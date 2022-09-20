@@ -1,0 +1,14 @@
+{
+	"name": "projeto_a3",
+	"version": "1.0.0",
+	"main": "index.js",
+	"license": "MIT",
+	"scripts": {
+		"start": "concurrently  \"yarn gates\"  \"yarn crud\" ",
+		"gates": "node Gateway/server.js",
+		"crud": "node BACK_FIREBASE/server.js"
+	},
+	"dependencies": {
+		"concurrently": "^7.4.0"
+	}
+}
