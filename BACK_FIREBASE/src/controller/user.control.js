@@ -76,7 +76,11 @@ const getUserForLogin = async (req, res, next) => {
 			res.status(404).send({ message: "usuario não encontrado" });
 			return;
 		}
-		res.send({ token: `Bearer ${generateToken(user)}` });
+		res.send({ 
+			token: `${generateToken(user)}`,
+			tokenType: "Bearer",
+			TokenTime: "15 min"
+		});
 	} catch (error) {
 		console.log(error);
 		res.status(400).send({ message: error.message });
