@@ -5,25 +5,46 @@ const reg = require("../registry.json");
 route.all("/:apiName/:path/:value", async (req, res) => {
 	try {
 		if (reg.services[req.params.apiName]) {
-            let value = "/" + req.params.value;
-            value = value == undefined || value == null ? "" : value;
-
+			let value = "/" + req.params.value;
+			value = value == undefined || value == null ? "" : value;
 			await axios({
 				method: req.method,
-				url: reg.services[req.params.apiName].url + req.params.path+value,
-				headers: req.headers,
+				url:
+					reg.services[req.params.apiName].url +
+					req.params.path +
+					value,
 				data: req.body,
 			})
-				.then(response => {
-					console.log(`Resposta: ${response.data}`);
-					res.send(response.data);
+				.then((data) => {
+					res.send(data.data);
 				})
-				.catch(error => {
-					res.send(error);
-					console.log(`Resposta: ${error}`);
+				.catch((err) => {
+					res.send({message:err.message});
 				});
-			console.log(`${req.method} ${reg.services[req.params.apiName].url + req.params.path+value}`);
 		} else {
+			res.send({ message: "no service for this param" });
+		}
+	} catch (error) {
+		res.send({ erro: error.message });
+	}
+});
+
+route.all("/:apiName/:path", async (req, res) => {
+	try {
+		if (reg.services[req.params.apiName]) {
+			axios({
+				method: req.method,
+				url: reg.services[req.params.apiName].url + req.params.path,
+				data: req.body,
+			})
+				.then(data => {
+					res.send(data.data);
+				})
+				.catch(err => {
+					res.send({message:err.message});
+				});
+		} else {
+		
 			res.send({ message: "no service for this param" });
 		}
 	} catch (error) {

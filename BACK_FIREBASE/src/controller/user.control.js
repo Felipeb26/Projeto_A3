@@ -30,7 +30,7 @@ const getAll = async (req, res, next) => {
 	}
 };
 
-const getById = async (req, res, next) => {
+const getById = async (req, res) => {
 	try {
 		const id = req.params.id;
 		const user = await collection.doc(id).get();
@@ -44,7 +44,7 @@ const getById = async (req, res, next) => {
 	}
 };
 
-const getUserForLogin = async (req, res, next) => {
+const getUserForLogin = async (req, res) => {
 	try {
 		const userList = [];
 		const { nome, email } = req.body;
@@ -65,8 +65,6 @@ const getUserForLogin = async (req, res, next) => {
 			})
 			.catch((err) => res.send({ message: err.message }));
 		const user = userList[0];
-
-
 		if (
 			email.localeCompare(user.email) > 0 ||
 			email.localeCompare(user.email) < 0
@@ -87,7 +85,7 @@ const getUserForLogin = async (req, res, next) => {
 	}
 };
 
-const addUser = async (req, res, next) => {
+const addUser = async (req, res) => {
 	try {
 		const { nome, email, senha, agenda, role } = req.body;
 
@@ -112,7 +110,7 @@ const addUser = async (req, res, next) => {
 	}
 };
 
-const updateUser = async (req, res, next) => {
+const updateUser = async (req, res) => {
 	try {
 		const id = req.params.id;
 		const data = req.body;
@@ -124,7 +122,7 @@ const updateUser = async (req, res, next) => {
 	}
 };
 
-const deleteUser = async (req, res, next) => {
+const deleteUser = async (req, res) => {
 	try {
 		const id = req.params.id;
 		await collection.doc(id).delete();

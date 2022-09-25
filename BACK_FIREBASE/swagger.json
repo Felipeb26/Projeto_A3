@@ -270,11 +270,11 @@
 			"Users": {
 				"type": "object",
 				"properties": {
-					"name": { "type": "string" },
+					"name": {"type": "string" },
 					"email": { "type": "string" },
 					"agenda ": { "type": "string", "format": "date-time" },
 					"senha": { "type": "string", "format": "password" },
-					"role": { "type": "string" }
+					"role": { "type": "number" }
 				}
 			}
 		}
