@@ -9,10 +9,10 @@ route.get("/users",authUser,cache(300), getAll);
 
 route.get("/user/:id", authUser, cache(300), getById);
 
-route.post("/users", authUser, addUser);
+route.post("/users", authUser,cache(300), addUser);
 
-route.put("/user/:id", authUser, updateUser);
+route.put("/user/:id", authUser,cache(300), updateUser);
 
-route.delete("/user/:id", authUser, deleteUser);
+route.delete("/user/:id", authUser,cache(300), deleteUser);
 
 module.exports = route;
