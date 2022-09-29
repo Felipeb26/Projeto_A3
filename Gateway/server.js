@@ -4,8 +4,8 @@ const gates = require("./routes/gates.routes");
 const cors = require("cors");
 const compress = require("compression");
 
-const port = process.env.PORT_GATE;
-const host = process.env.HOST_NAME;
+let port = process.env.PORT;
+const host = process.env.HOST;
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -14,6 +14,15 @@ app.use(compress())
 
 app.use("/", gates);
 
-app.listen(port, host, () => {
+app.get("/", (req, res) => {
+	return res.send({ message: "Gateway is running" });
+});
+
+
+if(port.match("3000")){
+	port = port.replace("3000", "3001")
+}
+
+app.listen(port, () => {
 	console.log(`Rodando gateway http://${host}:${port}`);
 });

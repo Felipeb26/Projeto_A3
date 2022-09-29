@@ -19,7 +19,7 @@ route.all("/:apiName/:path/:value", async (req, res) => {
 					res.send(data.data);
 				})
 				.catch((err) => {
-					res.send({message:err.message});
+					res.send({ message: err.message });
 				});
 		} else {
 			res.send({ message: "no service for this param" });
@@ -32,19 +32,40 @@ route.all("/:apiName/:path/:value", async (req, res) => {
 route.all("/:apiName/:path", async (req, res) => {
 	try {
 		if (reg.services[req.params.apiName]) {
-			axios({
+			await axios({
 				method: req.method,
 				url: reg.services[req.params.apiName].url + req.params.path,
 				data: req.body,
 			})
-				.then(data => {
+				.then((data) => {
 					res.send(data.data);
 				})
-				.catch(err => {
-					res.send({message:err.message});
+				.catch((err) => {
+					res.send({ message: err.message });
 				});
 		} else {
-		
+			res.send({ message: "no service for this param" });
+		}
+	} catch (error) {
+		res.send({ erro: error.message });
+	}
+});
+
+route.all("/:apiName/", async (req, res) => {
+	try {
+		if (reg.services[req.params.apiName]) {
+			await axios({
+				method: req.method,
+				url: reg.services[req.params.apiName].url,
+				data: req.body,
+			})
+				.then((data) => {
+					res.send(data.data);
+				})
+				.catch((err) => {
+					res.send({ message: err.message });
+				});
+		} else {
 			res.send({ message: "no service for this param" });
 		}
 	} catch (error) {

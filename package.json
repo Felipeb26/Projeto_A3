@@ -4,9 +4,10 @@
 	"main": "index.js",
 	"license": "MIT",
 	"scripts": {
-		"start": "concurrently  \"yarn gates\"  \"yarn crud\" ",
+		"start": "concurrently \"yarn gates\" \"yarn crud\" \"yarn mail\"",
 		"gates": "node Gateway/server.js",
-		"crud": "node BACK_FIREBASE/server.js"
+		"crud": "node BACK/server.js",
+		"mail": "node MAIL/server.js"
 	},
 	"dependencies": {
 		"concurrently": "^7.4.0",
