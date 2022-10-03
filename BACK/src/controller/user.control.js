@@ -5,6 +5,15 @@ const { generateToken } = require("../utils/token_jwt");
 
 const collection = db.collection("usuarios");
 
+const getAllPaginate = async (req, res, next) => {
+	try {
+		const data = await collection.get().where(1 == 1).orderBy("email").startAfter(0).limit(10).get();
+		return res.send(data)
+	} catch (error) {
+		return res.status(400).send({ message: error.message });
+	}
+};
+
 const getAll = async (req, res, next) => {
 	try {
 		const data = await collection.get();
@@ -19,7 +28,7 @@ const getAll = async (req, res, next) => {
 					it.data().email,
 					it.data().senha,
 					it.data().agenda,
-					it.data().role,
+					it.data().role
 				);
 				userList.push(users);
 			});
@@ -74,10 +83,10 @@ const getUserForLogin = async (req, res) => {
 			res.status(404).send({ message: "usuario não encontrado" });
 			return;
 		}
-		res.send({ 
+		res.send({
 			token: `${generateToken(user)}`,
 			tokenType: "Bearer",
-			TokenTime: "15 min"
+			TokenTime: "15 min",
 		});
 	} catch (error) {
 		console.log(error);
@@ -89,12 +98,17 @@ const addUser = async (req, res) => {
 	try {
 		const { nome, email, senha, agenda, role } = req.body;
 
-		if (role == undefined || null &&
-			nome == undefined || null &&
-			email == undefined || null &&
-			senha == undefined || null &&
-			agenda == undefined || null) {
-			res.status(400).send({ message: "todos os campos devem ser informados" });
+		if (
+			role == undefined ||
+			(null && nome == undefined) ||
+			(null && email == undefined) ||
+			(null && senha == undefined) ||
+			(null && agenda == undefined) ||
+			null
+		) {
+			res.status(400).send({
+				message: "todos os campos devem ser informados",
+			});
 			return;
 		}
 
@@ -133,6 +147,7 @@ const deleteUser = async (req, res) => {
 };
 
 module.exports = {
+	getAllPaginate,
 	getAll,
 	getById,
 	addUser,
