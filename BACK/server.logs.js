@@ -11,12 +11,12 @@ var accessLogStream = rfs.createStream("access.log", {
 module.exports = morgan(
 	function (tokens, req, res) {
 		return [
-			`\nMethod: ${tokens.method(req, res)};`,
+			`Method: ${tokens.method(req, res)};`,
 			`Url: ${tokens.url(req, res)}; `,
 			`Status-code: ${tokens.status(req, res)}; `,
 			`Content-Length: ${tokens.res(req, res, "content-length")}; `,
 			`Response-Time: ${tokens["response-time"](req, res)}ms; `,
-			"\n------------------------------------------------------------------------------------------------------------------------------",
+			"------------------------------------------------------------------------------------------------------------------------------\n\n",
 		].join("\t");
 	},
 	{

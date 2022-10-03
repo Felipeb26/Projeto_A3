@@ -45,3 +45,4 @@ Em caso de sucesso das execuções descritas a seguinte tela será apresentada
 # Endpoints da aplicação
 Segue a documentação de contratos que a interface do usuário possa acessar os endpoints definidos para as funcionalidades em questão [Swagger](http://localhost:3000/api-docs/) 
 
+Para rodar o docker-compose.yml usar comando - "docker-compose up --build"

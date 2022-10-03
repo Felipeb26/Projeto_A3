@@ -13,12 +13,10 @@ const authUser = async (req, res, next) => {
 	const token = authHeader && authHeader.split(" ")[1];
 
 	if (token == null) {
-		res.status(401).send({ message: "unathorized" });
-		return;
+		return res.status(401).send({ message: "unathorized" });
 	}
 	if (authHeader.toLowerCase().indexOf("bearer") == -1) {
-		res.status(401).send({ message: "token invalido" });
-		return;
+		return res.status(401).send({ message: "token invalido" });
 	}
 	jwt.verify(token, process.env.ACESS_TOKEN_SECRET, (err, user) => {
 		if (err) {

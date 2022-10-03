@@ -1,6 +1,5 @@
-require("dotenv").config({ path: "./.env" });
+require("dotenv").config();
 const express = require("express");
-const gates = require("./routes/gates.routes");
 const cors = require("cors");
 const compress = require("compression");
 
@@ -12,6 +11,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(compress())
 
+const gates = require("./src/routes/gates.routes");
 app.use("/", gates);
 
 app.get("/", (req, res) => {

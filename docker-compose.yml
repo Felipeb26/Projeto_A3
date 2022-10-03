@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+  gates:
+    image: a3/gate
+    build: ./Gateway
+    ports:
+      - 3001:3001
+    restart: on-failure
+    cpu_count: 1
+    mem_limit: 100m
+
+  back:
+    image: a3/back
+    build: ./BACK
+    ports:
+      - 3000:3000
+    restart: on-failure
+    cpu_count: 1
+    mem_limit: 100m
+    depends_on:
+    - gates
+
+  mail:
+    image: a3/mail
+    build: ./MAIL
+    ports:
+      - 3003:3003
+    restart: on-failure
+    cpu_count: 1
+    mem_limit: 100m
+    depends_on:
+    - gates
