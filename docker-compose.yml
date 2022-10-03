@@ -7,8 +7,13 @@ services:
     ports:
       - 3001:3001
     restart: on-failure
+    networks:
+      serveros:
     cpu_count: 1
     mem_limit: 100m
+    # depends_on:
+    # - mail
+    # - back
 
   back:
     image: a3/back
@@ -16,10 +21,10 @@ services:
     ports:
       - 3000:3000
     restart: on-failure
+    networks:
+      serveros:
     cpu_count: 1
     mem_limit: 100m
-    depends_on:
-    - gates
 
   mail:
     image: a3/mail
@@ -27,7 +32,16 @@ services:
     ports:
       - 3003:3003
     restart: on-failure
+    networks:
+      serveros:
     cpu_count: 1
     mem_limit: 100m
-    depends_on:
-    - gates
+
+networks:
+    serveros:
+      external: false
+      driver: bridge
+      ipam:
+        driver: default
+        config:
+          - subnet: 172.18.1.0/24
