@@ -4,13 +4,13 @@
             "apiName": "crud",
             "host": "http://locahost",
             "port": 3000,
-            "url": "http://localhost:3000/"
+            "url": "http://172.16.238.10:3000/"
         },
         "mail-message":{
             "apiName": "messages",
             "host": "http://locahost",
             "port": 3003,
-            "url": "http://localhost:3003/"
+            "url": "http://172.16.238.11:3003/"
         }
     }
 }

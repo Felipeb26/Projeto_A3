@@ -7,8 +7,9 @@ services:
     ports:
       - 3001:3001
     restart: on-failure
-    networks:
-      serveros:
+    networks: 
+      mynet:
+        ipv4_address: "172.16.238.9"
     cpu_count: 1
     mem_limit: 100m
     # depends_on:
@@ -21,8 +22,9 @@ services:
     ports:
       - 3000:3000
     restart: on-failure
-    networks:
-      serveros:
+    networks: 
+      mynet:
+        ipv4_address: "172.16.238.10"
     cpu_count: 1
     mem_limit: 100m
 
@@ -33,15 +35,15 @@ services:
       - 3003:3003
     restart: on-failure
     networks:
-      serveros:
+      mynet:
+        ipv4_address: "172.16.238.11"
     cpu_count: 1
     mem_limit: 100m
 
-networks:
-    serveros:
-      external: false
-      driver: bridge
-      ipam:
-        driver: default
-        config:
-          - subnet: 172.18.1.0/24
+networks: 
+  mynet:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.16.238.0/24
