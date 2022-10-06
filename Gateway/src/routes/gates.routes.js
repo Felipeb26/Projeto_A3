@@ -61,10 +61,10 @@ route.all("/:apiName/:path", limiter, async (req, res) => {
 					data: req.body,
 				})
 					.then((data) => {
-						res.send(data.data);
+						return res.send(data.data);
 					})
 					.catch((err) => {
-						res.send({ message: err.message });
+						return res.send({ message: err.message });
 					});
 			}
 		} else {

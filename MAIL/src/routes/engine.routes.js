@@ -1,62 +1,89 @@
 const route = require("express").Router();
-const ejs = require("ejs");
-const path = require("path");
 const pdf = require("html-pdf");
-
-const fs = require("fs");
-const { Stream } = require("stream");
+const uuid = require("uuid");
+const { html, pdfOptions } = require("../service/pdf.service");
+const SMTP_CONFIG = require("../service/email.service");
+const name = uuid.v4();
 
 route.get("/", async (req, res, next) => {
-	const time = new Date();
-	const date = time.toLocaleDateString();
-	const timer = time.toLocaleTimeString();
+	try {
+		pdf.create(html, pdfOptions).toFile(
+			"./upload/arquivo.pdf",
+			(err, res) => {
+				if (err) return res.status(500).send({ erro: err.message });
+				console.log("arquivo criado");
+			}
+		);
 
-	const today = date + " " + timer;
+		pdf.create(html, pdfOptions).toBuffer((err, buffer) => {
+			if (err) {
+				return res.status(500).send({ error: err.message });
+			}
+			return res
+				.writeHead(200, {
+					"Content-Length": Buffer.byteLength(buffer),
+					"Content-Type": "application/pdf",
+					"Content-disposition": ` attachment;filename=${name}.pdf`,
+				})
+				.end(buffer);
+		});
+	} catch (error) {
+		return res.status(500).send({ erro: error.mensage });
+	}
+});
 
-	const ejsFile = path.join(__dirname, "../", "templates", "index.ejs");
-
-	ejs.renderFile(ejsFile, { today: today }, (err, html) => {
-		if (err) {
-			console.log(err);
-			return res.send({ message: err });
-		}
-
-		const options = {
-			directory: "/tmp",
-			orientation: "portrait",
-			renderDelay: 1000,
-			height: "11.25in",
-			width: "8.5in",
-			header: {
-				height: "15mm",
+route.get("/mail", async (req, res, next) => {
+	try {
+		const transporter = nodemailer.createTransport({
+			host: SMTP_CONFIG.host,
+			port: SMTP_CONFIG.port,
+			secure: false,
+			auth: {
+				user: SMTP_CONFIG.user,
+				pass: SMTP_CONFIG.pass,
 			},
-			footer: {
-				height: "15mm",
+			tls: {
+				rejectUnauthorized: false,
 			},
-			type: "pdf",
-			childProcessOptions: {
-				env: {
-					OPENSSL_CONF: "/dev/null",
-				},
-			},
+		});
+
+		const dados = {
+			para: "felipeb2silva@gmail.com",
+			assunto: "teste",
+			mensagem: "testando envio mcado",
 		};
 
-		res.setHeader("Content-type", "application/pdf");
+		console.table(dados)
+		console.table(SMTP_CONFIG);
 
-		pdf.create(html, options).toBuffer(function (err, data) {
-			if (err) {
-				console.log(`erro ${err}`);
-				return res.send(err);
-			}
-			if (data instanceof Stream) {
-				data.pipe(fs.createWriteStream("./teste.pdf"));
-				return res.send(data);
-			}
-			if (data instanceof Buffer) {
-				return res.send(data);
-			}
-		});
-	});
+		async function sendMail() {
+			await transporter
+				.sendMail({
+					from: "Felipe Batista <felipeb2silva@gmail.com",
+					replyTo: "lipethunderb@gmail.com",
+					to: [dados.para],
+					subject: dados.assunto,
+					text: dados.mensagem,
+					priority: "high",
+					date: Date.now(),
+					attachments: [
+						{ filename: name, path: `../../upload/arquivo.pdf` },
+					],
+				})
+				.then(() => {
+					return res.send({
+						message: "email enviado para com sucesso",
+					});
+				})
+				.catch((err) => {
+					return res.send(err);
+				});
+		}
+		sendMail();
+	} catch (error) {
+		return res.status(500).send({ erro: error.mensage });
+	} finally {
+	}
 });
 
 module.exports = route;
