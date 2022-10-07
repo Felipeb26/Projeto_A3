@@ -1,14 +1,63 @@
 const db = require("../config/firebase_admin");
-const role_list = require("../config/roles_list");
 const Usuarios = require("../model/user.model");
 const { generateToken } = require("../utils/token_jwt");
+const { verifyRoles, toDate, verifyDate , isValidDate} = require("../utils/verify");
 
 const collection = db.collection("usuarios");
 
 const getAllPaginate = async (req, res, next) => {
 	try {
-		const data = await collection.get().where(1 == 1).orderBy("email").startAfter(0).limit(10).get();
-		return res.send(data)
+		let limit = req.query.limit || 10;
+		let after = req.query.after;
+		let before = req.query.before;
+		let view = req.query.view || "agenda";
+		limit = parseInt(limit);
+
+		let data = collection.orderBy(view, "asc");
+
+		if (after) {
+			data = data.startAfter(after).limit(limit);
+		} else if (before) {
+			data = data.endBefore(before).limit(limit);
+		} else {
+			data = data.limit(limit);
+		}
+
+		const snapshots = await data.get();
+		const userList = [];
+
+		if (snapshots.empty) {
+			res.send(400).send({ message: "sem usuarios cadastrados" });
+		} else {
+			snapshots.forEach((it) => {
+				const users = new Usuarios(
+					it.id,
+					it.data().nome,
+					it.data().email,
+					it.data().senha,
+					verifyDate(it.data().agenda),
+					it.data().role
+				);
+				userList.push(users);
+			});
+		}
+
+		content = {
+			users: userList,
+			pagination: {
+				prev:
+					userList.length > 0 && (after || before)
+						? userList[0].agenda
+						: null,
+				next:
+					userList.length == limit
+						? userList[userList.length - 1].agenda
+						: null,
+				totalElements: userList.length,
+			},
+		};
+
+		return res.status(200).send(content);
 	} catch (error) {
 		return res.status(400).send({ message: error.message });
 	}
@@ -16,8 +65,10 @@ const getAllPaginate = async (req, res, next) => {
 
 const getAll = async (req, res, next) => {
 	try {
-		const data = await collection.get();
+		let data = collection.orderBy("agenda", "asc");
 		const userList = [];
+
+		data = await data.get();
 		if (data.empty) {
 			res.send(400).send({ message: "sem usuarios cadastrados" });
 		} else {
@@ -27,7 +78,7 @@ const getAll = async (req, res, next) => {
 					it.data().nome,
 					it.data().email,
 					it.data().senha,
-					it.data().agenda,
+					verifyDate(it.data().agenda),
 					it.data().role
 				);
 				userList.push(users);
@@ -96,7 +147,7 @@ const getUserForLogin = async (req, res) => {
 
 const addUser = async (req, res) => {
 	try {
-		const { nome, email, senha, agenda, role } = req.body;
+		let { nome, email, senha, agenda, role } = req.body;
 
 		if (
 			role == undefined ||
@@ -112,13 +163,59 @@ const addUser = async (req, res) => {
 			return;
 		}
 
-		console.log(
-			nome + " " + email + " " + senha + " " + agenda + " " + role
-		);
+		agenda = toDate(agenda);
+		if(!isValidDate(agenda)){
+			return res.status(400).send({erro:"A data: fornecida não é uma data valida"})
+		}
+		if(agenda instanceof Date){
+			agenda = agenda.toString();
+		}
 
-		const user = { nome, email, senha, agenda, role };
+		const data = await collection.get();
+		const userList = [];
+		if (data.empty) {
+			res.send(400).send({ message: "sem usuarios cadastrados" });
+		} else {
+			data.forEach((it) => {
+				const users = new Usuarios(
+					it.id,
+					it.data().nome,
+					it.data().email,
+					it.data().senha,
+					it.data().agenda,
+					it.data().role
+				);
+				userList.push(users);
+			});
+		}
+
+		let errorList = [];
+		userList.forEach((it) => {
+			if (it.email == email) {
+				errorList.push(`Email: ${email} já cadastro em sistema!`);
+			}
+			if (it.agenda == agenda) {
+				errorList.push(`Data ${agenda} não pode ser selecionada`);
+			}
+		});
+
+		if (errorList.length > 0) {
+			errorList = [...new Set(errorList)];
+			return res.send(errorList);
+		}
+
+		role = verifyRoles(role);
+		senha = new Buffer.from(senha).toString("base64");
+		const user = {
+			nome,
+			email,
+			senha,
+			agenda,
+			role,
+		};
+
 		await collection.doc().set(user);
-		res.send({ message: "salvo com sucesso" });
+		res.status(201).send({ message: "salvo com sucesso" });
 	} catch (error) {
 		res.status(400).send({ message: error.message });
 	}
@@ -128,11 +225,18 @@ const updateUser = async (req, res) => {
 	try {
 		const id = req.params.id;
 		const data = req.body;
+
+		if (data == null) {
+			return res
+				.status(400)
+				.send({ erro: "sem dados para alterar usuario" });
+		}
 		await collection.doc(id).update(data);
+
 		const user = await collection.doc(id).get();
-		res.send(user.data());
+		return res.send(user.data());
 	} catch (error) {
-		res.status(400).send({ message: error.message });
+		return res.status(400).send({ message: error.message });
 	}
 };
 
@@ -140,7 +244,7 @@ const deleteUser = async (req, res) => {
 	try {
 		const id = req.params.id;
 		await collection.doc(id).delete();
-		res.send("Usuario deletado com sucesso!!");
+		res.send({ message: "Usuario deletado com sucesso!!" });
 	} catch (error) {
 		res.status(400).send({ message: error.message });
 	}

@@ -5,9 +5,13 @@
 	"license": "MIT",
 	"scripts": {
 		"start": "concurrently \"yarn gates\" \"yarn crud\" \"yarn mail\"",
+		"test": "concurrently \"yarn test-gates\" \"yarn test-crud\" \"yarn test-mail\"",
 		"gates": "node Gateway/server.js",
 		"crud": "node BACK/server.js",
-		"mail": "node MAIL/server.js"
+		"mail": "node MAIL/server.js",
+		"test-gates": "nodemon Gateway/server.js",
+		"test-crud": "nodemon BACK/server.js",
+		"test-mail": "nodemon MAIL/server.js"
 	},
 	"dependencies": {
 		"concurrently": "^7.4.0",

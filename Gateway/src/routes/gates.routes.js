@@ -10,26 +10,40 @@ const limiter = rateLimiter({
 
 route.all("/:apiName/:path/:value", limiter, async (req, res) => {
 	try {
-		console.log(req.headers());
-
 		if (reg.services[req.params.apiName]) {
 			let value = "/" + req.params.value;
 			value = value == undefined || value == null ? "" : value;
-			await axios({
-				method: req.method,
-				url:
-					reg.services[req.params.apiName].url +
-					req.params.path +
-					value,
-				headers: req.headers,
-				data: req.body,
-			})
-				.then((data) => {
-					res.send(data.data);
+			if (req.method == "POST") {
+				await axios({
+					method: req.method,
+					url: reg.services[req.params.apiName].url + req.params.path,
+					data: req.body,
 				})
-				.catch((err) => {
-					res.send({ message: err.message });
-				});
+					.then((data) => {
+						return res.status(data.status).send(data.data);
+					})
+					.catch((err) => {
+						res.status(err.response.status).send({ message: err.message });
+					});
+			} else {
+				await axios({
+					method: req.method,
+					url:
+						reg.services[req.params.apiName].url +
+						req.params.path +
+						value,
+					headers: req.headers,
+					data: req.body,
+				})
+					.then((data) => {
+						return res.status(data.status).send(data.data);
+					})
+					.catch((err) => {
+						res.status(err.response.status).send({
+							message: err.message,
+						});
+					});
+			}
 		} else {
 			res.send({ message: "no service for this param" });
 		}
@@ -48,10 +62,12 @@ route.all("/:apiName/:path", limiter, async (req, res) => {
 					data: req.body,
 				})
 					.then((data) => {
-						res.send(data.data);
+						return res.status(data.status).send(data.data);
 					})
 					.catch((err) => {
-						res.send({ message: err.message });
+						res.status(err.response.status).send({
+							message: err.message,
+						});
 					});
 			} else {
 				await axios({
@@ -61,10 +77,12 @@ route.all("/:apiName/:path", limiter, async (req, res) => {
 					data: req.body,
 				})
 					.then((data) => {
-						return res.send(data.data);
+						return res.status(data.status).send(data.data);
 					})
 					.catch((err) => {
-						return res.send({ message: err.message });
+						res.status(err.response.status).send({
+							message: err.message,
+						});
 					});
 			}
 		} else {
@@ -78,17 +96,19 @@ route.all("/:apiName/:path", limiter, async (req, res) => {
 route.all("/:apiName/", limiter, async (req, res) => {
 	try {
 		if (reg.services[req.params.apiName]) {
-			if (req.method == "POST") {
+			if (req.method != "GET" || req.method != "DELETE") {
 				await axios({
 					method: req.method,
 					url: reg.services[req.params.apiName].url,
 					data: req.body,
 				})
 					.then((data) => {
-						res.send(data.data);
+						return res.status(data.status).send(data.data);
 					})
 					.catch((err) => {
-						res.send({ message: err.message });
+						res.status(err.response.status).send({
+							message: err.message,
+						});
 					});
 			} else {
 				await axios({
@@ -98,14 +118,16 @@ route.all("/:apiName/", limiter, async (req, res) => {
 					data: req.body,
 				})
 					.then((data) => {
-						res.send(data.data);
+						return res.status(data.status).send(data.data);
 					})
 					.catch((err) => {
-						res.send({ message: err.message });
+						res.status(err.response.status).send({
+							message: err.message,
+						});
 					});
 			}
 		} else {
-			res.send({ message: "no service for this param" });
+			res.status(400).send({ message: "no service for this param" });
 		}
 	} catch (error) {
 		res.send({ erro: error.message });

@@ -20,7 +20,7 @@ const authUser = async (req, res, next) => {
 	}
 	jwt.verify(token, process.env.ACESS_TOKEN_SECRET, (err, user) => {
 		if (err) {
-			return res.send({ message: "token invalido" });
+			return res.status(401).send({ message: `Erro: ${err.name} ás ${err.expiredAt}`});
 		}
 		req.user = user;
 		next();
