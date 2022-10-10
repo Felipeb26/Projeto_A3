@@ -5,6 +5,11 @@ const uuid = require("uuid");
 const nodemailer = require("nodemailer");
 const fs = require("fs");
 
+const time = new Date();
+const date = time.toLocaleDateString();
+const timer = time.toLocaleTimeString();
+const today = date + " " + timer;
+
 //imports folders
 const { html, pdfOptions } = require("../service/pdf.service");
 const SMTP_CONFIG = require("../service/email.service");
@@ -12,9 +17,11 @@ const SMTP_CONFIG = require("../service/email.service");
 const name = uuid.v4();
 const fileName = `${__dirname}/upload/arquivo.pdf`;
 
-route.get("/", async (req, res, next) => {
+route.get("/:data", async (req, res, next) => {
+	const data = req.params.data;
+
 	try {
-		pdf.create(html("hoke"), pdfOptions).toBuffer((err, buffer) => {
+		pdf.create(html(data), pdfOptions).toBuffer((err, buffer) => {
 			if (err) {
 				return res.status(500).send({ error: err.message });
 			}
@@ -33,8 +40,22 @@ route.get("/", async (req, res, next) => {
 
 route.post("/", async (req, res, next) => {
 	try {
+		const { para, assunto, mensagem } = req.body;
 
-		pdf.create(html(hoje), pdfOptions).toFile(fileName, (err, resp) => {
+		if (
+			para == null ||
+			undefined ||
+			assunto == null ||
+			undefined ||
+			mensagem == undefined ||
+			null
+		) {
+			return res
+				.status(400)
+				.send({ erro: `precisa informar todos os campos` });
+		}
+
+		pdf.create(html(today), pdfOptions).toFile(fileName, (err, resp) => {
 			if (err) {
 				console.log(err);
 				return res.status(500).send({ erro: err.message });
@@ -54,9 +75,9 @@ route.post("/", async (req, res, next) => {
 			});
 
 			const dados = {
-				para: "felipeb2silva@gmail.com",
-				assunto: "teste",
-				mensagem: "testando envio mcado",
+				para: para,
+				assunto: assunto,
+				mensagem: mensagem,
 			};
 
 			async function sendMail() {
@@ -84,7 +105,7 @@ route.post("/", async (req, res, next) => {
 					})
 					.catch((err) => {
 						console.log(err);
-						return res.send(err);
+						return res.status(500).send(err);
 					});
 			}
 			sendMail();

@@ -2,17 +2,25 @@ require("dotenv").config();
 const compress = require("compression");
 const express = require("express");
 const cors = require("cors");
+const swagger_ui = require("swagger-ui-express");
 
+// envs
 let port = process.env.PORT;
 const host = process.env.HOST;
 
+// configs
 const app = express();
 app.use(express.json());
 app.use(compress());
 app.use(cors({ origin: "*" }));
 
-const engine = require("./src/routes/engine.routes");
-app.use("/index", engine);
+
+// rotas
+const doc = require("./swagger.json")
+app.use("/api-docs", swagger_ui.serve, swagger_ui.setup(doc))
+
+const rotas = require("./src/routes/engine.routes");
+app.use("/index", rotas);
 
 app.get("/", (req, res) => {
 	return res.send({ message: "Mail is running" });

@@ -1,7 +1,4 @@
-const time = new Date();
-const date = time.toLocaleDateString();
-const timer = time.toLocaleTimeString();
-const today = date + " " + timer;
+
 
 const pdfOptions = {
     childProcessOptions: {

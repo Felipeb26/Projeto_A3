@@ -1,0 +1,105 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "Api crud firebase",
+		"description": "Api comm crud de conexao com banco de dados firebase",
+		"termsOfService": "http://localhost:3000/terms",
+		"contact": {
+			"email": "felipeb2silva@gmail.com",
+			"name": "felipe Batista da silva"
+		},
+		"version": "1.0.0"
+	},
+	"servers": [
+		{
+			"url": "http://localhost:3003/",
+			"description": "api emails"
+		}
+	],
+    "paths": {
+        "/index":{
+            "post": {
+				"summary": "summary enviar email com pdf",
+				"description": "envia email",
+				"tags": ["MAIL"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/email"
+                            },
+                            "examples": {
+                                "mail":{
+									"para": "jhvb@mail.com",
+									"assunto": "assunto",
+									"mensagem": "mensagem"
+								}
+                            }
+                        }
+                    }
+                },
+				"responses": {
+					"500": {
+						"description": "server error"
+					},
+					"401": { "description": "unathorized" },
+					"400": { "description": "Bad Request" },
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/pdf": {
+								"shema": {
+									"type": "string",
+									"format": "binary"
+								}
+							}
+						}
+					}
+				}
+			}
+        },
+        "/index/{data}":{
+			"get": {
+				"summary": "summary dowload",
+				"description": "Faz o dowload do pdf",
+				"tags": ["MAIL"],
+				"parameters": [{
+					"name": "data",
+                    "in": "path",
+					"description": "Faz o dowload do pdf",
+					"required": "true"
+				}],
+				"responses": {
+					"500": {
+						"description": "server error"
+					},
+					"401": { "description": "unathorized" },
+					"400": { "description": "Bad Request" },
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/pdf": {
+								"shema": {
+									"type": "string",
+									"format": "binary"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+    },
+    "components": {
+        "schemas": {
+            "email": {
+                "type": "object",
+                "properties": {
+                    "para": {"type":"string"},
+                    "mensagem": {"type":"string"},
+                    "assunto": {"type":"string"}
+                }
+            }
+        }
+    }
+}
