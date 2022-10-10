@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const compress = require("compression");
+const ejs = require("ejs");
 
 //env variable
 let port = process.env.PORT;
@@ -16,6 +17,12 @@ app.use(compress())
 
 
 //paths
+app.set("view engine", "ejs")
+app.use(express.static(__dirname))
+
+app.get("/index", async (req, res) =>{
+	res.render("index.ejs")
+})
 
 const gates = require("./src/routes/gates.routes");
 app.use("/", gates);
