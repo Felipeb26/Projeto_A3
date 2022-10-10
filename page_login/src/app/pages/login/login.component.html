@@ -1,0 +1,60 @@
+<div class="conteudo-login">
+
+  <form class="conteudo-form" [formGroup]="loginForm" (submit)="submitLogin()">
+
+    <div>
+
+      <div class="logo">LOGO.jpg</div>
+
+      <div>
+        <input type="text" class="input-login" placeholder="email" formControlName="email">
+      </div>
+
+      <div class="mensagem-erro"
+      *ngIf="loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched">
+        *Campo Obrigatório!
+      </div>
+
+      <div class="mensagem-erro"
+      *ngIf="loginForm.get('email')?.errors?.['email'] && loginForm.get('email')?.touched">
+        Formato de email não é válido
+      </div>
+
+    </div>
+
+    <div>
+      <div id="input">
+        <input type="password"
+               value="password"
+               class="input-login"
+               placeholder="senha"
+               formControlName="senha">
+
+      <img src="projeto-login\src\assets\img\olho.png" alt="">
+      </div>
+
+      <div class="mensagem-erro"
+      *ngIf="loginForm.get('senha')?.errors?.['required'] && loginForm.get('senha')?.touched">
+        *Campo Obrigatório!
+      </div>
+
+<div>
+  <p class="esqueceu">
+    Esqueceu da
+    <a href="#esqueceu">  senha</a>? |
+    Ainda não tem conta?
+    <a href="#paracadastro"> Cadastre-se </a>
+  </p>
+</div>
+    </div>
+
+    <div>
+      <button class="input-submit" [disabled]="!loginForm.valid">Entrar</button>
+    </div>
+
+
+
+
+
+  </form>
+</div>
