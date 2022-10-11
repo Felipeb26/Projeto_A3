@@ -1,7 +1,12 @@
 const db = require("../config/firebase_admin");
 const Usuarios = require("../model/user.model");
 const { generateToken } = require("../utils/token_jwt");
-const { verifyRoles, toDate, verifyDate , isValidDate} = require("../utils/verify");
+const {
+	verifyRoles,
+	toDate,
+	verifyDate,
+	isValidDate,
+} = require("../utils/verify");
 
 const collection = db.collection("usuarios");
 
@@ -109,8 +114,8 @@ const getUserForLogin = async (req, res) => {
 		const userList = [];
 		let { nome, email } = req.body;
 
-		nome = new String(nome)
-		email = new String(email)
+		nome = new String(nome);
+		email = new String(email);
 
 		await collection
 			.where("nome", "==", `${nome}`)
@@ -129,18 +134,16 @@ const getUserForLogin = async (req, res) => {
 			})
 			.catch((err) => res.send({ message: err.message }));
 
-			let index = userList.findIndex(it => it.email == email)
+		let index = userList.findIndex((it) => it.email == email);
+
+		if (index == -1) {
+			return res
+				.status(404)
+				.send({ erro: `usuario nao encontrado ${nome}` });
+		}
 
 		const user = userList[index];
-		if (
-			email.localeCompare(user.email) > 0 ||
-			email.localeCompare(user.email) < 0
-		) {
-			console.log(user.email + " " + email);
-			console.log(email.localeCompare(user.email));
-			res.status(404).send({ message: "usuario não encontrado" });
-			return;
-		}
+
 		res.send({
 			token: `${generateToken(user)}`,
 			tokenType: "Bearer",
@@ -171,10 +174,12 @@ const addUser = async (req, res) => {
 		}
 
 		agenda = toDate(agenda);
-		if(!isValidDate(agenda)){
-			return res.status(400).send({erro:"A data: fornecida não é uma data valida"})
+		if (!isValidDate(agenda)) {
+			return res
+				.status(400)
+				.send({ erro: "A data: fornecida não é uma data valida" });
 		}
-		if(agenda instanceof Date){
+		if (agenda instanceof Date) {
 			agenda = agenda.toString();
 		}
 
