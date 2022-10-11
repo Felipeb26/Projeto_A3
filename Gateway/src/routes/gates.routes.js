@@ -13,7 +13,7 @@ route.all("/:apiName/:path/:value", limiter, async (req, res) => {
 		if (reg.services[req.params.apiName]) {
 			let value = "/" + req.params.value;
 			value = value == undefined || value == null ? "" : value;
-			if (req.method == "POST") {
+			if (req.method != "GET") {
 				await axios({
 					method: req.method,
 					url: reg.services[req.params.apiName].url + req.params.path,
@@ -55,7 +55,7 @@ route.all("/:apiName/:path/:value", limiter, async (req, res) => {
 route.all("/:apiName/:path", limiter, async (req, res) => {
 	try {
 		if (reg.services[req.params.apiName]) {
-			if (req.method == "POST") {
+			if (req.method != "GET") {
 				await axios({
 					method: req.method,
 					url: reg.services[req.params.apiName].url + req.params.path,

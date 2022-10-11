@@ -107,7 +107,11 @@ const getById = async (req, res) => {
 const getUserForLogin = async (req, res) => {
 	try {
 		const userList = [];
-		const { nome, email } = req.body;
+		let { nome, email } = req.body;
+
+		nome = new String(nome)
+		email = new String(email)
+
 		await collection
 			.where("nome", "==", `${nome}`)
 			.get()
@@ -124,7 +128,10 @@ const getUserForLogin = async (req, res) => {
 				});
 			})
 			.catch((err) => res.send({ message: err.message }));
-		const user = userList[0];
+
+			let index = userList.findIndex(it => it.email == email)
+
+		const user = userList[index];
 		if (
 			email.localeCompare(user.email) > 0 ||
 			email.localeCompare(user.email) < 0
