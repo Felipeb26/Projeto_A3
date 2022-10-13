@@ -23,7 +23,9 @@ route.all("/:apiName/:path/:value", limiter, async (req, res) => {
 						return res.status(data.status).send(data.data);
 					})
 					.catch((err) => {
-						res.status(err.response.status).send({ message: err.message });
+						res.status(err.response.status).send({
+							message: err.message,
+						});
 					});
 			} else {
 				await axios({

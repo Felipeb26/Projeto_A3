@@ -11,17 +11,17 @@ const timer = time.toLocaleTimeString();
 const today = date + " " + timer;
 
 //imports folders
-const { html, pdfOptions } = require("../service/pdf.service");
+const { pdfOptions, atestado, medicamento } = require("../service/pdf.service");
 const SMTP_CONFIG = require("../service/email.service");
 
 const name = uuid.v4();
-const fileName = `${__dirname}/upload/arquivo.pdf`;
+let fileName = `${__dirname}/upload/arquivo.pdf`;
 
 route.get("/:data", async (req, res, next) => {
 	const data = req.params.data;
 
 	try {
-		pdf.create(html(data), pdfOptions).toBuffer((err, buffer) => {
+		pdf.create(atestado(data), pdfOptions).toBuffer((err, buffer) => {
 			if (err) {
 				return res.status(500).send({ error: err.message });
 			}
@@ -40,7 +40,9 @@ route.get("/:data", async (req, res, next) => {
 
 route.post("/", async (req, res, next) => {
 	try {
-		const { para, assunto, mensagem } = req.body;
+		let errorsList = [];
+
+		let { para, assunto, mensagem, modelo } = req.body;
 
 		if (
 			para == null ||
@@ -50,16 +52,33 @@ route.post("/", async (req, res, next) => {
 			mensagem == undefined ||
 			null
 		) {
-			return res
-				.status(400)
-				.send({ erro: `precisa informar todos os campos` });
+			errorsList.push("precisa informar todos os campos");
+		}
+		if (modelo == undefined || null) {
+			errorsList.push("modelo não foi informado!!");
+		}
+		if (errorsList.length > 0) {
+			errorsList = [...new Set(errorsList)];
+			return res.send(errorsList);
 		}
 
-		pdf.create(html(today), pdfOptions).toFile(fileName, (err, resp) => {
-			if (err) {
-				console.log(err);
-				return res.status(500).send({ erro: err.message });
-			}
+		let html;
+		modelo = modelo.toLowerCase();
+		switch (modelo) {
+			case "atestado":
+				html = atestado(today);
+				break;
+			case "medicamento":
+				html = medicamento(today);
+				break;
+			default:
+				return res
+					.status(400)
+					.send({ error: "modelo não existente!!" });
+		}
+
+		pdf.create(html, pdfOptions).toFile(fileName, (err, resp) => {
+			if (err) return res.status(500).send({ erro: err.message });
 
 			const transporter = nodemailer.createTransport({
 				host: SMTP_CONFIG.host,
@@ -80,6 +99,7 @@ route.post("/", async (req, res, next) => {
 				mensagem: mensagem,
 			};
 
+			dados.para = dados.para.split(";");
 			async function sendMail() {
 				await transporter
 					.sendMail({
@@ -98,7 +118,12 @@ route.post("/", async (req, res, next) => {
 						],
 					})
 					.then(() => {
-						deleteFile();
+						var deleted = deleteFile();
+						if (deleted > 0) {
+							return res
+								.status(400)
+								.send({ error: "erro ao deletar arquivo" });
+						}
 						return res.send({
 							message: "email enviado para com sucesso",
 						});
@@ -116,14 +141,17 @@ route.post("/", async (req, res, next) => {
 	}
 });
 
-function deleteFile() {
+const deleteFile = () => {
 	try {
 		fs.unlinkSync(fileName);
-		console.log("arquivo deletado");
+		fs.rmdirSync(`${__dirname}/uplosad`);
+		console.log("pasta e arquivo deletado");
+		return 0;
 	} catch (error) {
 		console.log("error ao deletar arquivo");
 		console.log(error.message);
+		return 1;
 	}
-}
+};
 
 module.exports = route;

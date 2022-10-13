@@ -112,13 +112,13 @@ const getById = async (req, res) => {
 const getUserForLogin = async (req, res) => {
 	try {
 		const userList = [];
-		let { nome, email } = req.body;
+		let {senha, email } = req.body;
 
-		nome = new String(nome);
+		senha = new String(senha);
 		email = new String(email);
 
 		await collection
-			.where("nome", "==", `${nome}`)
+			.where("senha", "==", `${senha}`)
 			.get()
 			.then((snap) => {
 				snap.forEach((doc) => {
@@ -139,7 +139,7 @@ const getUserForLogin = async (req, res) => {
 		if (index == -1) {
 			return res
 				.status(404)
-				.send({ erro: `usuario nao encontrado ${nome}` });
+				.send({ erro: `usuario nao encontrado ${senha}` });
 		}
 
 		const user = userList[index];
