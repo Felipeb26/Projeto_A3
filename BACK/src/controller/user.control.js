@@ -160,12 +160,10 @@ const addUser = async (req, res) => {
 		let { nome, email, senha, agenda, role } = req.body;
 
 		if (
-			role == undefined ||
-			(null && nome == undefined) ||
-			(null && email == undefined) ||
-			(null && senha == undefined) ||
-			(null && agenda == undefined) ||
-			null
+			role == undefined || null && nome == undefined ||
+			null && email == undefined ||
+			null && senha == undefined ||
+			null 
 		) {
 			res.status(400).send({
 				message: "todos os campos devem ser informados",

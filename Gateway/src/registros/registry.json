@@ -1,12 +1,12 @@
 {
     "services":{
-        "bat-crud":{
+        "crud":{
             "apiName": "crud",
             "host": "http://locahost",
             "port": 3000,
             "url": "http://0.0.0.0:3000/"
         },
-        "mail-message":{
+        "mail":{
             "apiName": "messages",
             "host": "http://locahost",
             "port": 3003,

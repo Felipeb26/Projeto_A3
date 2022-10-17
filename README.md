@@ -43,6 +43,26 @@ Em caso de sucesso das execuções descritas a seguinte tela será apresentada
 
 ![console-server-started.jpeg](console-server-started.jpeg)
 # Endpoints da aplicação
-Segue a documentação de contratos que a interface do usuário possa acessar os endpoints definidos para as funcionalidades em questão [Swagger](http://localhost:3001/index) 
+Segue a documentação de contratos que a interface do usuário possa acessar os endpoints definidos para as funcionalidades em questão [Swagger](http://localhost:3001/index)
+
+# Primeiro microserviço Através do Barramento
+
+| endpoint gateway| endpoint | method | info|
+|----------|---------|------|------|
+| <http://localhost:3001/crud/login>      |<http://localhost:3000/login> | POST | enviar email e senha para receber Bearer token para ter acesso aos demais endpoints. |
+| <http://localhost:3001/crud/users>      |<http://localhost:3000/user/{id}> | GET | retorna todos os usuarios do cadastrados.|
+| <http://localhost:3001/crud/users>      |<http://localhost:3000/user/{id}> | POST | Salva usuario sendo necessario nome email senha e role |
+|<http://localhost:3001/crud/users-page> | <http://localhost:3000/users-page> | GET | retorna todos os usuarios paginado.|
+| <http://localhost:3001/crud//users-page>|<http://localhost:3000/user/{id}> | GET | retorna usuario de forma paginada para maior eficiencia em relação ao banco de dados.|
+| <http://localhost:3001/crud/user/{id}>  |<http://localhost:3000/user/{id}> | GET | recebe como paraetro o id do usuario para localizar.|
+| <http://localhost:3001/crud/user/{id}>       |<http://localhost:3000/user/{id}> | PUT | recebe o id para localizar o usuario e o corpo de acordo com os parametros para serem alterados.|
+| <http://localhost:3001/crud/user/{id}>       |<http://localhost:3000/user/{id}>  | DELETE | receb o id do usuario afim de excluir ele do banco de dados.|
+
+# Segundo microserviço Através do Barramento!
+
+| endpoint gateway| endpoint | method | info|
+|----------|---------|--------|---------|
+| <http://localhost:3001/mail/> | <http://localhost:3003/index> | POST | envia um email de acordo com o modelo de email informado sendo necessario para quem será enviado o email o assunto e mensagem.|
+| <http://localhost:3001/mail/> | <http://localhost:3003/index> | GET | realiza o dowload do modelo de email localmente, caso utilizado pelo gateway será retornado array de bytes.|
 
 Para rodar o docker-compose.yml usar comando - "docker-compose up --build"
