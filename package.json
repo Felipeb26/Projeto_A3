@@ -4,8 +4,8 @@
 	"main": "index.js",
 	"license": "MIT",
 	"scripts": {
-		"start": "concurrently \"yarn gates\" \"yarn crud\" \"yarn mail\"",
-		"test": "concurrently \"yarn test-gates\" \"yarn test-crud\" \"yarn test-mail\"",
+		"start": "concurrently \"yarn gates\" \"yarn crud\" \"yarn mail\" ",
+		"test": "concurrently \"yarn test-gates\" \"yarn test-crud\" \"yarn test-mail\" ",
 		"gates": "node Gateway/server.js",
 		"crud": "node BACK/server.js",
 		"mail": "node MAIL/server.js",

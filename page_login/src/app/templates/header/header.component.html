@@ -1,10 +1,16 @@
-<header>
-    <nav>
-        <ul>
-            <li><a href="#">content</a></li>
-            <li><a href="#">content</a></li>
-            <li><a href="#">content</a></li>
-            <li><a href="#">content</a></li>
-        </ul>
-    </nav>
-</header>
+<mat-toolbar>
+    <img  class="logo" src="{{logo}}" alt="logo" routerLink="">
+    <h1 routerLink="">origami saúde</h1>
+    <ul class="links">
+        <li><a mat-button routerLink="#">content</a></li>
+        <li><a mat-button routerLink="#">content</a></li>
+        <li><a mat-button routerLink="about">about</a></li>
+        <li>
+            <a mat-button routerLink="login">
+            <span class="material-icons">
+                    account_circle
+                </span>
+            </a>
+        </li>
+    </ul>
+</mat-toolbar>

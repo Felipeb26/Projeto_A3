@@ -12,12 +12,12 @@ export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup
 
-  constructor(
-    private formBuilder : FormBuilder,
-    private router: Router ) { }
+  constructor (
+    private formBuilder: FormBuilder,
+    private router: Router) { }
 
   ngOnInit(): void {
-    this.loginForm=  this.formBuilder.group(
+    this.loginForm = this.formBuilder.group(
       {
         email: ['', [Validators.required, Validators.email]],
         senha: ['', [Validators.required]]
@@ -26,16 +26,16 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  submitLogin(){
+  submitLogin() {
     debugger
     var dadosLogin = this.loginForm.getRawValue() as LoginModel;
 
-   // var input = document.querySelector('#input input');
-   // var img = document.querySelector('#input img');
-
-}
+    // var input = document.querySelector('#input input');
+    // var img = document.querySelector('#input img');
 
   }
+
+}
 
 
 
