@@ -4,11 +4,13 @@
 	"main": "index.js",
 	"license": "MIT",
 	"scripts": {
-		"start": "concurrently \"yarn gates\" \"yarn crud\" \"yarn mail\"",
-		"test": "concurrently \"yarn test-gates\" \"yarn test-crud\" \"yarn test-mail\"",
+		"start": "concurrently \"yarn main\" \"yarn gates\" \"yarn crud\" \"yarn mail\"",
+		"test": "concurrently \"yarn test-main\" \"yarn test-gates\" \"yarn test-crud\" \"yarn test-mail\"",
+		"main": "node server.js",
 		"gates": "node Gateway/server.js",
 		"crud": "node BACK/server.js",
 		"mail": "node MAIL/server.js",
+		"test-main": "nodemon server.js",
 		"test-gates": "nodemon Gateway/server.js",
 		"test-crud": "nodemon BACK/server.js",
 		"test-mail": "nodemon MAIL/server.js"
