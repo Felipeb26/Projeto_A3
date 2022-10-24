@@ -8,5 +8,12 @@
 
 :root{
     --midRed: rgb(203, 4, 4);
-    --myPurple: rgb(133,152,192);
+    --myPurple: #858ec0;
+    --myPurpleShadow: #5d6cc2;
+
+    --myLogo: #34bcbe;
+
+  --pdfColor:  #369098;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
