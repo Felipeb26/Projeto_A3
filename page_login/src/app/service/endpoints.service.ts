@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_PATH } from 'src/environments/environment';
 import { MICRO2 } from 'src/environments/environment.prod';
-import { Observable } from "rxjs";
+import { finalize, Observable } from "rxjs";
 import { USER } from '../models/usuario.model';
 
 
@@ -14,6 +14,8 @@ import { USER } from '../models/usuario.model';
   providedIn: 'root'
 })
 export class LoginService {
+
+  loading = false;
 
   constructor (
     private http: HttpClient
@@ -24,7 +26,8 @@ export class LoginService {
   }
 
   getAll(): Observable<USER[]> {
-    return this.http.get<USER[]>(`${API_PATH}${MICRO1}/users`);
+    this.loading = true;
+    return this.http.get<USER[]>(`${API_PATH}${MICRO1}/users`).pipe(finalize(() => this.loading = true));
   }
 
 

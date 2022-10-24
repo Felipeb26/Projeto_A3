@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from 'src/app/service/login.service';
+import { LoginService } from 'src/app/service/endpoints.service';
 
 @Component({
   selector: 'app-home',
@@ -8,15 +8,15 @@ import { LoginService } from 'src/app/service/login.service';
 })
 export class HomeComponent implements OnInit {
 
-  doctor:string = "assets/img/doctor.jpg"
+  doctor: string = "assets/img/doctor.jpg"
 
-  constructor(
-    private endpoints:LoginService
+  constructor (
+    private endpoints: LoginService
   ) { }
 
   ngOnInit(): void {
     this.endpoints.getAll().subscribe(
-      data =>console.log(data),
+      data => console.log(data),
       err => console.log(`${err.statusText}`)
     )
   }
