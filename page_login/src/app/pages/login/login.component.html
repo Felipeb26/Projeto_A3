@@ -4,15 +4,11 @@
 
 		<div>
 			<div class="logo">LOGO.jpg</div>
-			<div>
 				<input type="text" class="input-login" placeholder="email" formControlName="email">
-			</div>
-
 			<div class="mensagem-erro"
 				*ngIf="loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched">
 				*Campo Obrigatório!
 			</div>
-
 			<div class="mensagem-erro"
 				*ngIf="loginForm.get('email')?.errors?.['email'] && loginForm.get('email')?.touched">
 				Formato de email não é válido
@@ -38,9 +34,6 @@
 				</p>
 			</div>
 		</div>
-
-		<div>
-			<button class="input-submit" [disabled]="!loginForm.valid">Entrar</button>
-		</div>
+		<button class="input-submit" [disabled]="!loginForm.valid">Entrar</button>
 	</form>
 </div>

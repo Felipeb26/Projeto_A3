@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/service/login.service';
 
 @Component({
   selector: 'app-home',
@@ -9,9 +10,17 @@ export class HomeComponent implements OnInit {
 
   doctor:string = "assets/img/doctor.jpg"
 
-  constructor() { }
+  constructor(
+    private endpoints:LoginService
+  ) { }
 
   ngOnInit(): void {
+    this.endpoints.getAll().subscribe(
+      data =>console.log(data),
+      err => console.log(`${err.statusText}`)
+    )
   }
+
+
 
 }

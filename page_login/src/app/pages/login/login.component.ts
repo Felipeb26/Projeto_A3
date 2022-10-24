@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginModel } from 'src/app/models/LoginModel';
+import { LoginService } from 'src/app/service/login.service';
+import { Token } from './../../models/token.model';
 
 @Component({
   selector: 'app-login',
@@ -14,28 +16,31 @@ export class LoginComponent implements OnInit {
 
   constructor (
     private formBuilder: FormBuilder,
-    private router: Router) { }
+    private router: Router,
+    private endpoint: LoginService) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group(
       {
         email: ['', [Validators.required, Validators.email]],
         senha: ['', [Validators.required]]
-
       }
     );
   }
 
   submitLogin() {
-    debugger
     var dadosLogin = this.loginForm.getRawValue() as LoginModel;
-
-    // var input = document.querySelector('#input input');
-    // var img = document.querySelector('#input img');
-
+    console.log(dadosLogin)
+    this.endpoint.fazerLogin(dadosLogin).subscribe(
+      (data: Token) => {
+        localStorage.setItem("tk", data.token)
+        console.log(data)
+        this.router.navigate(["/"])
+      },
+      (error: any) => {
+        console.log(error)
+      }
+    );
   }
 
 }
-
-
-
