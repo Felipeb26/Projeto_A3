@@ -1,0 +1,36 @@
+.cadastro-form{
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+	margin-top: 50px;
+	border-radius: 10px;
+	background-color: white;
+	box-shadow: 0 30px 60px 0 gainsboro;
+	width: 50%;
+	padding: 8px 4px;
+	height: auto;
+	transition: all 0.5s ease-in-out;
+		box-shadow: 0 7px 7px 0 #5d6cc2;
+}
+
+.personal, .doctor, .contact {
+
+	color: black;
+	padding: 8px 4px;
+	text-align: left;
+	font-size: 15px;
+	margin: 10px;
+	width: 70%;
+	text-align: left;
+}
+
+hr{
+margin: 2%;
+
+}
+.password {
+	width: 1.25rem;
+	height: 1.25rem;
+	font-size: 1.25rem;
+	text-align: auto;
+}

@@ -11,8 +11,10 @@ import { Token } from './../../models/token.model';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
+  logo:string = "assets/img/logo.png";
   loginForm!: FormGroup
+  public showPassword: boolean = false;
+
 
   constructor (
     private formBuilder: FormBuilder,
@@ -27,6 +29,9 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+  public togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+}
 
   submitLogin() {
     var dadosLogin = this.loginForm.getRawValue() as LoginModel;

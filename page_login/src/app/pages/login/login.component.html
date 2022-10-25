@@ -2,9 +2,12 @@
 
 	<form class="conteudo-form" [formGroup]="loginForm" (submit)="submitLogin()">
 
-		<div>
-			<div class="logo">LOGO.jpg</div>
-				<input type="text" class="input-login" placeholder="email" formControlName="email">
+		<div class="logo">
+			<img class="logo" src="{{logo}}" alt="logo" routerLink="/home">
+		</div>
+
+		<div class="caixa">
+			<input type="text" class="input-login" placeholder="email" formControlName="email">
 			<div class="mensagem-erro"
 				*ngIf="loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched">
 				*Campo Obrigatório!
@@ -13,27 +16,31 @@
 				*ngIf="loginForm.get('email')?.errors?.['email'] && loginForm.get('email')?.touched">
 				Formato de email não é válido
 			</div>
-		</div>
 
-		<div>
-			<div id="input">
-				<input type="password" value="password" class="input-login" placeholder="senha" formControlName="senha">
-				<img src="projeto-login\src\assets\img\olho.png" alt="">
-			</div>
+			<mat-form-field appearance="fill">
+				<input matInput [type]="showPassword ? 'text' : 'password'" value="password" class="input-login"
+					placeholder="senha" formControlName="senha">
+				<mat-icon class="password" matSuffix (click)="togglePasswordVisibility()">
+					{{showPassword?'visibility_off':'visibility'}}
+				</mat-icon>
+			</mat-form-field>
+
 			<div class="mensagem-erro"
 				*ngIf="loginForm.get('senha')?.errors?.['required'] && loginForm.get('senha')?.touched">
 				*Campo Obrigatório!
 			</div>
-
-			<div>
-				<p class="esqueceu">
-					Esqueceu da
-					<a href="#esqueceu"> senha</a>? |
-					Ainda não tem conta?
-					<a href="#paracadastro"> Cadastre-se </a>
-				</p>
-			</div>
 		</div>
+
+
+		<div>
+			<p class="esqueceu">
+				Esqueceu da
+				<a href="#esqueceu"> senha</a>? |
+				Ainda não tem conta?
+				<a routerLink="/cadastro-medico"> Cadastre-se </a>
+			</p>
+		</div>
+
 		<button class="input-submit" [disabled]="!loginForm.valid">Entrar</button>
 	</form>
 </div>

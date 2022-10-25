@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Cadastro Médico</title>
+</head>
+
+<body>
+
+	<form class="cadastro-form">
+<h2>Cadastro Médico</h2>
+
+		<div class="personal">
+			<div>
+				Digite seu nome:
+				<input  type="text" matInput placeholder="nome" name="nome" ngModel required minlength="2" />
+			</div>
+
+			<div>
+				Digite seu Sobrenome:
+				<input  type="text" matInput placeholder="sobrenome" name="sobrenome" ngModel required
+					minlength="2" />
+			</div>
+			<div>
+				CPF:
+				<input type="text" matInput placeholder="CPF" name="CPF" ngModel required />
+			</div>
+		</div>
+		<hr>
+
+		<div class="doctor">
+			<div>
+				Digite seu CRM:
+				<input type="text" matInput placeholder="CRM" ngModel name="CRM" required />
+			</div>
+			<div>
+				Digite a sua Especialidade:
+				<input type="text" matInput placeholder="Especialidades" name="Especialidades" ngModel required
+				minlength="2" />
+			</div>
+			<section class="example-section"> Paciente
+				<mat-checkbox class="example-margin"></mat-checkbox>
+			</section>
+		</div>
+
+		<hr>
+
+		<div class="contact">
+			<div>
+				Digite seu Telefone:
+				<input type="text" matInput placeholder="Telefone" ngModel name="Telefone" required />
+			</div>
+			<div>
+				Digite um e-mail válido
+				<input type="text" matInput placeholder="email" name="email" ngModel email required />
+			</div>
+			<div>
+				Senha:
+				<input matInput [type]="showPassword ? 'text' : 'password'" name="password">
+				<mat-icon class="password" class="password" matSuffix (click)="togglePasswordVisibility()">
+					{{showPassword?'visibility_off':'visibility'}}
+				</mat-icon>
+
+			</div>
+
+
+		</div>
+
+
+		<button mat-raised-button color="primary">
+			Inserir Médico
+		</button>
+	</form>
+
+</body>
+
+</html>
