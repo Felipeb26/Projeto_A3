@@ -1,3 +1,4 @@
+import { LoadingService } from './../utils/loading.service';
 import { MAil } from '../models/email.model';
 import { MICRO1 } from '../../environments/environment';
 import { Token } from '../models/token.model';
@@ -15,10 +16,9 @@ import { USER } from '../models/usuario.model';
 })
 export class LoginService {
 
-  loading = false;
 
   constructor (
-    private http: HttpClient
+    private http: HttpClient,
   ) { }
 
   fazerLogin(login: LoginModel): Observable<Token> {
@@ -26,8 +26,8 @@ export class LoginService {
   }
 
   getAll(): Observable<USER[]> {
-    this.loading = true;
-    return this.http.get<USER[]>(`${API_PATH}${MICRO1}/users`).pipe(finalize(() => this.loading = true));
+    return this.http.get<USER[]>(`${API_PATH}${MICRO1}/users`)
+                      .pipe();
   }
 
 

@@ -3,11 +3,15 @@
 	<form class="conteudo-form" [formGroup]="loginForm" (submit)="submitLogin()">
 
 		<div class="logo">
-			<img class="logo" src="{{logo}}" alt="logo" routerLink="/home">
+			<img src="{{logo}}" alt="logo">
+			<h3>Origami Saùde</h3>
 		</div>
 
 		<div class="caixa">
-			<input type="text" class="input-login" placeholder="email" formControlName="email">
+			<mat-form-field appearance="fill">
+				<input type="text" class="input-login" placeholder="email" formControlName="email">
+			</mat-form-field>
+
 			<div class="mensagem-erro"
 				*ngIf="loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched">
 				*Campo Obrigatório!
@@ -30,8 +34,6 @@
 				*Campo Obrigatório!
 			</div>
 		</div>
-
-
 		<div>
 			<p class="esqueceu">
 				Esqueceu da

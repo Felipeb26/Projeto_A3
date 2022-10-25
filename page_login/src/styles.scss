@@ -1,21 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
-*{
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    text-decoration: none;
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
 }
 
 
 
-:root{
-    --midRed: rgb(203, 4, 4);
-    --myPurple: #858ec0;
-    --myPurpleShadow: #5d6cc2;
+:root {
+  --midRed: rgb(203, 4, 4);
+  --myPurple: #858ec0;
+  --myPurpleShadow: #5d6cc2;
 
-    --myLogo: #34bcbe;
-
-  --pdfColor:  #369098;
+  --myLogo: #34bcbe;
+  --pdfColor: #369098;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

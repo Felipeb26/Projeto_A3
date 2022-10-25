@@ -1,4 +1,3 @@
-
 .conteudo-login {
 	display: flex;
 	justify-content: center;
@@ -10,8 +9,8 @@
 		background-color: white;
 		box-shadow: 0 30px 60px 0 gainsboro;
 		text-align: center;
-		width: 40%;
-		height: auto;
+		width: 50rem;
+		height: 25rem;
 		transition: all 0.5s ease-in-out
 	}
 
@@ -25,7 +24,7 @@
 	background-color: #ece9e9;
 	border: none;
 	color: black;
-	padding: 8px 4px  ;
+	padding: 8px 4px;
 	text-align: left;
 	font-size: 15px;
 	margin: 10px;
@@ -52,25 +51,48 @@
 	border-radius: 5px;
 	transition: all 0.3s ease-in-out;
 	width: 30%;
+	height: 10%;
 	cursor: pointer;
 
 	.password {
-margin-top: auto;
-			font-size: 1.25rem;
-			text-align: left;
-		}
+		margin-top: auto;
+		font-size: 1.25rem;
+		text-align: left;
+	}
+}
+
+.input-submit:hover {
+	box-shadow: 0 7px 7px 0 var(--myLogo);
 }
 
 .logo {
 	border-image: 10px black;
-	box-shadow: 0 10px 10px 0 #5d6cc2;
+	box-shadow: 0 0 1rem #5d6cc2;
 	border-radius: 5px;
 	width: auto;
 	height: 10rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: 10px auto;
+	margin: 0.75rem 0.75rem;
+
+	& img {
+		width: 50%;
+		height: 100%;
+	}
+
+	& h3 {
+		text-transform: uppercase;
+		color: var(--myLogo);
+		font-weight: bold;
+		font-size: 2rem;
+		font-style: italic;
+		text-decoration: underline;
+	}
+}
+
+.logo:hover {
+	box-shadow: 0 0 1rem var(--myLogo)
 }
 
 .esqueceu {

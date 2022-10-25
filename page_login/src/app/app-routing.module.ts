@@ -7,7 +7,7 @@ import { CadastroMedicoComponent } from "./pages/cadastro-medico/cadastro-medico
 
 const routes: Routes = [
   // { path: "", pathMatch: "full", redirectTo: "home" },
-  { path: "home", component: HomeComponent },
+  { path: "", component: HomeComponent },
   { path: "login", component: LoginComponent },
   { path: "cadastro-medico", component: CadastroMedicoComponent },
   { path: "about", component: AboutComponent }
