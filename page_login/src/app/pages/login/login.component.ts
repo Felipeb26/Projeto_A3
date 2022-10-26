@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginModel } from 'src/app/models/LoginModel';
 import { LoginService } from 'src/app/service/endpoints.service';
-import Swal from 'sweetalert2';
+import { AlertsService } from 'src/app/utils/alerts.service';
 import { Token } from './../../models/token.model';
 
 @Component({
@@ -12,7 +12,7 @@ import { Token } from './../../models/token.model';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  logo:string = "assets/img/logo.png";
+  logo: string = "assets/img/logo.png";
   loginForm!: FormGroup
   public showPassword: boolean = false;
 
@@ -20,7 +20,8 @@ export class LoginComponent implements OnInit {
   constructor (
     private formBuilder: FormBuilder,
     private router: Router,
-    private endpoint: LoginService) { }
+    private endpoint: LoginService,
+    private alert: AlertsService) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group(
@@ -32,26 +33,26 @@ export class LoginComponent implements OnInit {
   }
   public togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
-}
-
+  }
+  
   submitLogin() {
-    var dadosLogin = this.loginForm.getRawValue() as LoginModel;
-    console.log(dadosLogin)
+    let dadosLogin = this.loginForm.getRawValue() as LoginModel;
+    const { email, senha } = dadosLogin;
+
+    if((email == null || undefined) || (senha == null || undefined)){
+      return this.alert.error("erro","ambos os campos devem ser informados!!")
+    }
     this.endpoint.fazerLogin(dadosLogin).subscribe(
       (data: Token) => {
         localStorage.setItem("tk", data.token)
-        Swal.fire({
-          title: "login concluido",
-          text: `token ${data.token}`,
-          icon: 'success',
-        })
+        this.alert.sucessT("usuario logado com sucesso");
         console.log(data)
         this.router.navigate(["/"])
       },
       (error: any) => {
         console.log(error)
+        this.alert.error(error.statusText, `email ${dadosLogin.email}`)
       }
     );
   }
-
 }

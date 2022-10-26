@@ -1,20 +1,39 @@
 <mat-toolbar>
-    <img class="logo" src="{{logo}}" alt="logo" routerLink="">
+    <img class="logo" src="{{logo}}" alt="logo" routerLink="" (click)="open=!open">
     <h1 routerLink="">origami saúde</h1>
-    <ul class="links">
-        <li><a mat-button routerLink="cadastro-medico">Medico</a></li>
-        <li><a mat-button routerLink="#">content</a></li>
-        <li><a mat-button routerLink="about">about</a></li>
-        <li>
-            <a mat-button routerLink="login">
-                <span class="material-icons">
-                    account_circle
-                </span>
-            </a>
-        </li>
-    </ul>
-    <button mat-icon-button>
+    <button class="menu" mat-icon-button (click)="open=!open">
         <mat-icon>menu</mat-icon>
     </button>
 </mat-toolbar>
-<app-loading></app-loading>
+<mat-sidenav-container>
+    <mat-sidenav mode="side" [(opened)]="open" position="end">
+        <ul class="links">
+            <li><a mat-button routerLink="">
+                <span class="material-icons">
+                    home
+                </span>
+            </a></li>
+            <li><a mat-button routerLink="medico">Medico</a></li>
+            <li><a mat-button routerLink="#">content</a></li>
+            <li><a mat-button routerLink="about">about</a></li>
+            <li>
+                <a mat-button routerLink="login">
+                    <span class="material-icons">
+                        account_circle
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a mat-button routerLink="login" (click)="logout()">
+                    <span class="material-icons">
+                        logout
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <router-outlet></router-outlet>
+        <app-loading></app-loading>
+    </mat-sidenav-content>
+</mat-sidenav-container>

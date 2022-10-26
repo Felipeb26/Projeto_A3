@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"scripts": {
 		"start": "concurrently \"yarn main\" \"yarn gates\" \"yarn crud\" \"yarn mail\" \"yarn front\" \"yarn f-doc\"",
-		"test": "concurrently \"yarn t-main\" \"yarn t-gates\" \"yarn t-crud\" \"yarn t-mail\" \"yarn front\" \"yarn f-doc\"",
+		"test": "concurrently \"yarn t-main\" \"yarn t-gates\" \"yarn t-crud\" \"yarn t-mail\" \"yarn front\"",
 		"front": "npm run ng serve --prefix page_login",
 		"f-doc": "npm run compodoc:build-and-serve --prefix page_login",
 		"main": "node server.js",

@@ -10,7 +10,7 @@
 		box-shadow: 0 30px 60px 0 gainsboro;
 		text-align: center;
 		width: 50rem;
-		height: 25rem;
+		height: 28rem;
 		transition: all 0.5s ease-in-out
 	}
 
@@ -75,7 +75,7 @@
 	justify-content: center;
 	align-items: center;
 	margin: 0.75rem 0.75rem;
-
+	flex-wrap: wrap;
 	& img {
 		width: 50%;
 		height: 100%;

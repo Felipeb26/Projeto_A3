@@ -3,7 +3,6 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
-    flex-wrap: wrap;
 }
 
 .cardDireita {
@@ -11,8 +10,9 @@
     flex-direction: column;
     align-items: center;
     box-shadow: 0 0 0.5rem black;
-    margin:  0 5rem 0 3rem;
-    flex:  1;
+    margin: 0 5rem 0 3rem;
+    flex: 1;
+
     & .imgDoctor {
         border-radius: 0.5rem;
         height: 15rem;
@@ -20,14 +20,32 @@
     }
 }
 
-.cardEsquerda{
+.cardEsquerda {
     display: flex;
     flex-direction: column;
     box-shadow: 0 0 0.5rem black;
     margin: 0 3rem 0 5rem;
     flex: 1;
-    & .content{
+
+    & .content {
         flex-wrap: wrap;
         word-wrap: break-word;
     }
+}
+
+@media (max-width: 900px) {
+    .home {
+        margin: 4rem 0 0 0;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .cardDireita {
+        margin: 0 0 1rem 0;
+    }
+
+    .cardEsquerda {
+        margin: 1rem 0 0 0;
+    }
+
 }

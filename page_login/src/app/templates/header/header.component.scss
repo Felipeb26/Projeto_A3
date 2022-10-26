@@ -11,28 +11,84 @@ mat-toolbar {
         height: 5rem;
         width: auto;
         cursor: pointer;
+        transition: all 1s ease-in-out;
     }
 
     & .logo:hover {
-        transition: 1s all;
         filter: drop-shadow(2rem 0 0.1rem var(--myLogo));
     }
 
     & h1 {
         cursor: pointer;
+        font-style: italic;
         font-weight: bold;
         letter-spacing: 0.5px;
         text-transform: uppercase;
+        transition: all 0.5s ease-in-out;
     }
+
+    & h1:hover {
+        color: var(--myLogo);
+        letter-spacing: 0.1rem;
+        font-size: 1.6rem;
+        font-weight: bold;
+    }
+
+    & .menu {
+        border-radius: 50%;
+        background: var(--myPurpleShadow);
+        color: var(--myLogo);
+        transition: all 0.5s ease-out;
+    }
+
+    & .menu:hover {
+        animation: zoom-in-zoom-out 1s ease infinite;
+        box-shadow:
+            0 0 0.5rem 0.2rem var(--myLogo),
+            0 0 1rem 0.5rem var(--myLogo);
+    }
+}
+
+mat-sidenav-container {
+    height: 82.1vh;
+    box-shadow: 0 0 1rem var(--myPurpleShadow);
+}
+
+mat-sidenav,
+mat-sidenav-content {
+    padding: 0.5rem;
+}
+
+mat-sidenav {
+    background-color: var(--myPurple);
+    width: 13rem;
+    display: flex;
+    background: var(--myPurple);
 
     & .links {
         display: flex;
+        align-items: center;
+        flex-direction: column;
         text-transform: uppercase;
-        flex-wrap: wrap;
     }
 
-    & .links>li:hover{
-                animation: zoom-in-zoom-out 1s ease normal;
+    & .links>li {
+        padding: 0.5rem 0;
+        width: 80%;
+    }
+
+    & .links>li>a {
+        width: 100%;
+        text-decoration: underline;
+        padding: 0.5rem 0;
+        font-weight: bold;
+        letter-spacing: 0.2rem;
+        transition: all 0.5s ease-in-out;
+        font-size: 1.1rem;
+    }
+
+    & .links>li:hover {
+        animation: zoom-in-zoom-out 1s ease normal;
         color: var(--myLogo);
     }
 
@@ -49,11 +105,32 @@ mat-toolbar {
         height: 3px;
         width: 100%;
         left: 0;
+        right: 0;
         bottom: 0;
-        transform: scale(0,1);
+        transform: scale(0, 0.8);
+        transition: 0.5s ease-in-out;
     }
 
     & a:hover::after {
-        transform:  scale(1,1);
+        transform: scale(0.8, 0.8);
+        // box-shadow: 1rem 1rem 1rem 2rem white;
+    }
+}
+
+.material-icons{
+    font-size: xx-large;
+}
+
+@keyframes zoom-in-zoom-out {
+    0% {
+        transform: scale(1, 1);
+    }
+
+    50% {
+        transform: scale(1.1, 1.1);
+    }
+
+    100% {
+        transform: scale(1, 1);
     }
 }
