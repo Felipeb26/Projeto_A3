@@ -1,5 +1,5 @@
 <mat-toolbar>
-    <img  class="logo" src="{{logo}}" alt="logo" routerLink="">
+    <img class="logo" src="{{logo}}" alt="logo" routerLink="">
     <h1 routerLink="">origami saúde</h1>
     <ul class="links">
         <li><a mat-button routerLink="cadastro-medico">Medico</a></li>
@@ -7,11 +7,14 @@
         <li><a mat-button routerLink="about">about</a></li>
         <li>
             <a mat-button routerLink="login">
-            <span class="material-icons">
+                <span class="material-icons">
                     account_circle
                 </span>
             </a>
         </li>
     </ul>
+    <button mat-icon-button>
+        <mat-icon>menu</mat-icon>
+    </button>
 </mat-toolbar>
 <app-loading></app-loading>

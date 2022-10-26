@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginModel } from 'src/app/models/LoginModel';
 import { LoginService } from 'src/app/service/endpoints.service';
+import Swal from 'sweetalert2';
 import { Token } from './../../models/token.model';
 
 @Component({
@@ -39,6 +40,11 @@ export class LoginComponent implements OnInit {
     this.endpoint.fazerLogin(dadosLogin).subscribe(
       (data: Token) => {
         localStorage.setItem("tk", data.token)
+        Swal.fire({
+          title: "login concluido",
+          text: `token ${data.token}`,
+          icon: 'success',
+        })
         console.log(data)
         this.router.navigate(["/"])
       },

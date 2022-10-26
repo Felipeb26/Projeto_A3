@@ -12,7 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
- import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 //paginas e componentes criadas
 import { AboutComponent } from './pages/about/about.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -38,18 +38,18 @@ import { CadastroPacienteComponent } from './pages/cadastro-paciente/cadastro-pa
   ],
   imports: [
     BrowserModule,
-	 AppRoutingModule,
+    AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
     MatCardModule,
-	 MatIconModule,
+    MatIconModule,
     HttpClientModule,
     MatProgressSpinnerModule,
     NgxSpinnerModule,
-	 FormsModule,
-	 MatCheckboxModule,
+    FormsModule,
+    MatCheckboxModule,
   ],
 
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenService, multi: true }],
