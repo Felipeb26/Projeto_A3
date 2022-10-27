@@ -4,90 +4,50 @@
 	align-items: center;
 	margin: 5%;
 
-	.conteudo-form {
+	& .conteudo-form {
+		box-shadow: 0 0 1rem var(--myPurpleShadow);
+		background-color: var(--myWhite);
 		border-radius: 10px;
-		background-color: white;
-		box-shadow: 0 30px 60px 0 gainsboro;
 		text-align: center;
 		width: 50rem;
-		height: 28rem;
+		height: 30rem;
 		transition: all 0.5s ease-in-out
 	}
 
-	.conteudo-form:hover {
-		box-shadow: 0 30px 60px 0 rgb(55, 55, 55);
+	& .conteudo-form:hover {
+		box-shadow: 0 0 1rem var(--myLogo);
 	}
 }
 
-
-.input-login {
-	background-color: #ece9e9;
-	border: none;
-	color: black;
-	padding: 8px 4px;
-	text-align: left;
-	font-size: 15px;
-	margin: 10px;
-	width: 70%;
-	border: 2p solid #f6f6f6;
-	transition: all 0.5s ease-in-out;
-	border-radius: 5px;
-}
-
-.mensagem-erro {
-	font-size: 10px;
-	color: red;
-	font-family: Arial, Helvetica, sans-serif;
-}
-
-.input-submit {
-	background-color: #858ec0;
-	border: none;
-	color: white;
-	padding: 5px;
-	text-align: center;
-	font-size: 15px;
-	box-shadow: 0 7px 7px 0 #5d6cc2;
-	border-radius: 5px;
-	transition: all 0.3s ease-in-out;
-	width: 30%;
-	height: 10%;
-	cursor: pointer;
-
-	.password {
-		margin-top: auto;
-		font-size: 1.25rem;
-		text-align: left;
-	}
-}
-
-.input-submit:hover {
-	box-shadow: 0 7px 7px 0 var(--myLogo);
-}
-
+// logo card
 .logo {
-	border-image: 10px black;
-	box-shadow: 0 0 1rem #5d6cc2;
+	border-image: 10px var(--myBlack);
+	box-shadow: 0 0 1rem var(--myPurpleShadow);
 	border-radius: 5px;
 	width: auto;
 	height: 10rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: 0.75rem 0.75rem;
+	margin: 1.5rem 1.5rem;
 	flex-wrap: wrap;
+
 	& img {
 		width: 50%;
 		height: 100%;
+		filter: brightness(1.25);
 	}
 
 	& h3 {
 		text-transform: uppercase;
-		color: var(--myLogo);
+		color: var(--myBlack);
 		font-weight: bold;
 		font-size: 2rem;
 		font-style: italic;
 		text-decoration: underline;
+		filter: brightness(1.25);
+		text-shadow: 0.3rem 0.7rem 0.6rem var(--myBlack);
+		-webkit-text-stroke: 1px var(--myLogo);
 	}
 }
 
@@ -95,14 +55,89 @@
 	box-shadow: 0 0 1rem var(--myLogo)
 }
 
-.esqueceu {
-	justify-content: center;
+// inputs card
+.caixa {
+	display: flex;
+	flex-direction: column;
 	align-items: center;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 10px;
-	text-align: center;
-	padding: 10px 5px 5px 10px;
-	margin-top: 1px;
-	width: 90%;
 
+	& mat-card {
+		background: var(--myWhite);
+		box-shadow: 0 0 1rem var(--myBlack);
+	}
+}
+
+mat-form-field {
+	border: 5rem;
+	background: var(--myWhite);
+	width: 70%;
+	border: 0;
+	transition: all 0.5s ease-in-out;
+
+	& mat-label {
+		color: var(--myBlack);
+	}
+
+	& input {
+		color: var(--myBlack);
+		font-size: medium;
+	}
+
+	& mat-hint {
+		font-size: small;
+		color: var(--myBlack);
+	}
+
+	& span {
+		color: var(--myBlack);
+		cursor: pointer;
+	}
+
+	& span:hover {
+		color: var(--myPurpleShadow);
+	}
+}
+
+.mensagem-erro {
+	font-size: 0.9rem;
+	color: red;
+}
+
+//esqueceu senha
+.esqueceu {
+	margin: 0.5rem 0 0 0;
+	font-size: 0.9rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	& p {
+		color: var(--myBlack);
+		text-decoration: underline;
+		font-weight: bold;
+		letter-spacing: 0.1rem;
+	}
+
+	& a {
+		letter-spacing: 0.1rem;
+		color: var(--myPurpleShadow);
+	}
+
+	& a:hover {
+		color: var(--myLogo);
+	}
+}
+
+//btn de submit
+.btn-submit {
+	margin: 1rem 0 0.5rem 0;
+	box-shadow: 0 0 1rem var(--myPurpleShadow);
+	background: var(--myPurple);
+	color: var(--myBlack);
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.btn-submit:hover {
+	box-shadow: 0 0 0.5rem var(--myLogo);
 }

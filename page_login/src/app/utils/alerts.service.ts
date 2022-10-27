@@ -19,8 +19,6 @@ export class AlertsService {
       toast.addEventListener('mouseenter', Swal.stopTimer)
       toast.addEventListener('mouseleave', Swal.resumeTimer)
     },
-    heightAuto: false,
-    allowOutsideClick: false
   })
 
   sucess(title: any, text: any) {

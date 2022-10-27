@@ -1,0 +1,59 @@
+<mat-card>
+    <form class="cadastro-form">
+        <h2>Cadastro de {{user}}</h2>
+
+        <div class="personal">
+            <mat-form-field>
+                <mat-label>Digite seu nome:</mat-label>
+                <input type="text" matInput name="nome" ngModel required minlength="2" />
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Digite seu Sobrenome:</mat-label>
+                <input type="text" matInput name="sobrenome" ngModel required minlength="2" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>CPF:</mat-label>
+                <input type="text" matInput name="CPF" ngModel required />
+            </mat-form-field>
+        </div>
+
+        <!-- <div class="doctor">
+            <mat-form-field>
+                <mat-label>Digite seu CRM:</mat-label>
+                <input type="text" matInput ngModel name="CRM" required />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Digite a sua Especialidade:</mat-label>
+                <input type="text" matInput name="Especialidades" ngModel required minlength="2" />
+            </mat-form-field> -->
+            <!-- <section class="example-section"> Paciente
+				<mat-checkbox class="example-margin"></mat-checkbox>
+			</section> -->
+        <!-- </div> -->
+
+<!-- 
+        <div class="contact">
+            <mat-form-field>
+                <mat-label>TELEFONE</mat-label>
+                <input type="text" matInput ngModel name="Telefone" required />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>EMAIL</mat-label>
+                <input type="text" matInput name="email" ngModel required />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Senha:</mat-label>
+                <input matInput [type]="showPassword ? 'text' : 'password'" name="password" minlength="5" required>
+                <span class="material-icons password" matSuffix (click)="togglePasswordVisibility()">
+                    {{showPassword?'visibility_off':'visibility'}}
+                </span>
+            </mat-form-field>
+        </div>
+
+
+        <button mat-button color="primary">
+            Inserir Médico
+        </button> -->
+    </form>
+</mat-card>

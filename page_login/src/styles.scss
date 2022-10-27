@@ -5,26 +5,39 @@
   list-style: none;
   text-decoration: none;
   box-sizing: border-box;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
 }
 
-
-
 :root {
+  --midRed: rgb(255, 0, 0);
+
+  --myPurple: #52587a;
+  --myPurpleShadow: #939fe1;
+
+  --myLogo: #237172;
+  --pdfColor: #215f64;
+
+  --myBlack: rgb(231, 231, 231);
+  --myWhite: rgb(53, 53, 53);
+  --myGray: rgba(103, 103, 103, 0.442);
+}
+
+:root .dark-theme {
+
   --midRed: rgb(203, 4, 4);
   --myPurple: #858ec0;
   --myPurpleShadow: #5d6cc2;
 
   --myLogo: #34bcbe;
   --pdfColor: #369098;
+
+  --myBlack: rgb(35, 35, 35);
+  --myWhite: #ece9e9;
+  --myGray: rgba(103, 103, 103, 0.442);
 }
 
 html,
 body {
   position: relative;
   height: 100%;
-}
-
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }

@@ -3,6 +3,7 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
+    background: var(--myGray);
 }
 
 .cardDireita {
@@ -10,7 +11,7 @@
     flex-direction: column;
     align-items: center;
     box-shadow: 0 0 0.5rem black;
-    margin: 0 5rem 0 3rem;
+    margin: 1rem 5rem 1rem 3rem;
     flex: 1;
 
     & .imgDoctor {
@@ -24,13 +25,20 @@
     display: flex;
     flex-direction: column;
     box-shadow: 0 0 0.5rem black;
-    margin: 0 3rem 0 5rem;
+    margin: 1rem 3rem 1rem 5rem;
     flex: 1;
 
     & .content {
         flex-wrap: wrap;
         word-wrap: break-word;
     }
+}
+
+mat-card-title>h1{
+    font-size: xx-large;
+    font-weight: bold;
+    font-style: italic;
+    letter-spacing: 0.1rem;
 }
 
 @media (max-width: 900px) {

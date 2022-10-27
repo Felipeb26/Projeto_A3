@@ -27,7 +27,7 @@ export class LoginService {
 
   getAll(): Observable<USER[]> {
     return this.http.get<USER[]>(`${API_PATH}${MICRO1}/users`)
-                      .pipe();
+      .pipe();
   }
 
 

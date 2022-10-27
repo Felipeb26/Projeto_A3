@@ -2,7 +2,7 @@ const NodeCache = require("node-cache");
 
 const cache = new NodeCache({
     deleteOnExpire:true,
-    checkperiod:60000,
+    checkperiod:6000,
     });
 
 module.exports = duration => (err, req, res, next) =>{

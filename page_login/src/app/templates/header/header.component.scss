@@ -13,7 +13,7 @@ mat-toolbar {
         cursor: pointer;
         transition: all 1s ease-in-out;
     }
-
+    
     & .logo:hover {
         filter: drop-shadow(2rem 0 0.1rem var(--myLogo));
     }
@@ -25,16 +25,19 @@ mat-toolbar {
         letter-spacing: 0.5px;
         text-transform: uppercase;
         transition: all 0.5s ease-in-out;
+        font-size: xx-large;
+        color: var(--myBlack);
+        filter: brightness(1.75);
+        -webkit-text-stroke: 1px var(--myLogo);
     }
 
     & h1:hover {
         color: var(--myLogo);
         letter-spacing: 0.1rem;
-        font-size: 1.6rem;
-        font-weight: bold;
     }
 
     & .menu {
+        margin: 0 2rem 0 0;
         border-radius: 50%;
         background: var(--myPurpleShadow);
         color: var(--myLogo);
@@ -57,6 +60,7 @@ mat-sidenav-container {
 mat-sidenav,
 mat-sidenav-content {
     padding: 0.5rem;
+    background: var(--myWhite);
 }
 
 mat-sidenav {
@@ -73,8 +77,11 @@ mat-sidenav {
     }
 
     & .links>li {
-        padding: 0.5rem 0;
+        margin: 0.5rem 0;
+        padding: 0.6rem 0;
         width: 80%;
+        box-shadow: 0 0.2rem 0.2rem 0 var(--myLogo);
+        transition: all 0.5s ease-in-out;
     }
 
     & .links>li>a {
@@ -85,11 +92,13 @@ mat-sidenav {
         letter-spacing: 0.2rem;
         transition: all 0.5s ease-in-out;
         font-size: 1.1rem;
+        color: var(--myWhite);
     }
 
     & .links>li:hover {
         animation: zoom-in-zoom-out 1s ease normal;
         color: var(--myLogo);
+        box-shadow: none;
     }
 
     & a {
@@ -113,11 +122,12 @@ mat-sidenav {
 
     & a:hover::after {
         transform: scale(0.8, 0.8);
-        // box-shadow: 1rem 1rem 1rem 2rem white;
     }
 }
 
-.material-icons{
+
+.material-icons {
+    color: var(--myWhite);
     font-size: xx-large;
 }
 

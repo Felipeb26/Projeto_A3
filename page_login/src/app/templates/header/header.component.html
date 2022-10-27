@@ -1,3 +1,4 @@
+<app-loading></app-loading>
 <mat-toolbar>
     <img class="logo" src="{{logo}}" alt="logo" routerLink="" (click)="open=!open">
     <h1 routerLink="">origami saúde</h1>
@@ -9,11 +10,11 @@
     <mat-sidenav mode="side" [(opened)]="open" position="end">
         <ul class="links">
             <li><a mat-button routerLink="">
-                <span class="material-icons">
-                    home
-                </span>
-            </a></li>
-            <li><a mat-button routerLink="medico">Medico</a></li>
+                    <span class="material-icons">
+                        home
+                    </span>
+                </a></li>
+            <li><a mat-button routerLink="cadastro">cadastro</a></li>
             <li><a mat-button routerLink="#">content</a></li>
             <li><a mat-button routerLink="about">about</a></li>
             <li>
@@ -30,10 +31,16 @@
                     </span>
                 </a>
             </li>
+            <li>
+                <a mat-button (click)="themeMode()">
+                    <span class="material-icons mode">
+                        {{mode}}
+                    </span>
+                </a>
+            </li>
         </ul>
     </mat-sidenav>
     <mat-sidenav-content>
         <router-outlet></router-outlet>
-        <app-loading></app-loading>
     </mat-sidenav-content>
 </mat-sidenav-container>

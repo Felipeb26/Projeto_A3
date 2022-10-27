@@ -12,6 +12,13 @@ export class TokenService implements HttpInterceptor {
     private load:LoadingService
   ) { }
 
+
+  IsLoggedIn() {
+    const token = localStorage.getItem("tk") != null
+    return token;
+  }
+
+
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     if(this.activeRequest === 0){
