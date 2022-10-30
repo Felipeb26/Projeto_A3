@@ -8,6 +8,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from "@angular/material/input";
+import { MatExpansionModule } from '@angular/material/expansion';
 //import acima angular material
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { BrowserModule } from '@angular/platform-browser';
@@ -51,7 +52,8 @@ import { CadastroComponent } from './pages/cadastro/cadastro.component';
     FormsModule,
     MatCheckboxModule,
     MatSidenavModule,
-    MatInputModule
+    MatInputModule,
+    MatExpansionModule
   ],
 
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenService, multi: true }],

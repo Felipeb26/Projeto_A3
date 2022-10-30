@@ -1,4 +1,56 @@
-mat-card{
-    margin: 5% 3% 0 3%;
+.card {
+    margin: 5% 3%;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background: var(--myWhite);
+    box-shadow: 0 0 1rem var(--myPurpleShadow);
 }
 
+.cadastro-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.dadosBase {
+    display: flex;
+
+    .dadosIdent {
+        flex: 1;
+        flex-direction: column;
+        & mat-form-field {
+            width: 80%;
+        }
+    }
+
+    .dadosContato {
+        flex: 1;
+
+        & mat-accordion {
+            background: var(--myWhite);
+        }
+
+        & mat-form-field {
+            width: 90%;
+        }
+    }
+}
+
+.medico {
+    display: flex;
+    flex-direction: column;
+
+    & mat-form-field {
+        width: 40%;
+    }
+}
+h2,mat-form-field,mat-label{
+    color: var(--myBlack);
+}
+
+mat-expansion-panel{
+    background: var(--myWhite);
+    & mat-panel-title{
+        color: var(--myBlack);
+        font-weight: bold;
+    }
+}

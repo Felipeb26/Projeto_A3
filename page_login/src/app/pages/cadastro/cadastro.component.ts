@@ -10,17 +10,27 @@ import { MedicoService } from 'src/app/service/cadastro-medico.service';
 })
 export class CadastroComponent implements OnInit {
 
-  user:string= "Paciente"
+  user: string = "Paciente"
+  disable_crm: string = "disable"
+  check:boolean=false
+  panelOpenState = false;
 
-  selectedValue: string | undefined;
+
   CadastroForm!: FormGroup;
-  public showPassword: boolean = false;
-  checked = true;
+  showPassword: boolean = false;
 
-  // selecteds: Select[] = [
-  //   { value: 'geral', viewValue: 'Geral' },
-  //   { value: 'ortopedista', viewValue: 'Ortopedista' },
-  // ];
+  crmInput($event: any) {
+    const isCheck = $event.target.checked;
+    if (isCheck) {
+      this.user = "Medico"
+      this.disable_crm = "false"
+      this.check =true
+    } else {
+      this.user = "Paciente"
+      this.disable_crm = "disable"
+      this.check = false
+    }
+  }
 
   constructor (
     private medicoService: MedicoService,
@@ -44,7 +54,6 @@ export class CadastroComponent implements OnInit {
     if (form.invalid) return
     this.medicoService.adicionarMedico(
       form.value.nome,
-      form.value.sobrenome,
       form.value.especialidade,
       form.value.fone,
       form.value.email,
