@@ -30,6 +30,10 @@ export class LoginService {
       .pipe();
   }
 
+  salvarUsuario(user: USER): Observable<USER[]> {
+    return this.http.post<USER[]>(`${API_PATH}${MICRO1}/users`,user)
+  }
+
 
   enviarEmail(mail: MAil): Observable<any> {
     return this.http.post<any>(`${API_PATH}${MICRO2}/index`, mail);

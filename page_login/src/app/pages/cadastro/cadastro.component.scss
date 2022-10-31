@@ -26,11 +26,20 @@
         flex: 1;
 
         & mat-accordion {
+            letter-spacing: 00.2rem;
             background: var(--myWhite);
+            text-transform: uppercase;
+            text-decoration: underline;
         }
 
         & mat-form-field {
             width: 90%;
+        }
+        & .password{
+            cursor: pointer;
+        }
+        & .password:hover{
+            color: var(--myPurpleShadow);
         }
     }
 }
@@ -43,6 +52,7 @@
         width: 40%;
     }
 }
+
 h2,mat-form-field,mat-label{
     color: var(--myBlack);
 }
@@ -53,4 +63,19 @@ mat-expansion-panel{
         color: var(--myBlack);
         font-weight: bold;
     }
+}
+
+.cadastar{
+    box-shadow: 0 0 0.5rem var(--myPurpleShadow);
+    background: var(--myPurple);
+    color: var(--myBlack);
+    width: auto;
+    border: 2px solid var(--myWhite);
+    margin: 0 40%;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+}
+
+.cadastar:hover{
+    box-shadow: 0 0 0.8rem var(--myLogo);
 }

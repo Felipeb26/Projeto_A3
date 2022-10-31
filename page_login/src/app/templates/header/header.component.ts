@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertsService } from 'src/app/utils/alerts.service';
+import { EncodesService } from './../../utils/encodes.service';
 
 @Component({
   selector: 'app-header',
@@ -13,13 +14,14 @@ export class HeaderComponent implements OnInit {
   mode: string = "light_mode"
 
   constructor (
-    private alert: AlertsService
+    private alert: AlertsService,
+    private encode: EncodesService
   ) { }
 
   ngOnInit(): void {
     const mode = localStorage.getItem("mode")
-    if (mode != null || undefined){
-      if(mode?.startsWith("dark")){
+    if (mode != null || undefined) {
+      if (mode?.startsWith("dark")) {
         document.body.classList.toggle("dark-theme");
         this.mode = "dark_mode"
       }
@@ -38,7 +40,7 @@ export class HeaderComponent implements OnInit {
       localStorage.setItem("mode", "light")
       return this.mode = "light_mode"
     }
-    localStorage.setItem("mode", "dark")
+    localStorage.setItem("mode", "dark");
     return this.mode = "dark_mode"
   }
 

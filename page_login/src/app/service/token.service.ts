@@ -1,3 +1,4 @@
+import { EncodesService } from './../utils/encodes.service';
 import { LoadingService } from './../utils/loading.service';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -9,7 +10,8 @@ import { finalize, Observable } from 'rxjs';
 export class TokenService implements HttpInterceptor {
   private activeRequest = 0;
   constructor (
-    private load:LoadingService
+    private load: LoadingService,
+    private encodes: EncodesService
   ) { }
 
 
@@ -21,13 +23,15 @@ export class TokenService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    if(this.activeRequest === 0){
+    if (this.activeRequest === 0) {
       this.load.show();
     }
     this.activeRequest++;
 
 
     let token = localStorage.getItem("tk");
+    token = this.encodes.decodeString(token);
+    console.log(token)
     let jwtToken = req.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`
@@ -37,7 +41,7 @@ export class TokenService implements HttpInterceptor {
     return next.handle(jwtToken).pipe(
       finalize(() => {
         this.activeRequest--;
-        if(this.activeRequest===0){
+        if (this.activeRequest === 0) {
           this.load.hide();
         }
       })

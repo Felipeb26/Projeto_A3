@@ -7,18 +7,23 @@ import Swal from 'sweetalert2';
 })
 export class AlertsService {
 
+  back: string = "#2d2d2d"
+  color: string = "#34bcbe"
+
   constructor () { }
 
   Toast = Swal.mixin({
     toast: true,
     position: "top-end",
-    timer: 2000,
+    timer: 3500,
     timerProgressBar: true,
     showConfirmButton: false,
     didOpen: (toast) => {
       toast.addEventListener('mouseenter', Swal.stopTimer)
       toast.addEventListener('mouseleave', Swal.resumeTimer)
     },
+    background: this.back,
+    color: this.color
   })
 
   sucess(title: any, text: any) {
@@ -65,7 +70,7 @@ export class AlertsService {
     });
   };
 
-//using only the text
+  //using only the text
   sucessT(text: any) {
     this.Toast.fire({
       text: text,

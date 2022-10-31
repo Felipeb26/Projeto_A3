@@ -1,3 +1,4 @@
+import { AlertsService } from './../utils/alerts.service';
 import { TokenService } from './../service/token.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
@@ -10,6 +11,7 @@ export class AuthGuard implements CanActivate {
 
   constructor (
     private endpoints: TokenService,
+    private alert:AlertsService,
     private route: Router) { }
 
   canActivate() {
@@ -18,6 +20,7 @@ export class AuthGuard implements CanActivate {
       return true;
     } else {
       this.route.navigate(["login"])
+      this.alert.infoT("necessário logar antes!");
       return false;
     }
   }

@@ -53,7 +53,7 @@ mat-toolbar {
 }
 
 mat-sidenav-container {
-    height: 72vh;
+    height: 82.3%;
     box-shadow: 0 0 1rem var(--myPurpleShadow);
 }
 
@@ -92,7 +92,7 @@ mat-sidenav {
         letter-spacing: 0.2rem;
         transition: all 0.5s ease-in-out;
         font-size: 1.1rem;
-        color: var(--myWhite);
+        color: var(--myBlack);
     }
 
     & .links>li:hover {
@@ -127,7 +127,7 @@ mat-sidenav {
 
 
 .material-icons {
-    color: var(--myWhite);
+    color: var(--myBlack);
     font-size: xx-large;
 }
 

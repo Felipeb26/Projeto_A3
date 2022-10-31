@@ -1,7 +1,9 @@
+import { USER } from './../../models/usuario.model';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MedicoService } from 'src/app/service/cadastro-medico.service';
+import { LoginService } from 'src/app/service/endpoints.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -12,7 +14,7 @@ export class CadastroComponent implements OnInit {
 
   user: string = "Paciente"
   disable_crm: string = "disable"
-  check:boolean=false
+  check: boolean = false
   panelOpenState = false;
 
 
@@ -24,7 +26,7 @@ export class CadastroComponent implements OnInit {
     if (isCheck) {
       this.user = "Medico"
       this.disable_crm = "false"
-      this.check =true
+      this.check = true
     } else {
       this.user = "Paciente"
       this.disable_crm = "disable"
@@ -35,6 +37,7 @@ export class CadastroComponent implements OnInit {
   constructor (
     private medicoService: MedicoService,
     private formBuilder: FormBuilder,
+    private endpoints:LoginService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -51,14 +54,26 @@ export class CadastroComponent implements OnInit {
   }
 
   AdicionarMedico(form: NgForm) {
-    if (form.invalid) return
-    this.medicoService.adicionarMedico(
-      form.value.nome,
-      form.value.especialidade,
-      form.value.fone,
-      form.value.email,
-      form.value.crm
-    )
+    if (form.invalid) {
+
+      return this.medicoService.adicionarMedico(
+        form.value.nome,
+        form.value.especialidade,
+        form.value.fone,
+        form.value.email,
+        form.value.crm
+      )
+    }
     form.resetForm();
+  }
+
+
+  cadastrar(usuario: { nome: string, email: string, cpf: string, telefone: string, senha: string, especialidade:string,crm:string, agenda:string }){
+
+    console.log(usuario)
+    this.endpoints.salvarUsuario(usuario).subscribe({
+
+    })
+
   }
 }
