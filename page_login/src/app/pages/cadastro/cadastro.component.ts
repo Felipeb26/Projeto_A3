@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MedicoService } from 'src/app/service/cadastro-medico.service';
 import { LoginService } from 'src/app/service/endpoints.service';
+import { AlertsService } from 'src/app/utils/alerts.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -16,10 +17,9 @@ export class CadastroComponent implements OnInit {
   disable_crm: string = "disable"
   check: boolean = false
   panelOpenState = false;
-
-
   CadastroForm!: FormGroup;
   showPassword: boolean = false;
+  role: number = 0
 
   crmInput($event: any) {
     const isCheck = $event.target.checked;
@@ -37,8 +37,9 @@ export class CadastroComponent implements OnInit {
   constructor (
     private medicoService: MedicoService,
     private formBuilder: FormBuilder,
-    private endpoints:LoginService,
-    private router: Router) { }
+    private endpoints: LoginService,
+    private route: Router,
+    private alert: AlertsService) { }
 
   ngOnInit(): void {
     this.CadastroForm = this.formBuilder.group(
@@ -68,12 +69,33 @@ export class CadastroComponent implements OnInit {
   }
 
 
-  cadastrar(usuario: { nome: string, email: string, cpf: string, telefone: string, senha: string, especialidade:string,crm:string, agenda:string }){
+  cadastrar(usuario: { nome: string, email: string, cpf: string, telefone: string, senha: string, especialidade: string, crm: string }) {
 
-    console.log(usuario)
-    this.endpoints.salvarUsuario(usuario).subscribe({
+    if (usuario.crm == null || undefined) {
+      this.role = 0
+    } else {
+      this.role = 1
+    }
 
-    })
+    const save = {
+      nome: usuario.nome,
+      email: usuario.email,
+      senha: usuario.senha,
+      agenda: "2022-12-30",
+      role: this.role,
+    }
+
+    this.endpoints.salvarUsuario(save).subscribe(
+      result => {
+        console.log(save),
+          console.log(result)
+      },
+      error => {
+
+        console.log(save),
+          console.log(error.message)
+      }
+    )
 
   }
 }

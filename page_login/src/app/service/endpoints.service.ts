@@ -1,3 +1,4 @@
+import { CRUD_PATH } from './../../environments/environment';
 import { LoadingService } from './../utils/loading.service';
 import { MAil } from '../models/email.model';
 import { MICRO1 } from '../../environments/environment';
@@ -7,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_PATH } from 'src/environments/environment';
 import { MICRO2 } from 'src/environments/environment.prod';
-import { finalize, Observable } from "rxjs";
+import { finalize, first, Observable } from "rxjs";
 import { USER } from '../models/usuario.model';
 
 
@@ -30,8 +31,8 @@ export class LoginService {
       .pipe();
   }
 
-  salvarUsuario(user: USER): Observable<USER[]> {
-    return this.http.post<USER[]>(`${API_PATH}${MICRO1}/users`,user)
+  salvarUsuario(user: USER): Observable<any> {
+    return this.http.post<USER>(`${CRUD_PATH}users`, user).pipe(first(), )
   }
 
 

@@ -27,11 +27,8 @@ export class TokenService implements HttpInterceptor {
       this.load.show();
     }
     this.activeRequest++;
-
-
     let token = localStorage.getItem("tk");
     token = this.encodes.decodeString(token);
-    console.log(token)
     let jwtToken = req.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`

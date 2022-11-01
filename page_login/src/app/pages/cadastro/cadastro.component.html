@@ -1,5 +1,5 @@
 <div class="card">
-    <form class="cadastro-form"  #usuario="ngForm" (ngSubmit)="cadastrar(usuario.value)">
+    <form class="cadastro-form" #usuario="ngForm" (ngSubmit)="cadastrar(usuario.value)">
         <h2>Cadastro de {{user}}</h2>
 
         <div class="dadosBase">
@@ -48,7 +48,7 @@
                         <mat-form-field appearance="outline">
                             <mat-label>Senha:</mat-label>
                             <input matInput [type]="showPassword ? 'text' : 'password'" name="senha" minlength="5"
-                                required>
+                                ngModel required>
                             <span class="material-icons password" matSuffix (click)="togglePasswordVisibility()">
                                 {{showPassword?'visibility_off':'visibility'}}
                             </span>

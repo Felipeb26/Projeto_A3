@@ -84,7 +84,9 @@ const getAll = async (req, res, next) => {
 					it.data().email,
 					it.data().senha,
 					verifyDate(it.data().agenda),
-					it.data().role
+					it.data().role,
+					it.data().crm,
+					it.data().especialidade
 				);
 				userList.push(users);
 			});
@@ -112,7 +114,7 @@ const getById = async (req, res) => {
 const getUserForLogin = async (req, res) => {
 	try {
 		const userList = [];
-		let {senha, email } = req.body;
+		let { senha, email } = req.body;
 
 		senha = new String(senha);
 		email = new String(email);
@@ -126,8 +128,11 @@ const getUserForLogin = async (req, res) => {
 						doc.id,
 						doc.data().nome,
 						doc.data().email,
+						doc.data().senha,
 						doc.data().agenda,
-						doc.data().roles
+						doc.data().role,
+						doc.data().crm,
+						doc.data().especialidade
 					);
 					userList.push(user);
 				});
@@ -150,20 +155,20 @@ const getUserForLogin = async (req, res) => {
 			TokenTime: "15 min",
 		});
 	} catch (error) {
-		console.log(error);
 		res.status(400).send({ message: error.message });
 	}
 };
 
 const addUser = async (req, res) => {
 	try {
-		let { nome, email, senha, agenda, role } = req.body;
+		let { nome, email, senha, agenda, role, crm, especialidade } = req.body;
 
 		if (
-			role == undefined || null && nome == undefined ||
-			null && email == undefined ||
-			null && senha == undefined ||
-			null 
+			role == undefined ||
+			(null && nome == undefined) ||
+			(null && email == undefined) ||
+			(null && senha == undefined) ||
+			null
 		) {
 			res.status(400).send({
 				message: "todos os campos devem ser informados",
@@ -171,15 +176,17 @@ const addUser = async (req, res) => {
 			return;
 		}
 
-		agenda = toDate(agenda);
-		if (!isValidDate(agenda)) {
-			return res
-				.status(400)
-				.send({ erro: "A data: fornecida não é uma data valida" });
-		}
-		if (agenda instanceof Date) {
-			agenda = agenda.toString();
-		}
+		// if (agenda != null || undefined) {
+		// 	agenda = toDate(agenda);
+		// 	if (!isValidDate(agenda)) {
+		// 		return res
+		// 			.status(400)
+		// 			.send({ erro: "A data: fornecida não é uma data valida" });
+		// 	}
+		// 	if (agenda instanceof Date) {
+		// 		agenda = agenda.toString();
+		// 	}
+		// }
 
 		const data = await collection.get();
 		const userList = [];
@@ -193,7 +200,9 @@ const addUser = async (req, res) => {
 					it.data().email,
 					it.data().senha,
 					it.data().agenda,
-					it.data().role
+					it.data().role,
+					it.data().crm,
+					it.data().especialidade
 				);
 				userList.push(users);
 			});
@@ -216,6 +225,22 @@ const addUser = async (req, res) => {
 
 		role = verifyRoles(role);
 		senha = new Buffer.from(senha).toString("base64");
+
+		if (crm != null || undefined) {
+			const doc = {
+				nome,
+				email,
+				senha,
+				agenda,
+				role,
+				crm,
+				especialidade,
+			};
+
+			await collection.doc().set(doc);
+			return res.status(201).send(doc);
+		}
+
 		const user = {
 			nome,
 			email,
@@ -225,9 +250,9 @@ const addUser = async (req, res) => {
 		};
 
 		await collection.doc().set(user);
-		res.status(201).send({ message: "salvo com sucesso" });
+		return res.status(201).send(user);
 	} catch (error) {
-		res.status(400).send({ message: error.message });
+		res.status(400).send({ message: `erro ao adicionar: ${error}` });
 	}
 };
 

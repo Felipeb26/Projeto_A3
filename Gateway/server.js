@@ -31,8 +31,6 @@ app.get("/", (req, res) => {
 	return res.send({ message: "Gateway is running" });
 });
 
-
-
 //ports - host
 if(port.match("3000")){
 	port = port.replace("3000", "3001")

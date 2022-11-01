@@ -3,7 +3,7 @@ export interface USER {
     nome: string,
     email: string,
     senha: string,
-    agenda: Date
+    agenda?: string
     role: Number,
     crm?: string,
     especialidade?: string

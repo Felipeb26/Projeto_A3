@@ -17,6 +17,7 @@
     .dadosIdent {
         flex: 1;
         flex-direction: column;
+
         & mat-form-field {
             width: 80%;
         }
@@ -26,19 +27,24 @@
         flex: 1;
 
         & mat-accordion {
+            box-shadow: 0 0 0.8rem var(--myLogo);
             letter-spacing: 00.2rem;
             background: var(--myWhite);
             text-transform: uppercase;
             text-decoration: underline;
         }
-
-        & mat-form-field {
+        & mat-expansion-panel-header{
+                box-shadow: 0 0 0.8rem var(--myPurpleShadow);
+            }
+            & mat-form-field {
             width: 90%;
         }
-        & .password{
+
+        & .password {
             cursor: pointer;
         }
-        & .password:hover{
+
+        & .password:hover {
             color: var(--myPurpleShadow);
         }
     }
@@ -53,19 +59,23 @@
     }
 }
 
-h2,mat-form-field,mat-label{
+h2,
+mat-form-field,
+mat-label {
     color: var(--myBlack);
 }
 
-mat-expansion-panel{
+mat-expansion-panel {
+    box-shadow: 0 0 5rem var(--myPurpleShadow);
     background: var(--myWhite);
-    & mat-panel-title{
+
+    & mat-panel-title {
         color: var(--myBlack);
         font-weight: bold;
     }
 }
 
-.cadastar{
+.cadastar {
     box-shadow: 0 0 0.5rem var(--myPurpleShadow);
     background: var(--myPurple);
     color: var(--myBlack);
@@ -74,8 +84,11 @@ mat-expansion-panel{
     margin: 0 40%;
     text-transform: uppercase;
     letter-spacing: 0.2rem;
+    border-radius: 5px;
+    padding: 0.5rem;
+    font-size: medium;
 }
 
-.cadastar:hover{
+.cadastar:hover {
     box-shadow: 0 0 0.8rem var(--myLogo);
 }
