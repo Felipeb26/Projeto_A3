@@ -9,7 +9,7 @@
 }
 
 :root {
-  --midRed: rgb(255, 0, 0);
+  --midRed: #ff0000;
 
   --myPurple: #52587a;
   --myPurpleShadow: #939fe1;
@@ -23,8 +23,7 @@
 }
 
 :root .dark-theme {
-
-  --midRed: rgb(203, 4, 4);
+  --midRed: #cb0404;
   --myPurple: #858ec0;
   --myPurpleShadow: #5d6cc2;
 
@@ -33,7 +32,7 @@
 
   --myBlack: #232323;
   --myWhite: #ece9e9;
-  --myGray: rgba(103, 103, 103, 0.442);
+  --myGray: #67676771;
 }
 
 html,

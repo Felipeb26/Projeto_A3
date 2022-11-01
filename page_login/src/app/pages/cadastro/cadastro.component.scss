@@ -27,16 +27,26 @@
         flex: 1;
 
         & mat-accordion {
-            box-shadow: 0 0 0.8rem var(--myLogo);
             letter-spacing: 00.2rem;
             background: var(--myWhite);
             text-transform: uppercase;
             text-decoration: underline;
         }
-        & mat-expansion-panel-header{
-                box-shadow: 0 0 0.8rem var(--myPurpleShadow);
-            }
-            & mat-form-field {
+
+        & mat-expansion-panel-header {
+            box-shadow: 0 0 0.8rem var(--myPurpleShadow);
+        }
+
+        & mat-panel-description{
+            color: var(--midRed);
+            font-weight: bold;
+        }
+
+        & .tel {
+            margin: 1rem 0 0 0;
+        }
+
+        & mat-form-field {
             width: 90%;
         }
 
@@ -63,6 +73,10 @@ h2,
 mat-form-field,
 mat-label {
     color: var(--myBlack);
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+    font-style: italic;
+    text-transform: uppercase;
 }
 
 mat-expansion-panel {
@@ -81,7 +95,7 @@ mat-expansion-panel {
     color: var(--myBlack);
     width: auto;
     border: 2px solid var(--myWhite);
-    margin: 0 40%;
+    margin: 1rem 40%;
     text-transform: uppercase;
     letter-spacing: 0.2rem;
     border-radius: 5px;

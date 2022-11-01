@@ -13,10 +13,11 @@ import { AlertsService } from 'src/app/utils/alerts.service';
 })
 export class CadastroComponent implements OnInit {
 
+
   user: string = "Paciente"
   disable_crm: string = "disable"
+  expand: string ="expand_more"
   check: boolean = false
-  panelOpenState = false;
   CadastroForm!: FormGroup;
   showPassword: boolean = false;
   role: number = 0
@@ -50,6 +51,16 @@ export class CadastroComponent implements OnInit {
     );
   }
 
+
+  panelOpenState(){
+  const exp = this.expand;
+    if(exp.endsWith("less")){
+      this.expand = "expand_more"
+    }else{
+      this.expand = "expand_less"
+    }
+  }
+
   public togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }
@@ -78,22 +89,30 @@ export class CadastroComponent implements OnInit {
     }
 
     const save = {
-      nome: usuario.nome,
-      email: usuario.email,
-      senha: usuario.senha,
-      agenda: "2022-12-30",
-      role: this.role,
+      "nome": usuario.nome,
+      "email": usuario.email,
+      "senha": usuario.senha,
+      "role": this.role
     }
 
     this.endpoints.salvarUsuario(save).subscribe(
-      result => {
-        console.log(save),
-          console.log(result)
+      (result: USER) => {
+        console.log(result)
+        this.alert.sucessT(`Usuario ${result.nome} cadastrado!`)
+        setTimeout(() => 5000);
+        this.route.navigate([""])
       },
-      error => {
+      (error: any) => {
+        const er = error.error.errorList;
+        if (er != null || undefined) {
+          let erro = new String(er);
 
-        console.log(save),
-          console.log(error.message)
+          erro = erro.replace("[", "")
+          erro = erro.replace("]", "")
+          this.alert.errorT(erro)
+        }
+
+        console.log(error)
       }
     )
 

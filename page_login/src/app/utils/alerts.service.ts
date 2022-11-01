@@ -7,8 +7,8 @@ import Swal from 'sweetalert2';
 })
 export class AlertsService {
 
-  back: string = "#2d2d2d"
-  color: string = "#34bcbe"
+  back: string = "#fdfdfd"
+  color: string = "#2d2d2d"
 
   constructor () { }
 

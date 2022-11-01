@@ -5,7 +5,7 @@
         <div class="dadosBase">
             <div class="dadosIdent">
                 <mat-form-field appearance="outline">
-                    <mat-label>Digite seu nome:</mat-label>
+                    <mat-label>nome:</mat-label>
                     <input type="text" matInput name="nome" ngModel required minlength="2" />
                 </mat-form-field>
 
@@ -31,13 +31,18 @@
 
             <div class="dadosContato">
                 <mat-accordion>
-                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel (opened)="panelOpenState()" (closed)="panelOpenState()">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 Contatos
                             </mat-panel-title>
+                            <mat-panel-description>
+                                <span class="material-icons">
+                                    {{expand}}
+                                </span>
+                            </mat-panel-description>
                         </mat-expansion-panel-header>
-                        <mat-form-field appearance="outline">
+                        <mat-form-field class="tel" appearance="outline">
                             <mat-label>TELEFONE</mat-label>
                             <input type="text" matInput ngModel name="telefone" required />
                         </mat-form-field>

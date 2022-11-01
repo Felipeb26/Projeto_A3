@@ -161,14 +161,15 @@ const getUserForLogin = async (req, res) => {
 
 const addUser = async (req, res) => {
 	try {
-		let { nome, email, senha, agenda, role, crm, especialidade } = req.body;
+		let { nome, email, senha, agenda, role, crm, especialidade, telefone } =
+			req.body;
 
 		if (
-			role == undefined ||
-			(null && nome == undefined) ||
-			(null && email == undefined) ||
-			(null && senha == undefined) ||
-			null
+			role == undefined || null 
+			&& nome == undefined ||	null 
+			&& email == undefined || null 
+			&& senha == undefined || null
+			&& telefone == undefined || null
 		) {
 			res.status(400).send({
 				message: "todos os campos devem ser informados",
@@ -176,17 +177,10 @@ const addUser = async (req, res) => {
 			return;
 		}
 
-		// if (agenda != null || undefined) {
-		// 	agenda = toDate(agenda);
-		// 	if (!isValidDate(agenda)) {
-		// 		return res
-		// 			.status(400)
-		// 			.send({ erro: "A data: fornecida não é uma data valida" });
-		// 	}
-		// 	if (agenda instanceof Date) {
-		// 		agenda = agenda.toString();
-		// 	}
-		// }
+		if (agenda == null || undefined) {
+			agenda = Date.now();
+			agenda = agenda.toString();
+		}
 
 		const data = await collection.get();
 		const userList = [];
@@ -213,6 +207,9 @@ const addUser = async (req, res) => {
 			if (it.email == email) {
 				errorList.push(`Email: ${email} já cadastro em sistema!`);
 			}
+			if (it.telefone == telefone) {
+				errorList.push(`Telefone: ${telefone} já cadastro em sistema!`);
+			}
 			if (it.agenda == agenda) {
 				errorList.push(`Data ${agenda} não pode ser selecionada`);
 			}
@@ -220,7 +217,7 @@ const addUser = async (req, res) => {
 
 		if (errorList.length > 0) {
 			errorList = [...new Set(errorList)];
-			return res.send(errorList);
+			return res.status(400).send({ errorList });
 		}
 
 		role = verifyRoles(role);
@@ -233,6 +230,7 @@ const addUser = async (req, res) => {
 				senha,
 				agenda,
 				role,
+				telefone,
 				crm,
 				especialidade,
 			};
@@ -246,6 +244,7 @@ const addUser = async (req, res) => {
 			email,
 			senha,
 			agenda,
+			telefone,
 			role,
 		};
 
