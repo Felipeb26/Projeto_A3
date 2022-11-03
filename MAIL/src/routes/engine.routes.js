@@ -125,7 +125,7 @@ route.post("/", async (req, res, next) => {
 								.send({ error: "erro ao deletar arquivo" });
 						}
 						return res.send({
-							message: "email enviado para com sucesso",
+							message: `email enviado com sucesso`,
 						});
 					})
 					.catch((err) => {
@@ -144,7 +144,7 @@ route.post("/", async (req, res, next) => {
 const deleteFile = () => {
 	try {
 		fs.unlinkSync(fileName);
-		fs.rmdirSync(`${__dirname}/uplosad`);
+		fs.rmdirSync(`${__dirname}/upload`);
 		console.log("pasta e arquivo deletado");
 		return 0;
 	} catch (error) {

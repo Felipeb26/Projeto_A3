@@ -1,3 +1,6 @@
+import { AlertsService } from './../../utils/alerts.service';
+import { LoginService } from 'src/app/service/endpoints.service';
+import { LoadingService } from './../../utils/loading.service';
 import { NgForm } from '@angular/forms';
 import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { faLinkedin, faFacebook, faGithub } from '@fortawesome/free-brands-svg-icons'
@@ -19,13 +22,31 @@ export class FooterComponent implements OnInit {
   @ViewChild('autosize')
   autosize!: CdkTextareaAutosize;
 
-  constructor (private _ngZone: NgZone) { }
+  constructor (private _ngZone: NgZone,
+    private endpoints: LoginService,
+    private alert: AlertsService) { }
 
   ngOnInit(): void {
   }
 
-  sendMail(mail: NgForm) {
-    console.log(mail)
+  sendMail(mail: { assunto: string, mensagem: string }) {
+
+    const toSend = {
+      "para": "felipeb2silva@gmail.com",
+      "assunto": mail.assunto,
+      "mensagem": mail.mensagem,
+      "modelo": "atestado"
+    }
+
+    this.endpoints.enviarEmail(toSend).subscribe(
+      (data: any) => {
+        this.alert.sucessT(data.message)
+      },
+      (erro: any) => {
+        console.log(erro)
+      }
+    )
+
   }
 
 }

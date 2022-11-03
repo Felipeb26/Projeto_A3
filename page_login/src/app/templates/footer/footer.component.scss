@@ -15,6 +15,7 @@ footer {
 
 .footerCol {
     width: 25%;
+
     & h4 {
         font-size: 1.2rem;
         color: var(--myBlack);
@@ -29,7 +30,7 @@ footer {
     }
 
     & li>a {
-        transition: all 0.5s ease-in-out;
+        transition: all 0.3s ease-in-out;
         text-transform: capitalize;
         color: var(--myBlack);
         font-size: 1rem;
@@ -42,7 +43,7 @@ footer {
     }
 
     & li>a:hover {
-        color: var(--myLogo);
+        color: var(--myWhite);
         padding-left: 1rem;
         text-decoration: underline;
     }
@@ -58,13 +59,17 @@ footer {
 
     & form>button {
         margin: 0.8rem 0 0 0;
-        background: var(--myPurpleShadow);
+        background: var(--myPurple);
         text-transform: uppercase;
         font-weight: bold;
         letter-spacing: 0.2rem;
         color: var(--myBlack);
+        box-shadow: 0 0 0.8rem var(--myPurpleShadow);
     }
 
+    & form>button:hover{
+        box-shadow: 0 0 0.5rem var(--myLogo);
+    }
 
 }
 
@@ -73,15 +78,18 @@ footer {
     flex-direction: column;
 
     & a {
+        border-radius: 1.6rem 1.3rem 1.3rem 1.6rem;
         transition: all 0.5s ease-in-out;
-        letter-spacing: 0.1rem;
         text-transform: capitalize;
+        letter-spacing: 0.1rem;
         color: var(--myBlack);
         margin: 0.3rem 0;
         font-style: italic;
         font-weight: 500;
-        border-radius: 1rem;
         width: 70%;
+        display: flex;
+        align-items: center;
+        justify-content: left;
     }
 
     & span {
@@ -89,9 +97,8 @@ footer {
         align-items: center;
         justify-content: center;
         margin: 0 0.5rem 0 0;
-        border-radius: 50%;
-        height: 2rem;
-        width: 2rem;
+        height: 2.8rem;
+        width: 2.8rem;
         border-radius: 50%;
         border: 2px solid var(--myBlack);
         background: var(--myWhite);
@@ -99,27 +106,31 @@ footer {
     }
 
     .linkedin {
-        & span{
+        & span {
             color: var(--iconBlue);
         }
+
         color: var(--myBlack);
     }
 
     .mailIcon {
-        & span{
+        & span {
             color: var(--iconRed);
         }
+
         color: var(--myBlack);
     }
 
     .github {
-        & span{
+        & span {
             color: var(--myBlack);
         }
+
         color: var(--myBlack);
     }
 
     & .linkedin:hover {
+        border: 3px solid var(--myBlack);
         background: var(--iconBlue);
         color: var(--myWhite);
 
@@ -131,6 +142,7 @@ footer {
 
 
     & .mailIcon:hover {
+        border: 3px solid var(--myBlack);
         background: var(--iconRed);
         color: var(--myWhite);
 
@@ -141,6 +153,7 @@ footer {
     }
 
     & .github:hover {
+        border: 3px solid var(--myBlack);
         background: var(--myBlack);
         color: var(--myWhite);
 
