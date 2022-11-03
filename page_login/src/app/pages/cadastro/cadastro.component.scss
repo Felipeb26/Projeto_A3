@@ -6,6 +6,10 @@
     box-shadow: 0 0 1rem var(--myPurpleShadow);
 }
 
+.card:hover {
+    box-shadow: 0 0 1rem var(--myLogo);
+}
+
 .cadastro-form {
     display: flex;
     flex-direction: column;
@@ -37,7 +41,7 @@
             box-shadow: 0 0 0.8rem var(--myPurpleShadow);
         }
 
-        & mat-panel-description{
+        & mat-panel-description {
             color: var(--midRed);
             font-weight: bold;
         }
@@ -105,4 +109,12 @@ mat-expansion-panel {
 
 .cadastar:hover {
     box-shadow: 0 0 0.8rem var(--myLogo);
+}
+
+@media screen and (max-width: 1365px) {
+    .card {
+        margin: 5% 10%;
+        width: 80%;
+        height: 80%;
+    }
 }

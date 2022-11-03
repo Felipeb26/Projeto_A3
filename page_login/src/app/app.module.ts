@@ -25,6 +25,7 @@ import { FooterComponent } from './templates/footer/footer.component';
 import { HeaderComponent } from './templates/header/header.component';
 import { LoadingComponent } from './utils/loading/loading.component';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { CadastroComponent } from './pages/cadastro/cadastro.component';
     MatCheckboxModule,
     MatSidenavModule,
     MatInputModule,
-    MatExpansionModule
+    MatExpansionModule,
+    FontAwesomeModule
   ],
 
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenService, multi: true }],
