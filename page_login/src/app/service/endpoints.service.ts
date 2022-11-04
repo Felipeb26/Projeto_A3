@@ -32,7 +32,7 @@ export class LoginService {
   }
 
   salvarUsuario(user: USER): Observable<any> {
-    return this.http.post<USER>(`${CRUD_PATH}users`, user).pipe(first(), )
+    return this.http.post<USER>(`${API_PATH}${MICRO1}/users`, user).pipe(first(), )
   }
 
 
