@@ -98,10 +98,11 @@ export class CadastroComponent implements OnInit {
     this.endpoints.salvarUsuario(save).subscribe(
       (result: USER) => {
         console.log(result)
-        this.alert.sucessT(`Usuario ${result.nome} cadastrado!`)
-        setTimeout(() => 5000);
-        this.route.navigate([""])
-      },
+        this.alert.sucessT(`Usuario ${save.nome} cadastrado!`)
+      //   setTimeout(() => 5000);
+      //   this.route.navigate([""])
+      // },
+    },
       (error: any) => {
         const er = error.error.errorList;
         if (er != null || undefined) {

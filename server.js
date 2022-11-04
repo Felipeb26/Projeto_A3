@@ -32,7 +32,7 @@ function deleteLogs() {
 	}
 }
 
-deleteLogs();
+// deleteLogs();
 
 // if(system.startsWith("win")){
 // 	exec(`start "" "${__dirname}/page_login"`).;

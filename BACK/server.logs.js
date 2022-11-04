@@ -2,6 +2,13 @@ const morgan = require("morgan");
 const path = require("path");
 var rfs = require("rotating-file-stream"); // version 2.x
 
+const date = new Date();
+const day = date.getDay();
+const month = date.getMonth() + 1;
+const year = date.getFullYear();
+const hour = date.getHours();
+const minutes = date.getMinutes();
+const seconds = date.getSeconds();
 
 var accessLogStream = rfs.createStream("access.log", {
 	interval: "1d",
@@ -16,7 +23,8 @@ module.exports = morgan(
 			`Status-code: ${tokens.status(req, res)}; `,
 			`Content-Length: ${tokens.res(req, res, "content-length")}; `,
 			`Response-Time: ${tokens["response-time"](req, res)}ms; `,
-			"\n------------------------------------------------------------------------------------------------------\n"
+			`\nDate ${day}/${month}/${year} ${hour}:${minutes}:${seconds}`,
+			"\n------------------------------------------------------------------------------------------------------\n",
 		].join("\t");
 	},
 	{

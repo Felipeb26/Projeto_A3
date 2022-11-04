@@ -1,7 +1,8 @@
 const route = require("express").Router();
 const axios = require("axios");
-const reg = require("../registros/registry.json");
+const reg = require("./registry.json");
 const rateLimiter = require("express-rate-limit");
+const fs = require("fs");
 
 const limiter = rateLimiter({
 	max: 15,
@@ -13,39 +14,26 @@ route.all("/:apiName/:path/:value", limiter, async (req, res) => {
 		if (reg.services[req.params.apiName]) {
 			let value = "/" + req.params.value;
 			value = value == undefined || value == null ? "" : value;
-			if (req.method != "GET") {
-				await axios({
-					method: req.method,
-					url: reg.services[req.params.apiName].url + req.params.path,
-					data: req.body,
+			await axios({
+				method: req.method,
+				url:
+					reg.services[req.params.apiName].url +
+					req.params.path +
+					value,
+				data: req.body,
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: req.headers.authorization,
+				},
+			})
+				.then((data) => {
+					return res.status(data.status).send(data.data);
 				})
-					.then((data) => {
-						return res.status(data.status).send(data.data);
-					})
-					.catch((err) => {
-						res.status(err.response.status).send({
-							message: err.message,
-						});
-					});
-			} else {
-				await axios({
-					method: req.method,
-					url:
-						reg.services[req.params.apiName].url +
-						req.params.path +
-						value,
-					headers: req.headers,
-					data: req.body,
-				})
-					.then((data) => {
-						return res.status(data.status).send(data.data);
-					})
-					.catch((err) => {
-						res.status(err.response.status).send({
-							message: err.message,
-						});
-					});
-			}
+				.catch((err) => {
+					let status = err.response.status;
+					status = status != null || undefined ? status : 400;
+					return res.status(status).send(err.response.data);
+				});
 		} else {
 			res.send({ message: "no service for this param" });
 		}
@@ -54,39 +42,26 @@ route.all("/:apiName/:path/:value", limiter, async (req, res) => {
 	}
 });
 
-route.all("/:apiName/:path", limiter, async (req, res) => {
+route.all("/:apiName/:path", async (req, res) => {
 	try {
 		if (reg.services[req.params.apiName]) {
-			if (req.method != "GET") {
-				await axios({
-					method: req.method,
-					url: reg.services[req.params.apiName].url + req.params.path,
-					data: req.body,
+			await axios({
+				url: reg.services[req.params.apiName].url + req.params.path,
+				method: req.method,
+				data: req.body,
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: req.headers.authorization,
+				},
+			})
+				.then((data) => {
+					return res.status(data.status).send(data.data);
 				})
-					.then((data) => {
-						return res.status(data.status).send(data.data);
-					})
-					.catch((err) => {
-						res.status(err.response.status).send({
-							message: err.message,
-						});
-					});
-			} else {
-				await axios({
-					method: req.method,
-					url: reg.services[req.params.apiName].url + req.params.path,
-					headers: req.headers,
-					data: req.body,
-				})
-					.then((data) => {
-						return res.status(data.status).send(data.data);
-					})
-					.catch((err) => {
-						res.status(err.response.status).send({
-							message: err.message,
-						});
-					});
-			}
+				.catch((err) => {
+					let status = err.response.status;
+					status = status != null || undefined ? status : 400;
+					return res.status(status).send(err.response.data);
+				});
 		} else {
 			res.send({ message: "no service for this param" });
 		}
@@ -98,42 +73,45 @@ route.all("/:apiName/:path", limiter, async (req, res) => {
 route.all("/:apiName/", limiter, async (req, res) => {
 	try {
 		if (reg.services[req.params.apiName]) {
-			if (req.method != "GET" || req.method != "DELETE") {
-				await axios({
-					method: req.method,
-					url: reg.services[req.params.apiName].url,
-					data: req.body,
+			await axios({
+				method: req.method,
+				url: reg.services[req.params.apiName].url,
+				data: req.body,
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: req.headers.authorization,
+				},
+			})
+				.then((data) => {
+					return res.status(data.status).send(data.data);
 				})
-					.then((data) => {
-						return res.status(data.status).send(data.data);
-					})
-					.catch((err) => {
-						res.status(err.response.status).send({
-							message: err.message,
-						});
-					});
-			} else {
-				await axios({
-					method: req.method,
-					url: reg.services[req.params.apiName].url,
-					headers: req.headers,
-					data: req.body,
-				})
-					.then((data) => {
-						return res.status(data.status).send(data.data);
-					})
-					.catch((err) => {
-						res.status(err.response.status).send({
-							message: err.message,
-						});
-					});
-			}
+				.catch((err) => {
+					let status = err.response.status;
+					status = status != null || undefined ? status : 400;
+					return res.status(status).send(err.response.data);
+				});
 		} else {
-			res.status(400).send({ message: "no service for this param" });
+			res.send({ message: "no service for this param" });
 		}
 	} catch (error) {
 		res.send({ erro: error.message });
 	}
+});
+
+route.post("/register", async (req, res) => {
+	const regisInfo = req.body;
+	reg.services[regisInfo.apiName] = { ...regisInfo };
+
+	fs.writeFile(`${__dirname}/registry.json`, JSON.stringify(reg), (err) => {
+		if (err) {
+			console.log(err);
+			return res.send(`não foi possivel registrar ${regisInfo}`);
+		} else {
+			return res.send(
+				`registro incluido com sucesso ${regisInfo.apiName}`
+			);
+		}
+	});
 });
 
 module.exports = route;

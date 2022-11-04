@@ -161,15 +161,14 @@ const getUserForLogin = async (req, res) => {
 
 const addUser = async (req, res) => {
 	try {
-		let { nome, email, senha, agenda, role, crm, especialidade, telefone } =
-			req.body;
+		let { nome, email, senha, agenda, role, crm, especialidade } = req.body;
 
 		if (
-			role == undefined || null 
-			&& nome == undefined ||	null 
-			&& email == undefined || null 
-			&& senha == undefined || null
-			&& telefone == undefined || null
+			role == undefined ||
+			(null && nome == undefined) ||
+			(null && email == undefined) ||
+			(null && senha == undefined) ||
+			null
 		) {
 			res.status(400).send({
 				message: "todos os campos devem ser informados",
@@ -177,9 +176,15 @@ const addUser = async (req, res) => {
 			return;
 		}
 
+		if (crm == null || (undefined && especialidade == null) || undefined) {
+			crm = " ";
+			especialidade = " ";
+		}
+
 		if (agenda == null || undefined) {
 			agenda = Date.now();
-			agenda = agenda.toString();
+		}else{
+			agenda = Date.parse(agenda)
 		}
 
 		const data = await collection.get();
@@ -207,9 +212,6 @@ const addUser = async (req, res) => {
 			if (it.email == email) {
 				errorList.push(`Email: ${email} já cadastro em sistema!`);
 			}
-			if (it.telefone == telefone) {
-				errorList.push(`Telefone: ${telefone} já cadastro em sistema!`);
-			}
 			if (it.agenda == agenda) {
 				errorList.push(`Data ${agenda} não pode ser selecionada`);
 			}
@@ -223,31 +225,15 @@ const addUser = async (req, res) => {
 		role = verifyRoles(role);
 		senha = new Buffer.from(senha).toString("base64");
 
-		if (crm != null || undefined) {
-			const doc = {
-				nome,
-				email,
-				senha,
-				agenda,
-				role,
-				telefone,
-				crm,
-				especialidade,
-			};
-
-			await collection.doc().set(doc);
-			return res.status(201).send(doc);
-		}
-
 		const user = {
 			nome,
 			email,
 			senha,
 			agenda,
-			telefone,
 			role,
+			crm,
+			especialidade,
 		};
-
 		await collection.doc().set(user);
 		return res.status(201).send(user);
 	} catch (error) {
