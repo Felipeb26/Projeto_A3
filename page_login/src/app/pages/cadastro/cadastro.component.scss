@@ -35,6 +35,8 @@
             background: var(--myWhite);
             text-transform: uppercase;
             text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-decoration-color: var(--myPurpleShadow);
         }
 
         & mat-expansion-panel-header {
@@ -91,6 +93,11 @@ mat-expansion-panel {
         color: var(--myBlack);
         font-weight: bold;
     }
+}
+
+input {
+    letter-spacing: 0.1rem;
+    font-size: larger;
 }
 
 .cadastar {

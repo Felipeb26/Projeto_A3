@@ -64,11 +64,12 @@ footer {
         font-weight: bold;
         letter-spacing: 0.2rem;
         color: var(--myBlack);
-        box-shadow: 0 0 0.8rem var(--myPurpleShadow);
+        box-shadow: 0 0 1rem var(--myPurpleShadow);
+        border: 2px solid var(--myBlack);
     }
 
     & form>button:hover{
-        box-shadow: 0 0 0.5rem var(--myLogo);
+        box-shadow: 0 0.5rem 0.5rem var(--myLogo);
     }
 
 }

@@ -1,4 +1,3 @@
-import { AlertsService } from 'src/app/utils/alerts.service';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/service/endpoints.service';
 
@@ -20,7 +19,5 @@ export class HomeComponent implements OnInit {
       data => console.log(data),
       err => console.log(err))
   }
-
-
 
 }

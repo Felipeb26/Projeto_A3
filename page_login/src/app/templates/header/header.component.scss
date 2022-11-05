@@ -97,8 +97,8 @@ mat-sidenav {
 
     & .links>li:hover {
         animation: zoom-in-zoom-out 1s ease normal;
+        box-shadow: 0 0 0.5rem var(--myLogo);
         color: var(--myLogo);
-        box-shadow: none;
     }
 
     & a {
