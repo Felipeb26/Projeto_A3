@@ -1,3 +1,4 @@
+import { UserComponent } from './pages/user/user.component';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { AboutComponent } from './pages/about/about.component';
 import { NgModule } from '@angular/core';
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: "login", component: LoginComponent },
   { path: "about", component: AboutComponent },
+  { path: "user", component: UserComponent },
   { path: "cadastro", component: CadastroComponent, canActivate: [AuthGuard] }
 ];
 

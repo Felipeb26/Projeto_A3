@@ -1,0 +1,34 @@
+<div class="card">
+    <form class="cadastro-form" #usuario="ngForm" (ngSubmit)="atualizar(usuario)">
+        <h1></h1>
+        <mat-form-field appearance="fill">
+            <mat-label>nome</mat-label>
+            <input type="text" matInput disabled="{{check}}" placeholder="{{nome}}" name="nome" ngModel>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>telefone</mat-label>
+            <input type="text" matInput disabled="{{check}}" placeholder="{{telefone}}" name="telefone" ngModel>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>email</mat-label>
+            <input type="text" matInput disabled="{{check}}" placeholder="{{email}}" name="email" ngModel>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>senha</mat-label>
+            <input type="text" matInput disabled="{{check}}" placeholder="{{senha}}" name="senha" ngModel>
+        </mat-form-field >
+        <div class="btns">
+            <mat-checkbox color="primary" (change)="enableInputs()">
+                ALterar Usuario?
+            </mat-checkbox>
+            <button type="submit" mat-button>
+                enviar
+            </button>
+        </div>
+    </form>
+    <div class="delete">
+        <button mat-button>
+            deletar
+        </button>
+    </div>
+</div>

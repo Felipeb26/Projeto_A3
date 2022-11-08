@@ -1,5 +1,5 @@
 import { AlertsService } from './../utils/alerts.service';
-import { TokenService } from './../service/token.service';
+import { TokenService } from '../service/interceptors/token.interceptor';
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { LoginService } from '../service/endpoints.service';
@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
 
   constructor (
     private endpoints: TokenService,
-    private alert:AlertsService,
+    private alert: AlertsService,
     private route: Router) { }
 
   canActivate() {

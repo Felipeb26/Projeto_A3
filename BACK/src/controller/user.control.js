@@ -149,6 +149,24 @@ const getUserForLogin = async (req, res) => {
 
 		const user = userList[index];
 
+		const tk = {
+			id: "id",
+			nome: "nome",
+			email: "email",
+			senha: "senha",
+			crm: "crm",
+			role: "role",
+		};
+
+		if (user instanceof Usuarios) {
+			(tk.id = user.id),
+				(tk.nome = user.nome),
+				(tk.email = user.email),
+				(tk.senha = user.senha),
+				(tk.crm = user.crm),
+				(tk.role = user.role);
+		}
+
 		res.send({
 			token: `${generateToken(user)}`,
 			tokenType: "Bearer",
@@ -183,8 +201,8 @@ const addUser = async (req, res) => {
 
 		if (agenda == null || undefined) {
 			agenda = Date.now();
-		}else{
-			agenda = Date.parse(agenda)
+		} else {
+			agenda = Date.parse(agenda);
 		}
 
 		const data = await collection.get();

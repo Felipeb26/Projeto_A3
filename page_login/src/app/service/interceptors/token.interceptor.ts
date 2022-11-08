@@ -1,8 +1,8 @@
-import { EncodesService } from './../utils/encodes.service';
-import { LoadingService } from './../utils/loading.service';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { finalize, Observable } from 'rxjs';
+import { EncodesService } from '../../utils/encodes.service';
+import { LoadingService } from '../../utils/loading.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class TokenService implements HttpInterceptor {
   private activeRequest = 0;
   constructor (
     private load: LoadingService,
-    private encodes: EncodesService
+    private encodes: EncodesService,
   ) { }
 
 
@@ -43,5 +43,7 @@ export class TokenService implements HttpInterceptor {
         }
       })
     )
+
+
   }
 }

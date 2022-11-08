@@ -53,6 +53,10 @@ body {
   min-height: 100%;
 }
 
+::ng-deep .mat-input-element::placeholder {
+  color: var(--myLogo);
+}
+
 
 ::-webkit-scrollbar-track{
   background-color: var(--myGray);

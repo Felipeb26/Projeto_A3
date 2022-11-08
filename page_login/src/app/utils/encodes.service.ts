@@ -1,6 +1,6 @@
-import { AlertsService } from 'src/app/utils/alerts.service';
 import { Injectable } from '@angular/core';
 import { Base64 } from 'js-base64';
+import { AlertsService } from 'src/app/utils/alerts.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,18 +11,18 @@ export class EncodesService {
 
 
   encodeString(chave: string) {
-    if(chave!= null){
+    if (chave != null) {
       let code = Base64.encode(chave);
       return code;
     }
     return null;
   }
 
-  decodeString(chave: string|null) {
-    if(localStorage.getItem("tk") != null){
-      let code = Base64.decode(localStorage.getItem("tk")!);
+  decodeString(chave: any) {
+    if (chave != null) {
+      let code = Base64.decode(chave);
       return code;
-    }else{
+    } else {
       this.alert.errorT("necessário estar logado")
       return null;
     }
