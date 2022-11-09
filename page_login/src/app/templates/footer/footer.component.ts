@@ -1,5 +1,5 @@
 import { AlertsService } from './../../utils/alerts.service';
-import { LoginService } from 'src/app/service/endpoints.service';
+import { EndpointsService } from 'src/app/service/endpoints.service';
 import { LoadingService } from './../../utils/loading.service';
 import { NgForm } from '@angular/forms';
 import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
@@ -23,7 +23,7 @@ export class FooterComponent implements OnInit {
   autosize!: CdkTextareaAutosize;
 
   constructor (private _ngZone: NgZone,
-    private endpoints: LoginService,
+    private endpoints: EndpointsService,
     private alert: AlertsService) { }
 
   ngOnInit(): void {

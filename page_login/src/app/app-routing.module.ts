@@ -1,3 +1,4 @@
+import { AgendamentoComponent } from './pages/agendamento/agendamento.component';
 import { UserComponent } from './pages/user/user.component';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { AboutComponent } from './pages/about/about.component';
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "about", component: AboutComponent },
   { path: "user", component: UserComponent },
+  { path: "agenda", component: AgendamentoComponent },
   { path: "cadastro", component: CadastroComponent, canActivate: [AuthGuard] }
 ];
 

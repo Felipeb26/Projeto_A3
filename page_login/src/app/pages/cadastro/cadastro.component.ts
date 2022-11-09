@@ -2,8 +2,7 @@ import { USER } from './../../models/usuario.model';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MedicoService } from 'src/app/service/cadastro-medico.service';
-import { LoginService } from 'src/app/service/endpoints.service';
+import { EndpointsService } from 'src/app/service/endpoints.service';
 import { AlertsService } from 'src/app/utils/alerts.service';
 
 @Component({
@@ -12,11 +11,9 @@ import { AlertsService } from 'src/app/utils/alerts.service';
   styleUrls: ['./cadastro.component.scss']
 })
 export class CadastroComponent implements OnInit {
-
-
   user: string = "Paciente"
   disable_crm: string = "disable"
-  expand: string ="expand_more"
+  expand: string = "expand_more"
   check: boolean = false
   CadastroForm!: FormGroup;
   showPassword: boolean = false;
@@ -36,9 +33,8 @@ export class CadastroComponent implements OnInit {
   }
 
   constructor (
-    private medicoService: MedicoService,
     private formBuilder: FormBuilder,
-    private endpoints: LoginService,
+    private endpoints: EndpointsService,
     private route: Router,
     private alert: AlertsService) { }
 
@@ -52,11 +48,11 @@ export class CadastroComponent implements OnInit {
   }
 
 
-  panelOpenState(){
-  const exp = this.expand;
-    if(exp.endsWith("less")){
+  panelOpenState() {
+    const exp = this.expand;
+    if (exp.endsWith("less")) {
       this.expand = "expand_more"
-    }else{
+    } else {
       this.expand = "expand_less"
     }
   }
@@ -65,22 +61,7 @@ export class CadastroComponent implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
-  AdicionarMedico(form: NgForm) {
-    if (form.invalid) {
-
-      return this.medicoService.adicionarMedico(
-        form.value.nome,
-        form.value.especialidade,
-        form.value.fone,
-        form.value.email,
-        form.value.crm
-      )
-    }
-    form.resetForm();
-  }
-
-
-  cadastrar(usuario: { nome: string, email: string, cpf: string, telefone: string, senha: string, especialidade: string, crm: string }) {
+  cadastrar(usuario: { nome: string, email: string, telefone: string, senha: string, especialidade: string, crm: string }) {
 
     if (usuario.crm == null || undefined) {
       this.role = 0
@@ -88,21 +69,36 @@ export class CadastroComponent implements OnInit {
       this.role = 1
     }
 
-    const save = {
+    const user = {
       "nome": usuario.nome,
+      "telefone": usuario.telefone,
       "email": usuario.email,
       "senha": usuario.senha,
       "role": this.role
     }
 
+    const doctor = {
+      "nome": usuario.nome,
+      "telefone": usuario.telefone,
+      "email": usuario.email,
+      "senha": usuario.senha,
+      "crm": usuario.crm,
+      "especialidade": usuario.especialidade,
+      "role": this.role
+    }
+
+    let save = user;
+    if (usuario.crm.trim() != "" && usuario.crm != undefined) {
+      save = doctor;
+    }
+
     this.endpoints.salvarUsuario(save).subscribe(
       (result: USER) => {
-        console.log(result)
-        this.alert.sucessT(`Usuario ${save.nome} cadastrado!`)
-      //   setTimeout(() => 5000);
-      //   this.route.navigate([""])
-      // },
-    },
+        this.alert.sucessT(`Usuario ${result.nome} cadastrado!`)
+        //   setTimeout(() => 5000);
+        //   this.route.navigate([""])
+        // },
+      },
       (error: any) => {
         const er = error.error.errorList;
         if (er != null || undefined) {
@@ -112,8 +108,6 @@ export class CadastroComponent implements OnInit {
           erro = erro.replace("]", "")
           this.alert.errorT(erro)
         }
-
-        console.log(error)
       }
     )
 

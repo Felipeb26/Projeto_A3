@@ -6,14 +6,17 @@
     padding: 1rem;
     margin: 5% 3%;
     display: flex;
+
     & form {
         flex-direction: column;
         display: flex;
         flex: 3;
+
         & .btns {
             display: flex;
             align-items: baseline;
             justify-content: center;
+
             & button {
                 transition: all 0.3s ease-in-out;
                 box-shadow: 0 0 0.8rem var(--myPurpleShadow);
@@ -30,11 +33,13 @@
             }
         }
     }
-    & .delete{
+
+    & .delete {
         height: 25%;
         display: flex;
-        margin: 1rem 0 0 3rem ;
-        & button{
+        margin: 1rem 0 0 3rem;
+
+        & button {
             box-shadow: 0 0 0.3rem var(--myPurpleShadow);
             text-transform: uppercase;
             letter-spacing: 0.2rem;

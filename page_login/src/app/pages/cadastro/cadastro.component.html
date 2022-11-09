@@ -8,11 +8,6 @@
                     <mat-label>nome:</mat-label>
                     <input type="text" matInput name="nome" ngModel required minlength="2" />
                 </mat-form-field>
-
-                <mat-form-field appearance="outline">
-                    <mat-label>CPF:</mat-label>
-                    <input type="text" matInput name="cpf" ngModel required />
-                </mat-form-field>
                 <br>
                 <mat-label>
                     <input class="form-check-input" type="checkbox" [checked]="check" (change)="crmInput($event)">

@@ -10,6 +10,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSelectModule } from '@angular/material/select';
 //import acima angular material
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { BrowserModule } from '@angular/platform-browser';
@@ -28,6 +29,7 @@ import { FooterComponent } from './templates/footer/footer.component';
 import { HeaderComponent } from './templates/header/header.component';
 import { LoadingComponent } from './utils/loading/loading.component';
 import { UserComponent } from './pages/user/user.component';
+import { AgendamentoComponent } from './pages/agendamento/agendamento.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { UserComponent } from './pages/user/user.component';
     LoadingComponent,
     CadastroComponent,
     UserComponent,
+    AgendamentoComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,12 +61,14 @@ import { UserComponent } from './pages/user/user.component';
     MatSidenavModule,
     MatInputModule,
     MatExpansionModule,
-    FontAwesomeModule
+    MatSelectModule,
+    FontAwesomeModule,
   ],
 
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenService, multi: true },
-    {provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true}],
+    {provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginModel } from 'src/app/models/LoginModel';
-import { LoginService } from 'src/app/service/endpoints.service';
+import { EndpointsService } from 'src/app/service/endpoints.service';
 import { AlertsService } from 'src/app/utils/alerts.service';
 import { Token } from './../../models/token.model';
 import { EncodesService } from './../../utils/encodes.service';
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   constructor (
     private formBuilder: FormBuilder,
     private router: Router,
-    private endpoint: LoginService,
+    private endpoint: EndpointsService,
     private alert: AlertsService,
     private encodes: EncodesService) { }
 
@@ -46,13 +46,13 @@ export class LoginComponent implements OnInit {
     }
     this.endpoint.fazerLogin(dadosLogin).subscribe(
       (data: Token) => {
-        let token  = this.encodes.encodeString(data.token)
-        if(token != null ){
-          localStorage.setItem("tk",token)
+        let token = this.encodes.encodeString(data.token)
+        if (token != null) {
+          localStorage.setItem("tk", token)
           this.alert.sucessT("usuario logado com sucesso");
           this.router.navigate(["/"])
           return;
-        }else{
+        } else {
           this.alert.errorT("erro ao fazer login tente em 2min")
           this.router.navigate(["login"])
           return;

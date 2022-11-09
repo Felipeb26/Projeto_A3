@@ -1,0 +1,45 @@
+<div class="card">
+    <form #agenda="ngForm" (ngSubmit)="agendar(agenda)">
+        <h2>{{nome}}</h2>
+        <mat-card class="agenda">
+            <div class="field">
+                <mat-form-field appearance="fill" [(value)]="data">
+                    <mat-label>agenda</mat-label>
+                    <input type="datetime-local" matInput id="" [ngModel] ="data | date:'yyyy-MM-dd'" (ngModelChange)="showData(data)">
+                </mat-form-field>
+            </div>
+            <!--  -->
+            <div class="field">
+                <mat-form-field appearance="fill">
+                    <mat-label>especialidade</mat-label>
+                    <mat-select name="especialidade" ngModel [(value)]="especial"
+                        (valueChange)="selectEspecialidade(especial)">
+                        <mat-option class="option" *ngFor="let espe of especialidades" [value]="espe.id">
+                            {{espe.especialidade}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <label>{{espe}}</label>
+            </div>
+            <!--  -->
+            <div class="field">
+                <mat-form-field appearance="fill">
+                    <mat-label>nome</mat-label>
+                    <mat-select name="nome" [(value)]="medico" ngModel (valueChange)="selectMedico(medico)">
+                        <mat-option class="option" *ngFor="let espe of medicos" [value]="espe.id">
+                            {{espe.nome}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <label>{{doc}}</label>
+            </div>
+        </mat-card>
+        <!--  -->
+        <button mat-button type="submit">
+            confirmar agendamento?
+        </button>
+    </form>
+    <mat-card class="agendadas">
+        <h2>{{nome}}</h2>
+    </mat-card>
+</div>

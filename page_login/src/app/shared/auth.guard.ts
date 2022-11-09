@@ -2,7 +2,7 @@ import { AlertsService } from './../utils/alerts.service';
 import { TokenService } from '../service/interceptors/token.interceptor';
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { LoginService } from '../service/endpoints.service';
+import { EndpointsService } from '../service/endpoints.service';
 
 @Injectable({
   providedIn: 'root'

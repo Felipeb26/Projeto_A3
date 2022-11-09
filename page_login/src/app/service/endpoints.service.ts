@@ -15,7 +15,7 @@ import { USER } from '../models/usuario.model';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class EndpointsService {
 
 
   constructor (
@@ -32,7 +32,7 @@ export class LoginService {
   }
 
   salvarUsuario(user: USER): Observable<any> {
-    return this.http.post<USER>(`${API_PATH}${MICRO1}/users`, user).pipe(first(), )
+    return this.http.post<USER>(`${API_PATH}${MICRO1}/users`, user).pipe(first(),)
   }
 
 
