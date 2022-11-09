@@ -21,10 +21,11 @@ export class AgendamentoComponent implements OnInit {
   especial: string = ""
   data: any
 
+  selectDate: any
   doc: any = ""
   espe: any = ""
 
-  constructor (
+  constructor(
     private endpoints: EndpointsService,
     private encodes: EncodesService
   ) { }
@@ -74,11 +75,10 @@ export class AgendamentoComponent implements OnInit {
 
   selectMedico(value: any) {
     this.doc = this.medicos.filter(er => er.id == value).map(ap => ap.nome);
-    console.log(this.doc)
   }
- 
-  showData(value:any){
-    console.log(value)
+
+  showData(value: Date) {
+    this.selectDate = value
   }
 
 }

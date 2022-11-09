@@ -26,13 +26,13 @@
 
             <div class="dadosContato">
                 <mat-accordion>
-                    <mat-expansion-panel (opened)="panelOpenState()" (closed)="panelOpenState()">
+                    <mat-expansion-panel hideToggle (opened)="panelOpenState()" (closed)="panelOpenState()">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 Contatos
                             </mat-panel-title>
                             <mat-panel-description>
-                                <span class="material-icons">
+                                <span class="material-icons" matSuffix>
                                     {{expand}}
                                 </span>
                             </mat-panel-description>

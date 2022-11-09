@@ -1,11 +1,9 @@
-import { AlertsService } from './../../utils/alerts.service';
-import { EndpointsService } from 'src/app/service/endpoints.service';
-import { LoadingService } from './../../utils/loading.service';
-import { NgForm } from '@angular/forms';
-import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
-import { faLinkedin, faFacebook, faGithub } from '@fortawesome/free-brands-svg-icons'
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
+import { faFacebook, faGithub, faLinkedin, faMailchimp as faEnvelope } from '@fortawesome/free-brands-svg-icons';
+// import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { EndpointsService } from 'src/app/service/endpoints.service';
+import { AlertsService } from './../../utils/alerts.service';
 
 @Component({
   selector: 'app-footer',
@@ -22,7 +20,7 @@ export class FooterComponent implements OnInit {
   @ViewChild('autosize')
   autosize!: CdkTextareaAutosize;
 
-  constructor (private _ngZone: NgZone,
+  constructor(
     private endpoints: EndpointsService,
     private alert: AlertsService) { }
 
