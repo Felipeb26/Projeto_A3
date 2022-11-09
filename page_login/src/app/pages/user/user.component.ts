@@ -15,14 +15,16 @@ export class UserComponent implements OnInit {
   form = document.getElementsByTagName("mat-form-field") as HTMLCollectionOf<HTMLElement>;
   input = document.getElementsByTagName("input") as HTMLCollectionOf<HTMLElement>;
   check: string = "disabled"
-
-  id: any
+  checks: boolean = true
+  id: string = ""
   nome: string = ""
   email: string = ""
   senha: string = ""
   telefone: string = ""
   crm: string = ""
   especialidade: string = ""
+
+  showPassword: boolean = false
 
   constructor (
     private encodes: EncodesService) { }
@@ -48,21 +50,26 @@ export class UserComponent implements OnInit {
     }
   }
 
-
   enableInputs() {
     if (this.check.startsWith("disabled")) {
       for (let i = 0; i < this.form.length; i++) {
-        this.form[i].style.boxShadow = "0 -1.75rem 0.5rem -0.8rem var(--myPurple) inset"
-        this.input[i].style.textDecoration = "none"
+        this.form[i].style.boxShadow = "0 -1.75rem 0.5rem -0.8rem var(--myPurple) inset";
+        this.input[i].style.textDecoration = "none";
+        this.checks = false
       }
       this.check = "false"
     } else {
       for (let i = 0; i < this.form.length; i++) {
-        this.form[i].style.boxShadow = "inset 0 0 5rem var(--myPurple)"
-        this.input[i].style.textDecoration = "underline var(--myLogo)"
+        this.form[i].style.boxShadow = "inset 0 0 5rem var(--myPurple)";
+        this.input[i].style.textDecoration = "underline var(--myLogo)";
+        this.checks = true
       }
-      this.check = "disabled"
+      this.check = "disabled";
     }
+  }
+
+  togglePass(): void {
+    this.showPassword = !this.showPassword;
   }
 
   atualizar(usuario: NgForm) {

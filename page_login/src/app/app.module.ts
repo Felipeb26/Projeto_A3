@@ -1,3 +1,4 @@
+import { CacheInterceptor } from './service/interceptors/cache.interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -60,7 +61,9 @@ import { UserComponent } from './pages/user/user.component';
     FontAwesomeModule
   ],
 
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenService, multi: true }],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenService, multi: true },
+    {provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true}],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 
