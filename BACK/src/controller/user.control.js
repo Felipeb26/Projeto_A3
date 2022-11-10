@@ -79,7 +79,7 @@ const getAll = async (req, res, next) => {
 		} else {
 			data.forEach((it) => {
 				const users = new Usuarios(
-					it.id,
+					it.data().id,
 					it.data().nome,
 					it.data().email,
 					it.data().senha,

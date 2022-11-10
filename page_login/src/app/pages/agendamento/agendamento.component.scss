@@ -1,5 +1,6 @@
 .card {
     box-shadow: 0 0 2rem var(--myPurpleShadow);
+    transition: all 0.5s ease-in-out;
     border-radius: 5px;
     padding: 2rem;
     display: flex;
@@ -19,6 +20,7 @@
 
         }
         & h2 {
+            font-style: italic;
             color: var(--myBlack);
         }
         .agenda{
@@ -33,6 +35,10 @@
         display: flex;
         flex-direction: column;
     }
+}
+
+.card:hover{
+    box-shadow: 0 0 1rem var(--myLogo);
 }
 
 .field{

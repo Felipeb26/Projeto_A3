@@ -1,0 +1,13 @@
+{
+	"compilerOptions": {
+		"outDir": "./dist/",
+		"noImplicitAny": false,
+		"target": "es2020",
+		"module": "commonjs",
+		"strict": true,
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"esModuleInterop": true
+	},
+	"exclude": ["node_modules", "**/*.spec.ts"]
+}
