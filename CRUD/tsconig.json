@@ -1,5 +1,6 @@
 {
 	"compilerOptions": {
+		"rootDir": "./",
 		"outDir": "./dist",
 		"noImplicitAny": false,
 		"target": "es2020",

@@ -4,7 +4,7 @@ import * as jwt from "jsonwebtoken";
 const secret = process.env.ACESS_TOKEN_SECRET;
 
 export const generateToken = (pass: any) => {
-    const acessToken = jwt.sign({ id: pass }, secret!, { expiresIn: 900000 });
+    const acessToken = jwt.sign({ id: pass }, secret!, { expiresIn: 300 });
     return acessToken;
 };
 

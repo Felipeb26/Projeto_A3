@@ -2,6 +2,7 @@ import { db } from "../config/firebase";
 import { Medicos } from "../model/medico.model";
 import { generateToken } from "../utils/token.utils";
 import { Usuarios } from './../model/usuariosmodel.';
+import { verifyRoles, ifNullNewValue, anyToDate } from "../utils/constraints.utils"
 
 const usuariosCollections = db.collection("usuarios")
 const medicosCollections = db.collection("medicos")
@@ -53,7 +54,7 @@ export class UsuariosController {
 
             const all = [...userList, ...doctorsList]
             const index = all.find(it => it.getEmail() === email);
-            
+
             if (index?.getId() == undefined || null) {
                 return res
                     .status(404)
@@ -169,7 +170,7 @@ export class UsuariosController {
                         it.data().telefone,
                         it.data().email,
                         it.data().senha,
-                        it.data().agenda,
+                        anyToDate(it.data().agenda),
                         it.data().role,
                     )
                     users.push(user)
@@ -201,7 +202,7 @@ export class UsuariosController {
                     it.data().telefone,
                     it.data().email,
                     it.data().senha,
-                    it.data().agenda,
+                    anyToDate(it.data().agenda),
                     it.data().role,
                 )
                 usersList.push(user)
@@ -214,7 +215,7 @@ export class UsuariosController {
                     it.data().telefone,
                     it.data().email,
                     it.data().senha,
-                    it.data().agenda,
+                    anyToDate(it.data().agenda),
                     it.data().role,
                     it.data().crm,
                     it.data().especialidade
@@ -242,31 +243,129 @@ export class UsuariosController {
     getById = async (req: any, res: any) => {
         try {
             const id = req.params.id;
-            const user = await usuariosCollections.doc(id).get();
-            if (!user.exists) {
+            const it = await usuariosCollections.doc(id).get();
+            if (!it.exists) {
                 res.status(404).send({ message: "usuarios não existe" });
             } else {
-                res.send(user.data());
+                const user = new Usuarios(
+                    it.id,
+                    it.data()!.nome,
+                    it.data()!.telefone,
+                    it.data()!.email,
+                    it.data()!.senha,
+                    anyToDate(it.data()!.agenda),
+                    it.data()!.role,
+                )
+                res.send(user);
             }
         } catch (error: any) {
             res.status(400).send({ message: error.message });
         }
     };
 
+    addUser = async (req: any, res: any) => {
+        try {
+            const errorsList: Array<any> = []
+            let { nome, telefone, email, senha, agenda, role } = req.body;
+            if (nome == null || undefined && telefone == null || undefined && email == null || undefined
+                && senha == null || undefined && role == null || undefined) {
+                return res.status(400).send({ message: "todos os campos devem ser preenchidos" })
+            }
+
+            if (agenda == null || undefined) {
+                agenda = Date.now()
+            }
+
+            const users: Usuarios[] = []
+            const request = await usuariosCollections.get();
+            request.docs.forEach(it => {
+                const user = new Usuarios(
+                    it.id,
+                    it.data().nome,
+                    it.data().telefone,
+                    it.data().email,
+                    it.data().senha,
+                    it.data().agenda,
+                    it.data().role,
+                );
+                users.push(user);
+            })
+
+            users.forEach(it => {
+                if (it.getEmail() == email) {
+                    errorsList.push(`Email: ${email} já foi cadastrado!`)
+                }
+                if (it.getAgenda() == agenda) {
+                    errorsList.push(`Data: ${agenda} não pode ser selecionada`)
+                }
+                if (it.getTelefone() == telefone) {
+                    errorsList.push(`Telefone: ${telefone} já foi cadastrado`)
+                }
+            })
+
+            if (errorsList.length > 0) {
+                return res.status(400).send(errorsList)
+            }
+
+            role = verifyRoles(role);
+
+            const user = {
+                "nome": nome,
+                "telefone": telefone,
+                "email": email,
+                "senha": senha,
+                "agenda": agenda,
+                "role": role
+            }
+
+            await usuariosCollections.doc().set(user);
+            return res.status(201).send(user);
+
+        } catch (error: any) {
+            console.log(error.message)
+        }
+
+    }
+
     updateUser = async (req: any, res: any) => {
         try {
             const id = req.params.id;
-            const data = req.body;
+            let { nome, telefone, email, senha, agenda, role } = req.body;
 
-            if (data == null) {
-                return res
-                    .status(400)
-                    .send({ erro: "sem dados para alterar usuario" });
+            const data = await usuariosCollections.doc(id).get();
+
+            if (!data.exists) {
+                return res.status(404).send({ message: "usuario não encontrado" })
             }
-            await usuariosCollections.doc(id).update(data);
+            const user = new Usuarios(
+                data.id,
+                data.data()!.nome,
+                data.data()!.telefone,
+                data.data()!.email,
+                data.data()!.senha,
+                data.data()!.agenda,
+                data.data()!.role)
 
-            const user = await usuariosCollections.doc(id).get();
-            return res.send(user.data());
+
+            nome = ifNullNewValue(nome, user.getNome())
+            telefone = ifNullNewValue(telefone, user.getTelefone())
+            email = ifNullNewValue(email, user.getEmail())
+            senha = ifNullNewValue(senha, user.getSenha())
+            agenda = ifNullNewValue(agenda, user.getAgenda())
+            role = ifNullNewValue(role, user.getRole())
+
+            const userUpdate = {
+                "nome": nome,
+                "telefone": telefone,
+                "email": email,
+                "senha": senha,
+                "agenda": agenda,
+                "role": role
+            }
+
+            await usuariosCollections.doc(id).update(userUpdate);
+            const saveUser = await usuariosCollections.doc(id).get();
+            return res.send(saveUser.data());
         } catch (error: any) {
             return res.status(400).send({ message: error.message });
         }
