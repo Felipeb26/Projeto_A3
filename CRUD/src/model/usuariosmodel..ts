@@ -1,7 +1,3 @@
-import {
-    Roles
-} from "../enum/role.enum";
-
 export class Usuarios {
 
     private id: string;
@@ -10,9 +6,9 @@ export class Usuarios {
     private email: string;
     private senha: string;
     private agenda: any;
-    private role: Roles;
+    private role: number;
 
-    constructor (id: string, nome: string, telefone: string, email: string, senha: string, agenda: any, role: Roles) {
+    constructor (id: string, nome: string, telefone: string, email: string, senha: string, agenda: any, role: number) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
@@ -74,7 +70,7 @@ export class Usuarios {
         this.senha = senha;
     }
 
-    setRole(role: Roles) {
+    setRole(role: number) {
         this.role = role;
     }
 }

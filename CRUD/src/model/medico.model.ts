@@ -1,5 +1,3 @@
-import { Roles } from "../enum/role.enum";
-
 export class Medicos {
 
     private id: string;
@@ -7,12 +5,12 @@ export class Medicos {
     private telefone: string;
     private email: string;
     private senha: string;
-    private agenda: any;
-    private role: Roles;
+    private agenda: string;
+    private role: number;
     private crm: string;
     private especialidade: string;
 
-    constructor (id: string, nome: string, telefone: string, email: string, senha: string, agenda: any, role: Roles, crm: string, especialidade: string) {
+    constructor (id: string, nome: string, telefone: string, email: string, senha: string, agenda: string, role: number, crm: string, especialidade: string) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -60,7 +58,6 @@ export class Medicos {
         return this.especialidade;
     }
 
-
     setId(id: string) {
         this.id = id;
     }
@@ -77,7 +74,7 @@ export class Medicos {
         this.email = email;
     }
 
-    setAgenda(agenda: any) {
+    setAgenda(agenda: string) {
         this.agenda = agenda
     }
 
@@ -85,7 +82,7 @@ export class Medicos {
         this.senha = senha;
     }
 
-    setRole(role: Roles) {
+    setRole(role: number) {
         this.role = role;
     }
 
