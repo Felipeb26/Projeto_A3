@@ -1,4 +1,7 @@
 {
+	"env": {
+		"ACESS_TOKEN_SECRET": "cuieswgfdcukyascefgukieyfig"
+	},
 	"ext": "ejs, js, mjs, json",
 	"delay": 2500,
 	"path": "*.*"

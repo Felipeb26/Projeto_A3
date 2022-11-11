@@ -1,10 +1,13 @@
 require("dotenv").config();
 import { Response } from "express";
 import * as jwt from "jsonwebtoken";
-const secret = process.env.ACESS_TOKEN_SECRET;
+let secret = process.env.ACESS_TOKEN_SECRET;
 
 export const generateToken = (pass: any) => {
-    const acessToken = jwt.sign({ id: pass }, secret!, { expiresIn: 300 });
+    if(secret == null || undefined){
+        secret = "o_algoz_ninja_age_feito_o_vento"
+    }
+    const acessToken = jwt.sign({ id: pass }, secret!, { expiresIn: 6000 });
     return acessToken;
 };
 
@@ -19,7 +22,7 @@ export const authUser = async (req: any, res: Response, next: any) => {
         return res.status(401).send({ erro: "token invalido" });
     }
     try {
-        await jwt.verify(token, process.env.ACESS_TOKEN_SECRET as string);
+        await jwt.verify(token, secret as string);
         next();
     } catch (error) {
         console.log(error)

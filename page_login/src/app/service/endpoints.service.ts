@@ -10,6 +10,7 @@ import { API_PATH } from 'src/environments/environment';
 import { MICRO2 } from 'src/environments/environment.prod';
 import { finalize, first, Observable } from "rxjs";
 import { USER } from '../models/usuario.model';
+import { Medico } from '../models/medico';
 
 
 @Injectable({
@@ -28,6 +29,16 @@ export class EndpointsService {
 
   getAll(): Observable<USER[]> {
     return this.http.get<USER[]>(`${API_PATH}${MICRO1}/users`)
+      .pipe();
+  }
+
+  getAllDocs(): Observable<Medico[]> {
+    return this.http.get<Medico[]>(`${API_PATH}${MICRO1}/docs`)
+      .pipe();
+  }
+
+  getAllConsultas(): Observable<USER[]> {
+    return this.http.get<USER[]>(`${API_PATH}${MICRO1}/consultas`)
       .pipe();
   }
 

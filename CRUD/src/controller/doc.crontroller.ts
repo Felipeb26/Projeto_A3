@@ -1,5 +1,5 @@
+import { db } from "../config/firebase";
 import { Medicos } from './../model/medico.model';
-import { db } from "../config/firebase"
 const medicosTable = db.collection("medicos")
 
 export class MedicoController {

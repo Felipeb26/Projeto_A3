@@ -31,9 +31,10 @@ export class AgendamentoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.decodeToken()
-    this.endpoints.getAll().subscribe(
+    // this.decodeToken()
+    this.endpoints.getAllDocs().subscribe(
       data => {
+        console.log(data)
         data = data.filter(er => er.crm != null)
         this.especialidades = data
       },
@@ -43,12 +44,8 @@ export class AgendamentoComponent implements OnInit {
 
 
   agendar(agenda: NgForm) {
-
-
     console.log(agenda.value)
   }
-
-
 
   decodeToken() {
     const value = this.encodes.decodeString(localStorage.getItem("tk"))

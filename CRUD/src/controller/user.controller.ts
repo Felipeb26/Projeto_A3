@@ -1,8 +1,8 @@
 import { db } from "../config/firebase";
 import { Medicos } from "../model/medico.model";
+import { anyToDate, ifNullNewValue, verifyRoles } from "../utils/constraints.utils";
 import { generateToken } from "../utils/token.utils";
 import { Usuarios } from './../model/usuariosmodel.';
-import { verifyRoles, ifNullNewValue, anyToDate } from "../utils/constraints.utils"
 
 const usuariosCollections = db.collection("usuarios")
 const medicosCollections = db.collection("medicos")
@@ -93,6 +93,7 @@ export class UsuariosController {
                 TokenTime: "15 min",
             });
         } catch (error: any) {
+            console.log(error)
             res.status(400).send({ message: error.message });
         }
     };
