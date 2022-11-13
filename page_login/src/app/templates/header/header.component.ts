@@ -8,7 +8,7 @@ import { EncodesService } from './../../utils/encodes.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
+  local:any=localStorage.getItem("tk")
   logo: string = "assets/img/logo.png"
   open: boolean = false
   mode: string = "light_mode"
@@ -29,8 +29,11 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem("tk")
-    this.alert.sucessT("usuario deslogado com sucesso!")
+    console.log(this.local)
+    if(this.local != null || undefined){
+      localStorage.removeItem("tk")
+      this.alert.sucessT("usuario deslogado com sucesso!")
+    }
   }
 
   public themeMode() {

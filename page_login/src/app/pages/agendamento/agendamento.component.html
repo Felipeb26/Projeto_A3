@@ -7,9 +7,9 @@
 			<div class="field">
 				<mat-form-field appearance="fill" [(value)]="data">
 					<mat-label>agenda</mat-label>
-					<input type="datetime-local" matInput name="data" ngModel (ngModelChange)="showData($event)">
+					<input type="datetime-local" matInput name="data" ngModel (ngModelChange)="showData($event)" (min)="today" id="data">
 				</mat-form-field>
-				<label>{{selectDate | date: "dd/MM/yyyy hh:mm"}}</label>
+				<label>{{selectDate | date: "dd/MM/yyyy HH:mm"}}</label>
 			</div>
 			<!--  -->
 			<div class="field">
@@ -22,8 +22,9 @@
 						</mat-option>
 					</mat-select>
 				</mat-form-field>
-				<label>{{espe}}</label>
-                <!-- <a href="https://www.google.com/search?q=oque+faz+um+cardiologista" target="_blank">links aq</a> -->
+				<label>
+					<a href="https://www.google.com/search?q=o+que+faz+medico+{{espe}}" target="_blank">{{espe}}</a>
+				</label>
 			</div>
 			<!--  -->
 			<div class="field">
@@ -57,15 +58,25 @@
 						This is a summary of the content
 					</mat-panel-description>
 				</mat-expansion-panel-header>
-				<p *ngFor="let doc of especialidades">
-					{{doc.nome}}
-					<br>
-					{{doc.email}}
-					<br>
-					{{doc.especialidade}}
-				</p>
-				<!-- <p>tstette <button type="button" mat-button>del</button></p>
-				<p>tstette <button type="button" mat-button>del</button></p> -->
+				<mat-action-row class="consulta_title">
+					<p>nome</p>
+					<p>email</p>
+					<p>especialidade</p>
+				</mat-action-row>
+				<mat-action-row class="consulta" *ngFor="let doc of especialidades">
+					<p>
+						{{doc.nome}}
+					</p>
+					<p>
+						{{doc.email}}
+					</p>
+					<p>
+						{{doc.especialidade}}
+					</p>
+					<button mat-button>
+						cancelar
+					</button>
+				</mat-action-row>
 			</mat-expansion-panel>
 		</mat-accordion>
 	</mat-card>

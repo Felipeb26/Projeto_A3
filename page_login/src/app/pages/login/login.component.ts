@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
     const { email, senha } = dadosLogin;
 
     if ((email == null || undefined) || (senha == null || undefined)) {
-      return this.alert.error("erro", "ambos os campos devem ser informados!!")
+      return this.alert.errorT("ambos os campos devem ser informados!!")
     }
     this.endpoint.fazerLogin(dadosLogin).subscribe(
       (data: Token) => {
@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
       },
       (error: any) => {
         console.log(error)
-        this.alert.error(error.statusText, `email ${dadosLogin.email}`)
+        this.alert.errorT(`error.statusText email ${dadosLogin.email}`)
       }
     );
   }

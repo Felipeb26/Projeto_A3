@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { AlertsService } from './../../utils/alerts.service';
 import { EncodesService } from './../../utils/encodes.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -10,7 +12,8 @@ import { EndpointsService } from 'src/app/service/endpoints.service';
   styleUrls: ['./agendamento.component.scss']
 })
 export class AgendamentoComponent implements OnInit {
-
+  local:any=localStorage.getItem("tk")
+  today: any = Date.now().toLocaleString()
   especialidade: string = ""
   especialidades: USER[] = []
   medicos: USER[] = []
@@ -25,30 +28,52 @@ export class AgendamentoComponent implements OnInit {
   doc: any = ""
   espe: any = ""
 
-  constructor(
+  constructor (
     private endpoints: EndpointsService,
-    private encodes: EncodesService
+    private encodes: EncodesService,
+    private alert:AlertsService,
+    private route:Router
   ) { }
 
   ngOnInit(): void {
-    // this.decodeToken()
+    this.decodeToken()
     this.endpoints.getAllDocs().subscribe(
       data => {
         console.log(data)
         data = data.filter(er => er.crm != null)
         this.especialidades = data
       },
-      err => console.log(err)
+      err => {
+        if(err.status == 401 && this.local != null || undefined){
+          this.alert.infoT("tempo expirado!");
+        }else if (err.status==401 && this.local== null || undefined){
+          this.alert.infoT("tempo expirado!");
+          this.route.navigate(["/login"])
+        }
+
+        console.log(err)
+      }
     );
   }
 
 
   agendar(agenda: NgForm) {
-    console.log(agenda.value)
+    const date = agenda.value.data
+    const doc = this.doc
+    const especialidade = this.espe
+
+    const data = {
+      idUser: this.id,
+      agenda: date,
+      medico: doc,
+      especialidade: especialidade
+    }
+
+    console.table(data)
   }
 
   decodeToken() {
-    const value = this.encodes.decodeString(localStorage.getItem("tk"))
+    const value = this.encodes.decodeString(this.local)
 
     if (value) {
       const data = this.encodes.decodeString(value)

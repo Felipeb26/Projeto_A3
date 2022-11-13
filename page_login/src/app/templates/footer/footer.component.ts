@@ -28,7 +28,6 @@ export class FooterComponent implements OnInit {
   }
 
   sendMail(mail: { assunto: string, mensagem: string }) {
-
     const toSend = {
       "para": "felipeb2silva@gmail.com",
       "assunto": mail.assunto,
@@ -44,7 +43,11 @@ export class FooterComponent implements OnInit {
         console.log(erro)
       }
     )
+  }
 
+  mostrarRedes(value: any) {
+    const type = value.iconName;
+    this.alert.contatoModal(type);
   }
 
 }
