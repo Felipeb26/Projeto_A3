@@ -1,16 +1,14 @@
-import { CRUD_PATH } from './../../environments/environment';
-import { LoadingService } from './../utils/loading.service';
-import { MAil } from '../models/email.model';
-import { MICRO1 } from '../../environments/environment';
-import { Token } from '../models/token.model';
-import { LoginModel } from 'src/app/models/LoginModel';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { first, Observable } from "rxjs";
+import { LoginModel } from 'src/app/models/LoginModel';
 import { API_PATH } from 'src/environments/environment';
 import { MICRO2 } from 'src/environments/environment.prod';
-import { finalize, first, Observable } from "rxjs";
-import { USER } from '../models/usuario.model';
+import { MICRO1 } from '../../environments/environment';
+import { MAil } from '../models/email.model';
 import { Medico } from '../models/medico';
+import { Token } from '../models/token.model';
+import { USER } from '../models/usuario.model';
 
 
 @Injectable({
@@ -46,9 +44,18 @@ export class EndpointsService {
     return this.http.post<USER>(`${API_PATH}${MICRO1}/users`, user).pipe(first(),)
   }
 
+  // micro do email
 
   enviarEmail(mail: MAil): Observable<any> {
     return this.http.post<any>(`${API_PATH}${MICRO2}/index`, mail);
+  }
+
+  boasVindasUser(email: MAil): Observable<any> {
+    return this.http.post<MAil>(`${API_PATH}${MICRO2}/bemUser`, email);
+  }
+
+  boasVindasDoc(email: MAil): Observable<any> {
+    return this.http.post<MAil>(`${API_PATH}${MICRO2}/bemDoc`, email);
   }
 
 }
