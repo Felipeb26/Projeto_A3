@@ -1,3 +1,15 @@
+var Module = require("module");
+var fs = require("fs");
+
+Module._extensions[".ico"] = function (module, fn) {
+	var base64 = fs.readFileSync(fn).toString("base64");
+	module._compile(
+		'module.exports="data:image/jpg;base64,' + base64 + '"',
+		fn
+	);
+};
+
+const logo = require("../assets/favicon.ico");
 const options = {
 	childProcessOptions: {
 		env: {
@@ -65,12 +77,29 @@ const medicamento = (data) => {
 };
 
 const boasVindas = (data) => {
-	`<head><meta charset="utf-8"><style>*{margin: 0;padding: 0;}h1{color: blue;text-align:center;}body{font-family: arial, sans-serif;}main{width:90%;margin:auto;font-size: 25px;}p{padding-top: 30px;}header{background-color: whitesmoke;padding: 20px;margin-bottom: 20px;text-align: center;}</style></head><body><header><img class="logotipo" src="imagem/Origami.png" width="250px"></header><main><h1>Olá, paciente!</h1><p>Olá, (nome do paciente), Seja bem-vindo(a) a Origami Saúde.<br>Para nós é um prazer recebe-lo(a) aqui.</p><br><p>A sua consulta foi agendada para o dia ${data}<br>Havendo alguma dúvida, reclamação ou sugestão fale conosco através do nosso <a href="contato.html">canal de contato.</a></p><br><p>Um abraço,<br>Equipe Origami Saúde</p></main></body></html>`;
+	return `<header style="display: flex;flex-direction: column;align-items: center;">
+    <img class="logotipo" src="${logo}" width="250px">
+	</header>
+	<div style="display: flex;flex-direction: column;justify-content: center;align-items:center ;">
+    <h1>Olá Seja Bem vindo paciente!</h1>
+    <div>
+		<p>Olá, (nome do paciente), Seja bem-vindo(a) a Origami Saúde.</p>
+		<p>Para nós é um prazer recebe-lo(a) aqui.</p>
+    </div>
+    <p>A sua consulta foi agendada para o dia<br> ${data}.</p>
+    <p>Havendo alguma dúvida, reclamação ou sugestão fale conosco através do nosso <a
+        href="mailto:felipeb2silva@gmail.com" target="_blank">canal de
+        contato.</a></p>
+    <div style="margin-left: 8rem;">
+		<p>Um abraço</p>
+		<p style="margin-left: 1rem;"> Origami Saúde</p>
+		</div>
+	</div>`;
 };
 
 module.exports = {
 	medicamento,
 	atestado,
-    boasVindas,
+	boasVindas,
 	options,
 };

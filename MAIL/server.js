@@ -3,6 +3,7 @@ const compress = require("compression");
 const express = require("express");
 const cors = require("cors");
 const swagger_ui = require("swagger-ui-express");
+const route = require("./src/routes/engine.routes")
 
 // envs
 let port = process.env.PORT;
@@ -14,18 +15,15 @@ app.use(express.json());
 app.use(compress());
 app.use(cors({ origin: "*" }));
 
-
 // rotas
 const doc = require("./swagger.json")
 app.use("/api-docs", swagger_ui.serve, swagger_ui.setup(doc))
-
-const rotas = require("./src/routes/engine.routes");
-app.use("/index", rotas);
 
 app.get("/", (req, res) => {
 	return res.send({ message: "Mail is running" });
 });
 
+app.use(route)
 
 //log usado
 const loggs = require("./server.logs");

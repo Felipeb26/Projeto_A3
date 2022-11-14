@@ -1,6 +1,5 @@
 const route = require("express").Router();
 const uuid = require("uuid");
-const fs = require("fs");
 
 const { boasVindasController } = require("../controller/email.controller");
 
@@ -120,17 +119,5 @@ route.post("/bem", boasVindasController);
 // 	}
 // });
 
-const deleteFile = () => {
-	try {
-		fs.unlinkSync(fileName);
-		fs.rmdirSync(`${__dirname}/upload`);
-		console.log("pasta e arquivo deletado");
-		return 0;
-	} catch (error) {
-		console.log("error ao deletar arquivo");
-		console.log(error.message);
-		return 1;
-	}
-};
 
 module.exports = route;
