@@ -80,7 +80,7 @@ export class HeaderComponent implements OnInit {
           this.route.navigate(["/login"])
         }
       }).catch(() => this.alert.errorT("necessario logar"))
-    }, 10 * 600)
+    }, 10 * 900 * 100)
   }
 
   manterLogin() {
