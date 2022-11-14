@@ -4,6 +4,7 @@ mat-toolbar {
     display: flex;
     width: 100%;
     height: 5rem;
+	 font-size: 1rem;
     align-items: center;
     justify-content: space-between;
 
@@ -13,28 +14,27 @@ mat-toolbar {
         cursor: pointer;
         transition: all 1s ease-in-out;
     }
-    
+
     & .logo:hover {
-        filter: drop-shadow(2rem 0 0.1rem var(--myLogo));
+        filter: drop-shadow(1rem 0 0.1rem var(--myLogo));
     }
 
     & h1 {
         cursor: pointer;
         font-style: italic;
-        font-weight: bold;
         letter-spacing: 0.5px;
         text-transform: uppercase;
         transition: all 0.5s ease-in-out;
         font-size: xx-large;
         color: var(--myBlack);
-        filter: brightness(1.75);
-        -webkit-text-stroke: 1px var(--myLogo);
     }
 
     & h1:hover {
-        color: var(--myLogo);
         letter-spacing: 0.1rem;
     }
+& .material-icons{
+font-size:x-large;
+}
 
     & .menu {
         margin: 0 2rem 0 0;
@@ -52,6 +52,7 @@ mat-toolbar {
     }
 }
 
+
 mat-sidenav-container {
     height: 82.3%;
     box-shadow: 0 0 1rem var(--myPurpleShadow);
@@ -63,49 +64,46 @@ mat-sidenav-content {
     background: var(--myWhite);
 }
 
+
 mat-sidenav {
     background-color: var(--myPurple);
-    width: 13rem;
+    width: 10rem;
+	   border-radius: 10px;
     display: flex;
     background: var(--myPurple);
+	 position: absoluta;
+
 
     & .links {
         display: flex;
-        align-items: center;
+        align-items:flex-start;
         flex-direction: column;
-        text-transform: uppercase;
+        text-transform: capitalize;
     }
 
-    & .links>li {
-        margin: 0.5rem 0;
-        padding: 0.6rem 0;
-        width: 80%;
-        box-shadow: 0 0.2rem 0.2rem 0 var(--myLogo);
-        transition: all 0.5s ease-in-out;
-    }
+
+ //   & .links>li {
+    //    margin: 0.5rem 0;
+      //  padding: 0.6rem 0;
+    //    width: 80%;
+    ///    box-shadow: 0 0.2rem 0.2rem 0 var(--myLogo);
+    //    transition: all 0.5s ease-in-out;
+   // }
 
     & .links>li>a {
         width: 100%;
-        text-decoration: underline;
-        padding: 0.5rem 0;
-        font-weight: bold;
-        letter-spacing: 0.2rem;
+        padding: 12px 0;
         transition: all 0.5s ease-in-out;
-        font-size: 1.1rem;
+        font-size: 14px;
         color: var(--myBlack);
     }
 
     & .links>li:hover {
         animation: zoom-in-zoom-out 1s ease normal;
-        box-shadow: 0 0 0.5rem var(--myLogo);
+       // box-shadow: 0 0 0.5rem var(--myLogo);
         color: var(--myLogo);
     }
 
-    & a {
-        position: relative;
-        letter-spacing: 00.5px;
-        outline: none;
-    }
 
     & a::after {
         content: "";
@@ -125,10 +123,15 @@ mat-sidenav {
     }
 }
 
+mat-divider{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+	 }
 
 .material-icons {
     color: var(--myBlack);
-    font-size: xx-large;
+    font-size: x-large;
 }
 
 @keyframes zoom-in-zoom-out {
@@ -146,5 +149,5 @@ mat-sidenav {
 }
 
 @media screen and (max-width: 900) {
-    
+
 }

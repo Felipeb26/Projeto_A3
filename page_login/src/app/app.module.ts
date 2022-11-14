@@ -30,6 +30,8 @@ import { HeaderComponent } from './templates/header/header.component';
 import { LoadingComponent } from './utils/loading/loading.component';
 import { UserComponent } from './pages/user/user.component';
 import { AgendamentoComponent } from './pages/agendamento/agendamento.component';
+import { SwiperModule } from 'swiper/angular';
+
 
 @NgModule({
   declarations: [
@@ -63,6 +65,7 @@ import { AgendamentoComponent } from './pages/agendamento/agendamento.component'
     MatExpansionModule,
     MatSelectModule,
     FontAwesomeModule,
+	 SwiperModule,
   ],
 
   providers: [
