@@ -16,8 +16,6 @@ export const cache = (err: any, req: any, res: any, next: any) => {
 
     const key = req.originalUrl;
     const cachedResponse = caches.get(key);
-    console.log(cachedResponse)
-    console.log(key)
 
     if (cachedResponse) {
         console.log(`Cached ${key}`);

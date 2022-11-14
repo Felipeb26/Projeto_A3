@@ -39,7 +39,6 @@ export class AgendamentoComponent implements OnInit {
     this.endpoints.getAllDocs().subscribe(
       data => {
         this.decodeToken()
-        console.log(data)
         data = data.filter(er => er.crm != null)
         this.especialidades = data
       },

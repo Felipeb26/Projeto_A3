@@ -7,13 +7,13 @@ const system = os.platform(); // "win32"
 
 // console.log(system.startsWith("win"));
 
-function deleteLogs() {
+(function deleteLogs() {
 	console.log(
 		"todos os arquios de log seram deletados ao iniciar projeto de forma geral!"
 	);
 	try {
 		let logs = [
-			`${__dirname}/BACK/log/access.log`,
+			`${__dirname}/CRUD/log/access.log`,
 			`${__dirname}/MAIL/log/access.log`,
 		];
 
@@ -30,29 +30,4 @@ function deleteLogs() {
 	} catch (error) {
 		console.log("sem arquivo de log no momento!!");
 	}
-}
-
-// deleteLogs();
-
-// if(system.startsWith("win")){
-// 	exec(`start "" "${__dirname}/page_login"`).;
-// 	exec("ng serve", function (err, stdout, stderr) {
-// 		if (err) {
-// 			console.log(`Erro: ${err}`);
-// 		} else {
-// 			console.log(stdout);
-// 		}
-// 	});
-// }else{
-// 	exec(`start "" "${__dirname}/page_login"`);
-// 	exec("ng serve", function (err, stdout, stderr) {
-// 		if (err) {
-// 			console.log(`Erro: ${err}`);
-// 		} else {
-// 			console.log(stdout);
-// 		}
-// 	});
-// }
-
-
-// console.log(`${__dirname}/page_login`);
+})()

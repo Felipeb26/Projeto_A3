@@ -24,7 +24,6 @@ export class EncodesService {
       let code = Base64.decode(chave);
       return code;
     } else {
-      this.alert.errorT("necessário estar logado")
       return null;
     }
   }

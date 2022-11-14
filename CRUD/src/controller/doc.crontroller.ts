@@ -24,8 +24,9 @@ export class MedicoController {
                 medicos.push(medico);
             });
             return res.send(medicos);
-        } catch (error) {
+        } catch (error:any) {
             console.log(error)
+            return res.status(500).send({erro:error.message})
         }
 
     }

@@ -48,7 +48,6 @@ export class LoginComponent implements OnInit {
       (data: Token) => {
         let token:string|null = this.encodes.encodeString(data.token)
         this.encodes.sleep(1500);
-        console.log(`token ${token}`)
         if (token != null || token!.length >0) {
           localStorage.setItem("tk", token!)
           this.alert.sucessT("usuario logado com sucesso");

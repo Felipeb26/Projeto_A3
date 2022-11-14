@@ -4,7 +4,7 @@ import express from "express";
 import morgan from "morgan";
 import * as swaggerUi from "swagger-ui-express";
 import swaggerDoc from "../swagger.json";
-import { accessLogStream, logger } from "./log.config";
+import { accessLogStream, logger } from "../log.config";
 
 export const app = express();
 
