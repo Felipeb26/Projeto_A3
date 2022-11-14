@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { text } from '@fortawesome/fontawesome-svg-core';
 import Swal from 'sweetalert2';
 
 @Injectable({
@@ -28,7 +29,7 @@ export class AlertsService {
       toast.addEventListener('mouseleave', Swal.resumeTimer)
     },
     background: this.back,
-    color: this.color
+    color: this.color,
   })
 
   //using only the text

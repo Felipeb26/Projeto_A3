@@ -12,7 +12,10 @@ const newName = uuid.v4();
 
 const boasVindasController = async (req, res) => {
 	try {
-		pdf.create(service.boasVindas(today), service.options).toFile(
+		let { user } = req.body;
+		user = user.charAt(0).toUpperCase() + user.slice(1);
+
+		pdf.create(service.boasVindasUsuario(user), service.options).toFile(
 			name,
 			(erro, response) => {
 				if (erro) {

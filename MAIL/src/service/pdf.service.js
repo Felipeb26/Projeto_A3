@@ -76,9 +76,43 @@ const medicamento = (data) => {
             </footer>`;
 };
 
-const boasVindas = (data) => {
+const boasVindasUsuario = (data) => {
+	return `<div style="display: flex;flex-direction: column;align-items: center;width:100%;margin: 2rem 1rem;">
+        <header style="margin: 2rem 0 5rem 0;">
+            <img src="${logo}" width="150" height="150">
+        </header>
+        <div style="display: flex;margin: 2rem 0 5rem 0;">
+            <h2>
+                Olá ${data}, seja bem vindo ao&ensp;Origami Sáude!
+            </h2>
+        </div>
+        <div style="display: flex;margin: 2rem 01rem 2rem 0;">
+            <h3>
+                Sua entrada para como usuario de nossos serviços é um grande avanço no cuidado e tratamento de sua
+                saúde,
+                nos dedicamos para poder ajudar de acordo sua necessidade oferecendo um tratamento e auxilio 24hrs com
+                os medicos disponiveis em nosso sistema
+            </h3>
+        </div>
+        <div style="margin: 2rem 0 5rem 0;">
+            <h3>então que já finalizou seu cadastro que tal saber um pouco
+                <a href="https://felipeb26.github.io/front_a3/about" target="_blank">sobre nós
+                </a> passar em uma consulta de nossos medicos parceiros?
+            </h3>
+            <h3>para isso entre no nosso site
+			<a href="https://felipeb26.github.io/front_a3/"target="_blank">origami</a>
+            com o seu login</h3>
+        </div>
+        <div
+            style="display: flex;justify-content: flex-end;white-space: nowrap;margin: 2rem 0 0 50%;align-items: flex-end;">
+            <h3>novamente seja bem vindo&ensp;ao Origami Saúde</h3>
+        </div>
+    </div>`;
+};
+
+const agendamento = (data) => {
 	return `<header style="display: flex;flex-direction: column;align-items: center;">
-    <img class="logotipo" src="${logo}" width="250px">
+    <img class="logotipo" src="${logo}" width="150" height="150">
 	</header>
 	<div style="display: flex;flex-direction: column;justify-content: center;align-items:center ;">
     <h1>Olá Seja Bem vindo paciente!</h1>
@@ -100,6 +134,7 @@ const boasVindas = (data) => {
 module.exports = {
 	medicamento,
 	atestado,
-	boasVindas,
+	boasVindasUsuario,
+	agendamento,
 	options,
 };
