@@ -5,7 +5,6 @@ import { EndpointsService } from 'src/app/service/endpoints.service';
 import { AlertsService } from 'src/app/utils/alerts.service';
 import Swal from 'sweetalert2';
 import { EncodesService } from './../../utils/encodes.service';
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -19,10 +18,11 @@ export class HeaderComponent implements OnInit {
   email: string = ""
   senha: string = ""
 
+
   constructor (
-    private endpoint: EndpointsService,
     private alert: AlertsService,
     private encodes: EncodesService,
+    private endpoint: EndpointsService,
     private route: Router
   ) { }
 
@@ -42,8 +42,9 @@ export class HeaderComponent implements OnInit {
       localStorage.removeItem("tk")
       this.alert.sucessT("usuario deslogado com sucesso!")
     }
-  }
 
+
+  }
   public themeMode() {
     const theme = document.body.classList.toggle("dark-theme");
 
@@ -114,5 +115,7 @@ export class HeaderComponent implements OnInit {
       }
     }
   }
+
+
 
 }

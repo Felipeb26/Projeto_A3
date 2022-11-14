@@ -14,6 +14,7 @@ Seguem os links para instalação dos softwares iniciais. Seguir as configuraç�
 - Instalar o Git. Link [download e instalação](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - Instalar o NodeJS e npm. Link [download e passos para instalação](https://nodejs.org/en/download/).
 - Instalar o Yarn. Linbk [download e instalação](https://classic.yarnpkg.com/en/docs/install)
+- Instalar o Swiper para o carrossel [documentação](https://swiperjs.com/angular)
 
 # Build da aplicação
 A partir da linha de comando ou prompt do seu sistema operacional, defina ou crie um diretório para efetuar o download da aplicação. Exemplo (repos): 
