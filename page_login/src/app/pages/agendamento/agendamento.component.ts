@@ -12,7 +12,7 @@ import { EndpointsService } from 'src/app/service/endpoints.service';
   styleUrls: ['./agendamento.component.scss']
 })
 export class AgendamentoComponent implements OnInit {
-  local:any=localStorage.getItem("tk")
+  local: any = localStorage.getItem("tk")
   today: any = Date.now().toLocaleString()
   especialidade: string = ""
   especialidades: USER[] = []
@@ -31,27 +31,25 @@ export class AgendamentoComponent implements OnInit {
   constructor (
     private endpoints: EndpointsService,
     private encodes: EncodesService,
-    private alert:AlertsService,
-    private route:Router
+    private alert: AlertsService,
+    private route: Router
   ) { }
 
   ngOnInit(): void {
-    this.decodeToken()
     this.endpoints.getAllDocs().subscribe(
       data => {
+        this.decodeToken()
         console.log(data)
         data = data.filter(er => er.crm != null)
         this.especialidades = data
       },
       err => {
-        if(err.status == 401 && this.local != null || undefined){
+        if (err.status == 401 && this.local != null || undefined) {
           this.alert.infoT("tempo expirado!");
-        }else if (err.status==401 && this.local== null || undefined){
-          this.alert.infoT("tempo expirado!");
+        } else if (err.status == 401 && this.local == null || undefined) {
+          this.alert.infoT("necessario logar antes!");
           this.route.navigate(["/login"])
         }
-
-        console.log(err)
       }
     );
   }

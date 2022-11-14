@@ -46,9 +46,11 @@ export class LoginComponent implements OnInit {
     }
     this.endpoint.fazerLogin(dadosLogin).subscribe(
       (data: Token) => {
-        let token = this.encodes.encodeString(data.token)
-        if (token != null) {
-          localStorage.setItem("tk", token)
+        let token:string|null = this.encodes.encodeString(data.token)
+        this.encodes.sleep(1500);
+        console.log(`token ${token}`)
+        if (token != null || token!.length >0) {
+          localStorage.setItem("tk", token!)
           this.alert.sucessT("usuario logado com sucesso");
           this.router.navigate(["/"])
           return;
@@ -60,7 +62,7 @@ export class LoginComponent implements OnInit {
       },
       (error: any) => {
         console.log(error)
-        this.alert.errorT(`error.statusText email ${dadosLogin.email}`)
+        this.alert.errorT(`${error.statusText.toLowerCase()} email ${dadosLogin.email}`)
       }
     );
   }

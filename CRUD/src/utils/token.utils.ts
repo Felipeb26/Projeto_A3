@@ -25,7 +25,6 @@ export const authUser = async (req: any, res: Response, next: any) => {
         await jwt.verify(token, secret as string);
         next();
     } catch (error) {
-        console.log(error)
         return res.status(401).send({ erro: "token is expired" });
     }
 };

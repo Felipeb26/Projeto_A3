@@ -11,8 +11,11 @@
 }
 
 .cadastro-form {
-    display: flex;
     flex-direction: column;
+    display: flex;
+    & h2{
+        margin: 1rem 0 1rem 0;
+    }
 }
 
 .dadosBase {
@@ -27,8 +30,17 @@
         }
     }
 
-    .dadosContato {
+    .dadosMedico {
         flex: 1;
+
+        & mat-checkbox{
+            margin: 0 0 0.8rem 0;
+            text-decoration: underline;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+            font-weight: bold;
+            color: var(--myBlack);
+        }
 
         & mat-accordion {
             letter-spacing: 00.2rem;

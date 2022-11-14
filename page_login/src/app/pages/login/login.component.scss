@@ -130,6 +130,7 @@ mat-form-field {
 
 //btn de submit
 .btn-submit {
+	border: 2px solid var(--myBlack);
 	margin: 1rem 0 0.5rem 0;
 	box-shadow: 0 0 1rem var(--myPurpleShadow);
 	background: var(--myPurple);

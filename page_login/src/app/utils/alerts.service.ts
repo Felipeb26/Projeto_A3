@@ -39,14 +39,12 @@ export class AlertsService {
     });
   };
 
-
   infoT(text: any) {
     this.Toast.fire({
       text: text,
       icon: "info",
     });
   };
-
 
   errorT(text: any) {
     this.Toast.fire({
@@ -55,7 +53,6 @@ export class AlertsService {
     })
   };
 
-
   questionT(text: any) {
     this.Toast.fire({
       text: text,
@@ -63,13 +60,13 @@ export class AlertsService {
     });
   };
 
-
   warningT(text: any) {
     this.Toast.fire({
       text: text,
       icon: "warning",
     });
   };
+
   github: string = `<div style="width:100%;display:flex;justify-content:space-evenly;">
             <a style="display: flex;flex-direction: column; color: black;align-items: center;font-weight: bold;" href="${this.felipe[0]}" target="_blank" rel="noopener noreferrer">
                 <img style="height: 8rem;width: 8rem;border-radius:5px;" src="${this.felipe[0]}.png">
@@ -113,7 +110,7 @@ export class AlertsService {
 
     Swal.fire({
       icon: "question",
-      title: `${this.redes[this.tipo]}`,
+      title: `Clique para ver o ${this.redes[this.tipo]} de:`,
       html: tipoRede,
       showConfirmButton: false,
       showCloseButton: true,

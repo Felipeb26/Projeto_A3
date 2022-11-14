@@ -3,7 +3,6 @@ import {app} from "./middle"
 
 const port = process.env.PORT || 3000;
 
-
 const server = app.listen(port, () => {
     console.log(`CRUD rodando em http://localhost:${port}`)
 })

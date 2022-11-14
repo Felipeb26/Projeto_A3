@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     console.log(this.local)
-    if(this.local != null || undefined){
+    if(this.local != null || this.local != undefined){
       localStorage.removeItem("tk")
       this.alert.sucessT("usuario deslogado com sucesso!")
     }

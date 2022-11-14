@@ -1,29 +1,18 @@
-//import node
 const route = require("express").Router();
-const pdf = require("html-pdf");
 const uuid = require("uuid");
-const nodemailer = require("nodemailer");
 const fs = require("fs");
 
-const time = new Date();
-const date = time.toLocaleDateString();
-const timer = time.toLocaleTimeString();
-const today = date + " " + timer;
-
-//imports folders
-const { pdfOptions, atestado, medicamento } = require("../service/pdf.service");
-const SMTP_CONFIG = require("../service/email.service");
+const { boasVindasController } = require("../controller/email.controller");
 
 const name = uuid.v4();
 let fileName = `${__dirname}/upload/arquivo.pdf`;
 
 route.get("/:data", async (req, res, next) => {
 	const data = req.params.data;
-
 	try {
 		pdf.create(atestado(data), pdfOptions).toBuffer((err, buffer) => {
 			if (err) {
-				return res.status(500).send({ error: err.message });
+				return res.status(500).send(err.message);
 			}
 			return res
 				.writeHead(200, {
@@ -38,108 +27,98 @@ route.get("/:data", async (req, res, next) => {
 	}
 });
 
-route.post("/", async (req, res, next) => {
-	try {
-		let errorsList = [];
+route.post("/bem", boasVindasController);
 
-		let { para, assunto, mensagem, modelo } = req.body;
+// route.post("/", async (req, res, next) => {
+// 	try {
+// 		let errorsList = [];
 
-		if (
-			para == null ||
-			undefined ||
-			assunto == null ||
-			undefined ||
-			mensagem == undefined ||
-			null
-		) {
-			errorsList.push("precisa informar todos os campos");
-		}
-		if (modelo == undefined || null) {
-			errorsList.push("modelo não foi informado!!");
-		}
-		if (errorsList.length > 0) {
-			errorsList = [...new Set(errorsList)];
-			return res.send(errorsList);
-		}
+// 		let { para, assunto, mensagem, modelo } = req.body;
 
-		let html;
-		modelo = modelo.toLowerCase();
-		switch (modelo) {
-			case "atestado":
-				html = atestado(today);
-				break;
-			case "medicamento":
-				html = medicamento(today);
-				break;
-			default:
-				return res
-					.status(400)
-					.send({ error: "modelo não existente!!" });
-		}
+// 		if (
+// 			para == null ||
+// 			undefined ||
+// 			assunto == null ||
+// 			undefined ||
+// 			mensagem == undefined ||
+// 			null
+// 		) {
+// 			errorsList.push("precisa informar todos os campos");
+// 		}
+// 		if (modelo == undefined || null) {
+// 			errorsList.push("modelo não foi informado!!");
+// 		}
+// 		if (errorsList.length > 0) {
+// 			errorsList = [...new Set(errorsList)];
+// 			return res.send(errorsList);
+// 		}
 
-		pdf.create(html, pdfOptions).toFile(fileName, (err, resp) => {
-			if (err) return res.status(500).send({ erro: err.message });
+// 		let html;
+// 		modelo = modelo.toLowerCase();
+// 		switch (modelo) {
+// 			case "atestado":
+// 				html = atestado(today);
+// 				break;
+// 			case "medicamento":
+// 				html = medicamento(today);
+// 				break;
+// 			default:
+// 				return res
+// 					.status(400)
+// 					.send({ error: "modelo não existente!!" });
+// 		}
 
-			const transporter = nodemailer.createTransport({
-				host: SMTP_CONFIG.host,
-				port: SMTP_CONFIG.port,
-				secure: false,
-				auth: {
-					user: SMTP_CONFIG.user,
-					pass: SMTP_CONFIG.pass,
-				},
-				tls: {
-					rejectUnauthorized: false,
-				},
-			});
+// 		pdf.create(html, pdfOptions).toFile(fileName, (err, resp) => {
+// 			if (err) return res.status(500).send({ erro: err.message });
 
-			const dados = {
-				para: para,
-				assunto: assunto,
-				mensagem: mensagem,
-			};
+// 			const transporter =
 
-			dados.para = dados.para.split(";");
-			async function sendMail() {
-				await transporter
-					.sendMail({
-						from: "Felipe Batista <felipeb2silva@gmail.com",
-						replyTo: "lipethunderb@gmail.com",
-						to: [dados.para],
-						subject: dados.assunto,
-						text: dados.mensagem,
-						priority: "high",
-						date: Date.now(),
-						attachments: [
-							{
-								filename: `${name}.pdf`,
-								path: fileName,
-							},
-						],
-					})
-					.then(() => {
-						var deleted = deleteFile();
-						if (deleted > 0) {
-							return res
-								.status(400)
-								.send({ error: "erro ao deletar arquivo" });
-						}
-						return res.send({
-							message: `email enviado com sucesso`,
-						});
-					})
-					.catch((err) => {
-						console.log(err);
-						return res.status(500).send(err);
-					});
-			}
-			sendMail();
-		});
-	} catch (error) {
-		console.log(error);
-		return res.status(500).send({ erro: error.message });
-	}
-});
+// 			const dados = {
+// 				para: para,
+// 				assunto: assunto,
+// 				mensagem: mensagem,
+// 			};
+
+// 			dados.para = dados.para.split(";");
+// 			async (function sendMail() {
+// 				transporter
+// 					.sendMail({
+// 						from: "Felipe Batista <felipeb2silva@gmail.com>",
+// 						replyTo: "lipethunderb@gmail.com",
+// 						to: [dados.para],
+// 						subject: dados.assunto,
+// 						text: dados.mensagem,
+// 						priority: "high",
+// 						date: Date.now(),
+// 						attachments: [
+// 							{
+// 								filename: `${name}.pdf`,
+// 								path: fileName,
+// 							},
+// 						],
+// 					})
+// 					.then(() => {
+// 						let deleted = deleteFile();
+// 						if (deleted > 0) {
+// 							return res
+// 								.status(400)
+// 								.send({ error: "erro ao deletar arquivo" });
+// 						}
+// 						return res.send({
+// 							message: `email enviado com sucesso`,
+// 						});
+// 					})
+// 					.catch((err) => {
+// 						console.log(err);
+// 						return res.status(500).send(err);
+// 					});
+// 			})()
+// 		});
+// 	} catch (error) {
+// 		console.log(error);
+// 		return res.status(500).send({ erro: error.message });
+// 	}
+// });
 
 const deleteFile = () => {
 	try {

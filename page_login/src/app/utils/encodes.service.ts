@@ -9,6 +9,7 @@ export class EncodesService {
 
   constructor (private alert: AlertsService) { }
 
+  sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
   encodeString(chave: string) {
     if (chave != null) {

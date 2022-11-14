@@ -111,7 +111,7 @@ mat-form-field {
 }
 
 .consulta_title{
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     display: flex;
     & p{
@@ -127,7 +127,7 @@ mat-form-field {
 .consulta {
     box-shadow: 0 0 0.5rem var(--myPurpleShadow);
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     flex-wrap: wrap;
     display: flex;
     & p {
@@ -139,7 +139,7 @@ mat-form-field {
         flex: 1;
     }
     & button {
-        text-transform: uppercase;
+        text-transform: capitalize;
         box-shadow: 0 0 1rem var(--myPurpleShadow);
         border: 2px solid var(--myWhite);
         background: var(--myPurple);

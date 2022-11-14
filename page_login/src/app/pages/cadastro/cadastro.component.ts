@@ -14,21 +14,21 @@ export class CadastroComponent implements OnInit {
   user: string = "Paciente"
   disable_crm: string = "disable"
   expand: string = "expand_more"
-  check: boolean = false
+  check: string = "disabled"
   CadastroForm!: FormGroup;
   showPassword: boolean = false;
   role: number = 0
 
   crmInput($event: any) {
-    const isCheck = $event.target.checked;
+    const isCheck = $event.checked;
     if (isCheck) {
-      this.user = "Medico"
+      this.user = "Médico"
       this.disable_crm = "false"
-      this.check = true
+      this.check = "false"
     } else {
       this.user = "Paciente"
       this.disable_crm = "disable"
-      this.check = false
+      this.check = "disabled"
     }
   }
 
