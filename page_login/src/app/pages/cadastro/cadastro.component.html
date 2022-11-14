@@ -9,11 +9,11 @@
                 </mat-form-field>
                 <br>
                 <mat-form-field class="tel" appearance="outline">
-                    <mat-label>TELEFONE</mat-label>
+                    <mat-label>telefone</mat-label>
                     <input type="text" matInput ngModel name="telefone" required />
                 </mat-form-field>
                 <mat-form-field appearance="outline">
-                    <mat-label>EMAIL</mat-label>
+                    <mat-label>e-mail</mat-label>
                     <input type="text" matInput name="email" ngModel required />
                 </mat-form-field>
                 <mat-form-field appearance="outline">
@@ -25,9 +25,9 @@
                     </span>
                 </mat-form-field>
             </div>
-            <div class="dadosMedico">
+            <div class="dadosMedico ">
                 <mat-checkbox color="primary" labelPosition="before" #value="" (change)="crmInput($event)">
-                    possui crm?
+                    possui CRM?
                 </mat-checkbox>
                 <mat-accordion>
                     <mat-expansion-panel hideToggle (opened)="panelOpenState()" (closed)="panelOpenState()" [disabled]="check">
@@ -44,11 +44,11 @@
                         <br>
                         <mat-form-field appearance="outline">
                             <mat-label>CRM:</mat-label>
-                            <input type="text" matInput ngModel name="crm" disabled="{{disable_crm}}" />
+                            <input type="text" matInput ngModel name="crm" disabled="{{disable_crm}}" required />
                         </mat-form-field>
                         <mat-form-field appearance="outline">
                             <mat-label>Especialidade:</mat-label>
-                            <input type="text" matInput name="especialidade" ngModel disabled="{{disable_crm}}" />
+                            <input type="text" matInput name="especialidade" ngModel disabled="{{disable_crm}}" required />
                         </mat-form-field>
                     </mat-expansion-panel>
                 </mat-accordion>

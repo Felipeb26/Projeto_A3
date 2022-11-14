@@ -68,8 +68,8 @@
 
 
 .swiper{
-	width: 100%;
-	height: 100%;
+	width: auto;
+	height: auto;
 }
 
 .swiper-slide img{
@@ -83,19 +83,39 @@
 }
 
 .swiper-button-next, .swiper-button-prev{
-	color: #fff;
-	background: back;
+	color: var(--myWhite);
 	opacity: 50%;
-	width: 60px;
-	height: 60px;
+	width: 70px;
+	height: 70px;
 	border-radius: 100%;
-}
+
+	}
+
 
 .swiper-pagination-bullet-active{
-	background: #fff;
+	background: var(--myWhite);
 }
 
 .swiper-pagination-bullet{
 	width: 10px;
 	height: 10px;
 }
+
+	.cardEsquerda {
+		background-color:var(--myWhite);
+		display: flex;
+				  color: var(--myBlack);
+
+     flex-direction: column;
+     box-shadow: 0 0 0.5rem var(--myBlack);
+     margin: 1rem 3rem 1rem 5rem;
+	  width: auto;
+	  & .content, mat-card-subtitle {
+				background-color:var(--myWhite);
+
+		  color: var(--myBlack);
+			flex-wrap: wrap;
+			word-wrap: break-word;
+	  }
+	}
+

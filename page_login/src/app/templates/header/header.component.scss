@@ -23,9 +23,9 @@ mat-toolbar {
         cursor: pointer;
         font-style: italic;
         letter-spacing: 0.5px;
-        text-transform: uppercase;
+        text-transform: capitalize;
         transition: all 0.5s ease-in-out;
-        font-size: xx-large;
+        font-size: 14px;
         color: var(--myBlack);
     }
 
@@ -68,7 +68,6 @@ mat-sidenav-content {
 mat-sidenav {
     background-color: var(--myPurple);
     width: 10rem;
-	   border-radius: 10px;
     display: flex;
     background: var(--myPurple);
 	 position: absoluta;
@@ -123,11 +122,6 @@ mat-sidenav {
     }
 }
 
-mat-divider{
-  margin-top: 10px;
-  margin-bottom: 10px;
-  background-color: rgba(255, 255, 255, 0.5);
-	 }
 
 .material-icons {
     color: var(--myBlack);

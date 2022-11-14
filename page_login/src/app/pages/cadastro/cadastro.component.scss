@@ -36,17 +36,15 @@
         & mat-checkbox{
             margin: 0 0 0.8rem 0;
             text-decoration: underline;
-            text-transform: uppercase;
+            text-transform: capitalize;
             letter-spacing: 0.1rem;
             font-weight: bold;
             color: var(--myBlack);
         }
 
         & mat-accordion {
-            letter-spacing: 00.2rem;
-            background: var(--myWhite);
-            text-transform: uppercase;
-            text-decoration: underline;
+  background: var(--myWhite);
+            text-transform: capitalize;
             text-decoration-thickness: 2px;
             text-decoration-color: var(--myPurpleShadow);
         }
@@ -57,7 +55,6 @@
 
         & mat-panel-description {
             color: var(--midRed);
-            font-weight: bold;
         }
 
         & .tel {
@@ -91,10 +88,11 @@ h2,
 mat-form-field,
 mat-label {
     color: var(--myBlack);
-    font-weight: bold;
     letter-spacing: 0.1rem;
+    text-transform: capitalize;
+}
+mat-form-field {
     font-style: italic;
-    text-transform: uppercase;
 }
 
 mat-expansion-panel {
@@ -113,13 +111,13 @@ input {
 }
 
 .cadastar {
-    box-shadow: 0 0 0.5rem var(--myPurpleShadow);
+    box-shadow: 0 0 0.2rem var(--myPurpleShadow);
     background: var(--myPurple);
     color: var(--myBlack);
     width: auto;
-    border: 2px solid var(--myWhite);
+    border: 1px solid var(--myBlack);
     margin: 1rem 40%;
-    text-transform: uppercase;
+    text-transform: capitalize;
     letter-spacing: 0.2rem;
     border-radius: 5px;
     padding: 0.5rem;
