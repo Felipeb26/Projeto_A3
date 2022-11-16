@@ -67,8 +67,7 @@ Segue a documentação de contratos que a interface do usuário possa acessar os
 | <http://localhost:3001/mail/bem-user> | <http://localhost:3003/bem-user> | POST | envia um email um email para o usuario dando  parabens por se cadastrar no programa.|
 | <http://localhost:3001/mail/bem-doc> | <http://localhost:3003/bem-doc> | POST | envia um email um email para o medico dando  parabens por se cadastrar no programa.|
 | <http://localhost:3001/mail/preview> | <http://localhost:3003/preview> | POST | recebe array de bytes para uso de dowload ou preview do pdf sendo obrigatorio enviar o modelo do arquivo.|
-| <http://localhost:3001/mail/medicamento> | <http://localhost:3003/medicamento> | POST | envia um email com o pdf de todos os medicamentos para serem utilizados
-pelo paciente .|
+| <http://localhost:3001/mail/medicamento> | <http://localhost:3003/medicamento> | POST | envia um email com o pdf de todos os medicamentos para serem utilizados pelo paciente .|
 | <http://localhost:3001/mail/atestado> | <http://localhost:3003/atestdo> | POST | envia um email com o pdf de todos o atestado referente ao paciente.|
 
 Para rodar o docker-compose.yml usar comando - "docker-compose up --build"
