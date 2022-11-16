@@ -41,7 +41,11 @@ const options = {
 };
 
 const atestado = (data) => {
-	return `<header style="font-weight: bold;text-transform: uppercase;display: flex;justify-items: center;">
+	return `<div style="display: flex;flex-direction: column;align-items: center;width:100%;margin: 2rem 1rem;">
+        <header style="margin: 2rem 0 5rem 0;">
+            <img src="${logo}" width="150" height="150">
+        </header>
+        <header style="font-weight: bold;text-transform: uppercase;display: flex;justify-items: center;margin: 2rem 0 5rem 0;">
                 <h1>atestado medico</h1>
             </header>
             <div style="display: flex;align-items: center;margin: 2rem 0 5rem 0;">
@@ -53,13 +57,22 @@ const atestado = (data) => {
                 <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam vitae dignissimos porro aspernatur, necessitatibus doloribus voluptatem sit? Eligendi saepe a, tenetur, commodi ad amet quasi provident eum, quaerat doloribus incidunt.</p>
             </div>
             <footer style="display: flex;position: fixed;bottom: 0;margin-bottom: 1rem;">
-                <p>São Paulo ${data}</p>
+                <p style="float:right;">São Paulo ${data}</p>
                 <br><span style="float:right;">©projetoA3</span>
             </footer>`;
 };
 
 const medicamento = (data) => {
-	return `<header style="font-weight: bold;text-transform: uppercase;display: flex;justify-items: center;">
+	return `<div style="display: flex;flex-direction: column;align-items: center;width:100%;margin: 2rem 1rem;">
+        <header style="margin: 2rem 0 5rem 0;">
+            <img src="${logo}" width="150" height="150">
+        </header>
+        <div style="display: flex;margin: 2rem 0 5rem 0;">
+            <h2>
+                Olá ${data}, seja bem vindo ao&ensp;Origami Sáude!
+            </h2>
+        </div>
+        <header style="font-weight: bold;text-transform: uppercase;display: flex;justify-items: center;">
                 <h1>medicamento</h1>
             </header>
             <div style="display: flex;align-items: center;margin: 2rem 0 5rem 0;">
@@ -110,6 +123,37 @@ const boasVindasUsuario = (data) => {
     </div>`;
 };
 
+const boasVindasMedico = (data) => {
+	return `<div style="display: flex;flex-direction: column;align-items: center;width:100%;margin: 2rem 1rem;">
+        <header style="margin: 2rem 0 5rem 0;">
+            <img src="${logo}" width="150" height="150">
+        </header>
+        <div style="display: flex;margin: 2rem 0 5rem 0;">
+            <h2>
+                Olá ${data}, seja bem vindo ao&ensp;Origami Sáude!
+            </h2>
+        </div>
+        <div style="display: flex;margin: 2rem 01rem 2rem 0;">
+            <h3>
+                Sua entrada para como usuario colaborador nos engrandesce como grupo e empresa, esperamos contar cada vez mais com seu auxilio por aqui, desejamos seu auxilio e empenho total em cada paciente e em cada caso.
+            </h3>
+        </div>
+        <div style="margin: 2rem 0 5rem 0;">
+            <h3>então agora que entrou para o grupo gostaria de saber alguns de seus beneficios por aqui?
+                <a href="https://felipeb26.github.io/front_a3/parceiros" target="_blank">parceiros
+                </a>clicando no link ao lado será possivel ver alguns de seus beneficios e vantagens como colaborador do programa!
+            </h3>
+            <h3>para isso entre no nosso site
+			<a href="https://felipeb26.github.io/front_a3/"target="_blank">origami</a>
+            com o seu login</h3>
+        </div>
+        <div
+            style="display: flex;justify-content: flex-end;white-space: nowrap;margin: 2rem 0 0 50%;align-items: flex-end;">
+            <h3>novamente seja bem vindo&ensp;ao Origami Saúde</h3>
+        </div>
+    </div>`;
+};
+
 const agendamento = (data) => {
 	return `<header style="display: flex;flex-direction: column;align-items: center;">
     <img class="logotipo" src="${logo}" width="150" height="150">
@@ -135,6 +179,7 @@ module.exports = {
 	medicamento,
 	atestado,
 	boasVindasUsuario,
+	boasVindasMedico,
 	agendamento,
 	options,
 };

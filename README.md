@@ -51,10 +51,11 @@ Segue a documentação de contratos que a interface do usuário possa acessar os
 | endpoint gateway| endpoint | method | info|
 |----------|---------|------|------|
 | <http://localhost:3001/crud/login>      |<http://localhost:3000/login> | POST | enviar email e senha para receber Bearer token para ter acesso aos demais endpoints. |
-| <http://localhost:3001/crud/users>      |<http://localhost:3000/user/{id}> | GET | retorna todos os usuarios do cadastrados.|
-| <http://localhost:3001/crud/users>      |<http://localhost:3000/user/{id}> | POST | Salva usuario sendo necessario nome email senha e role |
-|<http://localhost:3001/crud/users-page> | <http://localhost:3000/users-page> | GET | retorna todos os usuarios paginado.|
-| <http://localhost:3001/crud//users-page>|<http://localhost:3000/user/{id}> | GET | retorna usuario de forma paginada para maior eficiencia em relação ao banco de dados.|
+| <http://localhost:3001/crud/consultas>      |<http://localhost:3000/consultas> | GET | retorna todos as consultas relacionadas ao medico e paciente cadastrados.|
+| <http://localhost:3001/crud/docs>      |<http://localhost:3000/docs> | GET | retorna todos os medicos cadastrados.|
+| <http://localhost:3001/crud/users>      |<http://localhost:3000/users> | GET | retorna todos os usuarios cadastrados.|
+| <http://localhost:3001/crud/users>      |<http://localhost:3000/users> | POST | Salva usuario sendo necessario nome email tellefone senha e role |
+|<http://localhost:3001/crud/users-page> | <http://localhost:3000/users-page> | GET | retorna todos os usuarios paginando.|
 | <http://localhost:3001/crud/user/{id}>  |<http://localhost:3000/user/{id}> | GET | recebe como paraetro o id do usuario para localizar.|
 | <http://localhost:3001/crud/user/{id}>       |<http://localhost:3000/user/{id}> | PUT | recebe o id para localizar o usuario e o corpo de acordo com os parametros para serem alterados.|
 | <http://localhost:3001/crud/user/{id}>       |<http://localhost:3000/user/{id}>  | DELETE | receb o id do usuario afim de excluir ele do banco de dados.|
@@ -63,7 +64,11 @@ Segue a documentação de contratos que a interface do usuário possa acessar os
 
 | endpoint gateway| endpoint | method | info|
 |----------|---------|--------|---------|
-| <http://localhost:3001/mail/> | <http://localhost:3003/index> | POST | envia um email de acordo com o modelo de email informado sendo necessario para quem será enviado o email o assunto e mensagem.|
-| <http://localhost:3001/mail/> | <http://localhost:3003/index> | GET | realiza o dowload do modelo de email localmente, caso utilizado pelo gateway será retornado array de bytes.|
+| <http://localhost:3001/mail/bem-user> | <http://localhost:3003/bem-user> | POST | envia um email um email para o usuario dando  parabens por se cadastrar no programa.|
+| <http://localhost:3001/mail/bem-doc> | <http://localhost:3003/bem-doc> | POST | envia um email um email para o medico dando  parabens por se cadastrar no programa.|
+| <http://localhost:3001/mail/preview> | <http://localhost:3003/preview> | POST | recebe array de bytes para uso de dowload ou preview do pdf sendo obrigatorio enviar o modelo do arquivo.|
+| <http://localhost:3001/mail/medicamento> | <http://localhost:3003/medicamento> | POST | envia um email com o pdf de todos os medicamentos para serem utilizados
+pelo paciente .|
+| <http://localhost:3001/mail/atestado> | <http://localhost:3003/atestdo> | POST | envia um email com o pdf de todos o atestado referente ao paciente.|
 
 Para rodar o docker-compose.yml usar comando - "docker-compose up --build"

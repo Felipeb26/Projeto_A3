@@ -1,6 +1,7 @@
 node_modules
 *lock*
 *.log
-
+log/
+log/
 documentation/
 documentation
