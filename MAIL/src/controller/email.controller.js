@@ -12,8 +12,20 @@ const newName = uuid.v4();
 
 const previewPDF = async (req, res) => {
 	try {
+		const errorList = [];
+
 		let { user, modelo } = req.body;
 		user = user.charAt(0).toUpperCase() + user.slice(1);
+		if (user == null || undefined) {
+			errorList.push("Necessario informar o nome do usuario");
+		}
+		if (modelo == null || undefined) {
+			errorList.push("Necessario informar o modelo do email");
+		}
+
+		if (errorList.length > 0) {
+			return res.status(400).send(errorList);
+		}
 
 		let pdfModel;
 		switch (modelo) {
@@ -55,8 +67,19 @@ const previewPDF = async (req, res) => {
 
 const boasVindasController = async (req, res) => {
 	try {
-		let { user } = req.body;
+		const errorList = [];
+		let { user, para } = req.body;
 		user = user.charAt(0).toUpperCase() + user.slice(1);
+
+		if (user == null || undefined) {
+			errorList.push("Necessario informar nome do usuario");
+		}
+		if (para == null || undefined) {
+			errorList.push("Necessario informar email para quem enviar");
+		}
+		if (errorList.length > 0) {
+			return res.status(400).send(errorList);
+		}
 
 		pdf.create(service.boasVindasUsuario(user), service.options).toFile(
 			name,
@@ -70,7 +93,7 @@ const boasVindasController = async (req, res) => {
 						.sendMail({
 							from: "Felipe Batista <felipeb2silva@gmail.com>",
 							replyTo: "lipethunderb@gmail.com",
-							to: "felipeb2silva@gmail.com",
+							to: para,
 							subject: "Origami Saúde",
 							text: "testando",
 							priority: "high",
@@ -103,8 +126,20 @@ const boasVindasController = async (req, res) => {
 
 const boasVindasDocController = async (req, res) => {
 	try {
-		let { user } = req.body;
+		const errorList = [];
+
+		let { user, para } = req.body;
 		user = user.charAt(0).toUpperCase() + user.slice(1);
+
+		if (user == null || undefined) {
+			errorList.push("Necessario informar nome do usuario");
+		}
+		if (para == null || undefined) {
+			errorList.push("Necessario informar email para quem enviar");
+		}
+		if (errorList.length > 0) {
+			return res.status(400).send(errorList);
+		}
 
 		pdf.create(service.boasVindasMedico(user), service.options).toFile(
 			name,
@@ -118,7 +153,7 @@ const boasVindasDocController = async (req, res) => {
 						.sendMail({
 							from: "Felipe Batista <felipeb2silva@gmail.com>",
 							replyTo: "lipethunderb@gmail.com",
-							to: "felipeb2silva@gmail.com",
+							to: para,
 							subject: "Origami Saúde",
 							text: "testando",
 							priority: "high",
@@ -151,9 +186,20 @@ const boasVindasDocController = async (req, res) => {
 
 const agendamentoController = async (req, res) => {
 	try {
-		let { user } = req.body;
+		const errorList = [];
+
+		let { user, para } = req.body;
 		user = user.charAt(0).toUpperCase() + user.slice(1);
 
+		if (user == null || undefined) {
+			errorList.push("Necessario informar nome do usuario");
+		}
+		if (para == null || undefined) {
+			errorList.push("Necessario informar email para quem enviar");
+		}
+		if (errorList.length > 0) {
+			return res.status(400).send(errorList);
+		}
 		pdf.create(service.agendamento(user), service.options).toFile(
 			name,
 			(erro, response) => {
@@ -166,7 +212,7 @@ const agendamentoController = async (req, res) => {
 						.sendMail({
 							from: "Felipe Batista <felipeb2silva@gmail.com>",
 							replyTo: "lipethunderb@gmail.com",
-							to: "felipeb2silva@gmail.com",
+							to: para,
 							subject: "Origami Saúde",
 							text: "testando",
 							priority: "high",
@@ -199,8 +245,20 @@ const agendamentoController = async (req, res) => {
 
 const atestadoController = async (req, res) => {
 	try {
-		let { user } = req.body;
+		const errorList = [];
+
+		let { user, para } = req.body;
 		user = user.charAt(0).toUpperCase() + user.slice(1);
+
+		if (user == null || undefined) {
+			errorList.push("Necessario informar nome do usuario");
+		}
+		if (para == null || undefined) {
+			errorList.push("Necessario informar email para quem enviar");
+		}
+		if (errorList.length > 0) {
+			return res.status(400).send(errorList);
+		}
 
 		pdf.create(service.atestado(user), service.options).toFile(
 			name,
@@ -214,7 +272,7 @@ const atestadoController = async (req, res) => {
 						.sendMail({
 							from: "Felipe Batista <felipeb2silva@gmail.com>",
 							replyTo: "lipethunderb@gmail.com",
-							to: "felipeb2silva@gmail.com",
+							to: para,
 							subject: "Origami Saúde",
 							text: "testando",
 							priority: "high",
@@ -247,9 +305,20 @@ const atestadoController = async (req, res) => {
 
 const medicamentoController = async (req, res) => {
 	try {
-		let { user } = req.body;
+		const errorList = [];
+
+		let { user, para } = req.body;
 		user = user.charAt(0).toUpperCase() + user.slice(1);
 
+		if (user == null || undefined) {
+			errorList.push("Necessario informar nome do usuario");
+		}
+		if (para == null || undefined) {
+			errorList.push("Necessario informar email para quem enviar");
+		}
+		if (errorList.length > 0) {
+			return res.status(400).send(errorList);
+		}
 		pdf.create(service.medicamento(user), service.options).toFile(
 			name,
 			(erro, response) => {
@@ -262,7 +331,7 @@ const medicamentoController = async (req, res) => {
 						.sendMail({
 							from: "Felipe Batista <felipeb2silva@gmail.com>",
 							replyTo: "lipethunderb@gmail.com",
-							to: "felipeb2silva@gmail.com",
+							to: para,
 							subject: "Origami Saúde",
 							text: "testando",
 							priority: "high",
