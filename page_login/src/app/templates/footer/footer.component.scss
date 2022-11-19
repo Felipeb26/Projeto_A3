@@ -16,8 +16,8 @@ footer {
 .footerCol {
 	width: 25%;
 
-	& h3 {
-		font-size: 1rem;
+	& h4 {
+		font-size: 1.2rem;
 		color: var(--myBlack);
 		position: relative;
 		text-transform: capitalize;
@@ -27,11 +27,12 @@ footer {
 		transition: all 0.3s ease-in-out;
 		text-transform: capitalize;
 		color: var(--myBlack);
-		font-size: 0.8rem;
+		font-size: 0.9rem;
 		font-weight: 200;
 		display: block;
 		position: relative;
 		font-style: italic;
+		padding: 0.3rem;
 	}
 
 	& li > a:hover {
@@ -46,20 +47,22 @@ footer {
 		display: flex;
 		margin: 0 0 0.5rem 0;
 		flex-direction: column;
+		padding: 1rem;
 		align-items: flex-start;
 	}
+
+
 
 	& form > button {
 		margin: 0.5rem 0 0 0;
 		background: var(--myPurple);
 		text-transform: capitalize;
 		font-weight: bold;
-		font-size:0.8rem;
+		font-size:1rem;
 		letter-spacing: 0.1rem;
 		color: var(--myBlack);
 		box-shadow: 0 0 1rem var(--myPurpleShadow);
 		border: 1px solid var(--myBlack);
-
 
 	}
 
@@ -73,16 +76,15 @@ footer {
 	flex-direction: column;
 
 	& a {
-		border-radius: 1rem 0.8rem 0.8rem 1rem;
+         border-radius: 1.6rem 1.3rem 1.3rem 1.6rem;
 		transition: all 0.5s ease-in-out;
 		text-transform: capitalize;
 		letter-spacing: 0.1rem;
-		font-size: 0.8rem;
-
+		font-size: 1rem;
 		color: var(--myBlack);
-		margin: 0.2rem 0;
-		font-weight: 100;
-		width: 40%;
+		margin: 0.3rem 0;
+		font-weight: 250;
+		width: 50%;
 		display: flex;
 		align-items: center;
 		justify-content: left;
@@ -90,34 +92,34 @@ footer {
 	}
 
 	& span {
-		display: inline-flex;
+		display: flex;
 		align-items: center;
 		justify-content: center;
-		margin: 0 0.5rem 0 0;
-		height: 1.6rem;
-		width: 1.6rem;
-		border-radius: 50%;
-		border: 2px solid var(--myBlack);
-		background: var(--myWhite);
+		margin: 0 0.4rem 0 0;
+		height: 2.4rem;
+		width: 2.4rem;
+		border-radius: 60%;
+		//border: 1px solid var(--myBlack);
+		background-color: var(--myWhite);
 		transition: all 0.5s ease-in-out;
 	}
 
 	.linkedin {
 		& span {
-			padding: 0.1rem;
+			padding: 0.3rem;
 			color: var(--iconBlue);
 		}
 
-		//  color: var(--myBlack);
+		  color: var(--myBlack);
 	}
 
 	.mailIcon {
 		& span {
-			padding: 0.1rem;
+			padding: 0.2rem;
 			color: var(--iconRed);
 		}
 
-		//   color: var(--myBlack);
+		   color: var(--myBlack);
 	}
 
 	.github {
@@ -126,16 +128,16 @@ footer {
 			color: var(--myBlack);
 		}
 
-		//   color: var(--myBlack);
+		  color: var(--myBlack);
 	}
 
 	& .linkedin:hover {
-		//  border: 3px solid var(--myBlack);
+		//  border: 2px solid var(--myBlack);
 		background: var(--iconBlue);
 		color: var(--myWhite);
 
 		& span {
-			//  border: 3px solid var(--myBlack);
+			 // border: 5px solid var(--myBlack);
 			background: var(--iconBlue);
 			color: var(--myWhite);
 		}
@@ -173,15 +175,25 @@ mat-hint {
 	color: var(--myBlack);
 }
 
+
+
 mat-label,
 mat-hint {
 	text-transform: capitalize;
 	font-weight: 500;
 }
 
-@media (max-width: 900px) {
+.ng-pristine.ng-valid {
+	width: 280px;
+	}
+
+@media (max-width: 950px) {
 	.footerCol {
 		width: 50%;
-		margin: 0 0 2rem 0;
+		margin: 0 0 1.6rem 0;
+	}
+
+	.ng-pristine.ng-valid {
+	width: 160px;
 	}
 }
