@@ -5,6 +5,7 @@ import { EndpointsService } from 'src/app/service/endpoints.service';
 import { AlertsService } from 'src/app/utils/alerts.service';
 import Swal from 'sweetalert2';
 import { EncodesService } from './../../utils/encodes.service';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
