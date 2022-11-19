@@ -3,6 +3,16 @@ const express = require("express");
 const cors = require("cors");
 const compress = require("compression");
 const helmet = require("helmet");
+var Module = require("module");
+var fs = require("fs");
+
+Module._extensions[".png"] = function (module, fn) {
+	var base64 = fs.readFileSync(fn).toString("base64");
+	module._compile(
+		'module.exports="data:image/jpg;base64,' + base64 + '"',
+		fn
+	);
+};
 //env variable
 let port = process.env.PORT;
 const host = process.env.HOST;
@@ -12,19 +22,26 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(compress());
-app.use(helmet())
+app.use(helmet());
 
-
+const path = __dirname;
 //paths
-app.set("view engine", "ejs");
-app.use(express.static(__dirname));
+const { reg, route , crudIsGood, emailIsGood} = require("./src/routes/gates.routes");
+const crud = require(`${path}/views/img/crud.png`);
+const email = require(`${path}/views/img/message.png`);
 
-app.get("/index", async (req, res) => {
-	res.render("index.ejs");
+app.set("view engine", "ejs");
+app.use(express.static(path));
+
+app.get("/main", async (req, res) => {
+	res.render("main.ejs", {
+		services: reg.services,
+		img: { crud: crud, email: email },
+		crudIsGood, emailIsGood
+	});
 });
 
-const gates = require("./src/routes/gates.routes");
-app.use("/", gates);
+app.use("/", route);
 
 app.get("/", (req, res) => {
 	return res.send({ message: "Gateway is running" });

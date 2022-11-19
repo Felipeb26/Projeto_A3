@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: rgba(206, 206, 206, 0.384);
+        }
+        main{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around; 
+        }
+        main>h1{
+            width: 100%;
+        }
+        .img{
+            height: 18rem;
+            width: 28rem;
+            margin: 0.3rem 0;
+            border-radius: 5px;
+        }
+        .data {
+            display: flex;
+            margin: 1rem 5%;
+            align-items: center;
+            text-decoration: underline;
+            text-decoration-color: rgb(31, 199, 199);
+        }
+
+        .data>h3 {
+            text-transform: uppercase;
+            margin: 0 0.5rem;
+            color: rgb(31, 199, 199);
+        }
+
+        .data>p>a {
+            text-transform: uppercase;
+        }
+
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <main>
+        <% for(var i in services){ %>
+            <h1
+                style="background: rgba(114, 109, 109, 0.856);padding: 0.5rem 1rem 1rem 1rem;text-transform: uppercase;font-style: italic;">
+                <a href='<%= services[i].host %>:<%=services[i].port %>/api-docs/' target="_blank" style="color: cyan;">
+                    documentação
+                    <%=i%>
+                </a>
+            </h1>
+            <div style="display: flex;flex-direction: column;">
+                <div class="data">
+                    <h3>api name:</h3>
+                    <p>
+                        <%= services[i].apiName %>
+                    </p>
+                </div>
+                <div class="data">
+                    <h3>url:</h3>
+                    <p>
+                        <%= services[i].url %>
+                    </p>
+                </div>
+                <div class="data">
+                    <h3>host:</h3>
+                    <p>
+                        <%= services[i].host %>
+                    </p>
+                </div>
+                <div class="data">
+                    <h3>porta:</h3>
+                    <p>
+                        <%= services[i].port %>
+                    </p>
+                </div>
+                <div class="data">
+                    <h3>
+                        url da documentação do serviço:
+                    </h3>
+                    <p>
+                        <a href='<%= services[i].host %>:<%=services[i].port %>/api-docs/' target="_blank"
+                            style="color: rgb(39, 141, 141);" rel="noopener noreferrer">
+                            <%=i%>
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <% if(services[i].apiName==="crud" ){ %>
+                <img class="img" src='<%= img.crud %>' alt="">
+                <% } else { %>
+                <img class="img" src='<%= img.email %>' alt="">
+                    <% } %>
+                        <% } %>
+    </main>
+</body>
+
+</html>

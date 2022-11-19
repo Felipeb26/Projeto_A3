@@ -114,4 +114,48 @@ route.post("/register", async (req, res) => {
 	});
 });
 
-module.exports = route;
+var crudIsGood=false;
+var emailIsGood=false;
+
+const urlC = "http://localhost:3000/";
+const urlE = "http://localhost:3003";
+
+setInterval(() => {
+	axios({
+		url: urlC,
+		method: "GET",
+	})
+		.then((en) => {
+			if (en.status == 200) {
+				crudIsGood = true;
+			} else {
+				crudIsGood = false;
+			}
+		})
+		.catch((err) => {
+			console.log(err.status)});
+			crudIsGood = false;
+	axios({
+		url: urlE,
+		method: "GET",
+	})
+		.then((en) => {
+			if (en.status == 200) {
+				(emailIsGood = true);
+			} else {
+				(emailIsGood = false);
+			}
+		})
+		.catch((err) => {
+			console.log(err.status);
+			(emailIsGood = false);
+		});
+		console.log(crudIsGood,emailIsGood)
+}, 5000);
+
+module.exports = {
+	route,
+	reg,
+	crudIsGood,
+	emailIsGood,
+};

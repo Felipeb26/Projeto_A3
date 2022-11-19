@@ -68,7 +68,7 @@ const previewPDF = async (req, res) => {
 const boasVindasController = async (req, res) => {
 	try {
 		const errorList = [];
-		let { user, para } = req.body;
+		let { user, para ,mensagem} = req.body;
 		user = user.charAt(0).toUpperCase() + user.slice(1);
 
 		if (user == null || undefined) {
@@ -95,7 +95,7 @@ const boasVindasController = async (req, res) => {
 							replyTo: "lipethunderb@gmail.com",
 							to: para,
 							subject: "Origami Saúde",
-							text: "testando",
+							text: mensagem,
 							priority: "high",
 							date: today,
 							attachments: [
@@ -128,7 +128,7 @@ const boasVindasDocController = async (req, res) => {
 	try {
 		const errorList = [];
 
-		let { user, para } = req.body;
+		let { user, para ,mensagem} = req.body;
 		user = user.charAt(0).toUpperCase() + user.slice(1);
 
 		if (user == null || undefined) {
@@ -155,7 +155,7 @@ const boasVindasDocController = async (req, res) => {
 							replyTo: "lipethunderb@gmail.com",
 							to: para,
 							subject: "Origami Saúde",
-							text: "testando",
+							text: mensagem,
 							priority: "high",
 							date: today,
 							attachments: [
@@ -188,7 +188,7 @@ const agendamentoController = async (req, res) => {
 	try {
 		const errorList = [];
 
-		let { user, para } = req.body;
+		let { user, para ,mensagem} = req.body;
 		user = user.charAt(0).toUpperCase() + user.slice(1);
 
 		if (user == null || undefined) {
@@ -214,7 +214,7 @@ const agendamentoController = async (req, res) => {
 							replyTo: "lipethunderb@gmail.com",
 							to: para,
 							subject: "Origami Saúde",
-							text: "testando",
+							text: mensagem,
 							priority: "high",
 							date: today,
 							attachments: [
@@ -247,7 +247,7 @@ const atestadoController = async (req, res) => {
 	try {
 		const errorList = [];
 
-		let { user, para } = req.body;
+		let { user, para ,mensagem} = req.body;
 		user = user.charAt(0).toUpperCase() + user.slice(1);
 
 		if (user == null || undefined) {
@@ -274,7 +274,7 @@ const atestadoController = async (req, res) => {
 							replyTo: "lipethunderb@gmail.com",
 							to: para,
 							subject: "Origami Saúde",
-							text: "testando",
+							text: mensagem,
 							priority: "high",
 							date: today,
 							attachments: [
@@ -307,7 +307,7 @@ const medicamentoController = async (req, res) => {
 	try {
 		const errorList = [];
 
-		let { user, para } = req.body;
+		let { user, para ,mensagem} = req.body;
 		user = user.charAt(0).toUpperCase() + user.slice(1);
 
 		if (user == null || undefined) {
@@ -333,7 +333,7 @@ const medicamentoController = async (req, res) => {
 							replyTo: "lipethunderb@gmail.com",
 							to: para,
 							subject: "Origami Saúde",
-							text: "testando",
+							text: mensagem,
 							priority: "high",
 							date: today,
 							attachments: [

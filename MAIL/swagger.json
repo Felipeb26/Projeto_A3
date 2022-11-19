@@ -10,40 +10,42 @@
 		},
 		"version": "1.0.0"
 	},
-	"servers": [
-		{
-			"url": "http://localhost:3003/",
-			"description": "api emails"
-		}
-	],
-    "paths": {
-        "/index":{
-            "post": {
+	"servers": [{
+		"url": "http://localhost:3003/",
+		"description": "api emails"
+	}],
+	"paths": {
+		"/bem-user": {
+			"post": {
 				"summary": "summary enviar email com pdf",
 				"description": "envia email",
 				"tags": ["MAIL"],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/email"
-                            },
-                            "examples": {
-                                "mail":{
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/email"
+							},
+							"examples": {
+								"mail": {
+									"user": "usuario felipe",
 									"para": "jhvb@mail.com",
-									"assunto": "assunto",
 									"mensagem": "mensagem"
 								}
-                            }
-                        }
-                    }
-                },
+							}
+						}
+					}
+				},
 				"responses": {
 					"500": {
 						"description": "server error"
 					},
-					"401": { "description": "unathorized" },
-					"400": { "description": "Bad Request" },
+					"401": {
+						"description": "unathorized"
+					},
+					"400": {
+						"description": "Bad Request"
+					},
 					"200": {
 						"description": "OK",
 						"content": {
@@ -57,24 +59,218 @@
 					}
 				}
 			}
-        },
-        "/index/{data}":{
-			"get": {
-				"summary": "summary dowload",
-				"description": "Faz o dowload do pdf",
+		},
+		"/bem-doc": {
+			"post": {
+				"summary": "summary enviar email com pdf",
+				"description": "envia email",
 				"tags": ["MAIL"],
-				"parameters": [{
-					"name": "data",
-                    "in": "path",
-					"description": "Faz o dowload do pdf",
-					"required": "true"
-				}],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/email"
+							},
+							"examples": {
+								"mail": {
+									"user": "usuario felipe",
+									"para": "jhvb@mail.com",
+									"mensagem": "mensagem"
+								}
+							}
+						}
+					}
+				},
 				"responses": {
 					"500": {
 						"description": "server error"
 					},
-					"401": { "description": "unathorized" },
-					"400": { "description": "Bad Request" },
+					"401": {
+						"description": "unathorized"
+					},
+					"400": {
+						"description": "Bad Request"
+					},
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/pdf": {
+								"shema": {
+									"type": "string",
+									"format": "binary"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/agendamento": {
+			"post": {
+				"summary": "summary enviar email com pdf",
+				"description": "envia email",
+				"tags": ["MAIL"],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/email"
+							},
+							"examples": {
+								"mail": {
+									"user": "usuario felipe",
+									"para": "jhvb@mail.com",
+									"mensagem": "mensagem"
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"500": {
+						"description": "server error"
+					},
+					"401": {
+						"description": "unathorized"
+					},
+					"400": {
+						"description": "Bad Request"
+					},
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/pdf": {
+								"shema": {
+									"type": "string",
+									"format": "binary"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/medicamento": {
+			"post": {
+				"summary": "summary enviar email com pdf",
+				"description": "envia email",
+				"tags": ["MAIL"],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/email"
+							},
+							"examples": {
+								"mail": {
+									"user": "usuario felipe",
+									"para": "jhvb@mail.com",
+									"mensagem": "mensagem"
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"500": {
+						"description": "server error"
+					},
+					"401": {
+						"description": "unathorized"
+					},
+					"400": {
+						"description": "Bad Request"
+					},
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/pdf": {
+								"shema": {
+									"type": "string",
+									"format": "binary"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/atestado": {
+			"post": {
+				"summary": "summary enviar email com pdf",
+				"description": "envia email",
+				"tags": ["MAIL"],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/email"
+							},
+							"examples": {
+								"mail": {
+									"user": "usuario felipe",
+									"para": "jhvb@mail.com",
+									"mensagem": "mensagem"
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"500": {
+						"description": "server error"
+					},
+					"401": {
+						"description": "unathorized"
+					},
+					"400": {
+						"description": "Bad Request"
+					},
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/pdf": {
+								"shema": {
+									"type": "string",
+									"format": "binary"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/preview": {
+			"post": {
+				"summary": "preview de pdf",
+				"description": "retorna pdf em formato de array de byte para preview ou baixar o pdf",
+				"tags": ["MAIL"],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/preview"
+							},
+							"examples": {
+								"mail": {
+									"user": "usuario felipe",
+									"para": "jhvb@mail.com",
+									"mensagem": "mensagem"
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"500": {
+						"description": "server error"
+					},
+					"401": {
+						"description": "unathorized"
+					},
+					"400": {
+						"description": "Bad Request"
+					},
 					"200": {
 						"description": "OK",
 						"content": {
@@ -89,17 +285,37 @@
 				}
 			}
 		}
-    },
-    "components": {
-        "schemas": {
-            "email": {
-                "type": "object",
-                "properties": {
-                    "para": {"type":"string"},
-                    "mensagem": {"type":"string"},
-                    "assunto": {"type":"string"}
-                }
-            }
-        }
-    }
+	},
+	"components": {
+		"schemas": {
+			"email": {
+				"type": "object",
+				"properties": {
+					"user": {
+						"type": "string"
+					},
+					"para": {
+						"type": "string"
+					},
+					"mensagem": {
+						"type": "string"
+					},
+					"assunto": {
+						"type": "string"
+					}
+				}
+			},
+			"preview": {
+				"type": "object",
+				"properties": {
+					"user": {
+						"type": "string"
+					},
+					"modelo": {
+						"type": "string"
+					}
+				}
+			}
+		}
+	}
 }

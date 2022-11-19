@@ -29,3 +29,7 @@ route.put("/user/:id", authUser, cache, user.updateUser);
 
 route.delete("/user/:id", authUser, cache, user.deleteUser);
 // endpoints referente ao medico
+
+route.get("/", async(req, res) =>{
+    return res.status(200).send({message:"Crud is running"})
+})
