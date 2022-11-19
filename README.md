@@ -33,12 +33,13 @@ git clone https://github.com/Felipeb26/Projeto_A3.git
 # Execução da aplicação
 A partir do diretório que foi efetuado o clone (ou seja, o repos ou o diretório que você definiu) digite os comandos a seguir para efetuar download das dependencias e compilação da aplicação:
 ```
-cd Projeto_A3/BACK_FIREBASE/
-yarn
-cd ../Gateway/
-yarn
-cd ..
-yarn start
+npm i -g yarn
+npm i -g @angular/cli@14
+cd Projeto_A3
+yarn ou npm install
+em cada subpasta do repositorio Projeto_A3 deverá 
+ser feito o comando yarn ou npm install para instalar
+as dependecias necessarias de cada projeto
 ```
 Em caso de sucesso das execuções descritas a seguinte tela será apresentada
 
