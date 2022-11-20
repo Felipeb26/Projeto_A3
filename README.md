@@ -7,7 +7,9 @@ Essa aplicação web tem como objetivo expor endpoints para o acesso do usuário
 | Aline Sousa Lima | 819214026 | 
 | Felipe Batista da Silva | 821244065 |
 | Gabriela Nunes Barbosa | 821140737 |
-| Guilherme Augusto Mota Barbosa | 821224564 |
+
+# Apresentação
+[Clique aqui para visualizar o vídeo de apresentação](https://youtu.be/2VI4KMAHwl4)
 
 # Pre-requisitos para instalação da aplicação.
 Seguem os links para instalação dos softwares iniciais. Seguir as configurações relevantes de acordo com o seu sistema operacional que cada fabricante exige. Desconsiderar caso a instalação de algum ou mais deles já tenha sido feita. 
