@@ -3,7 +3,7 @@ mat-toolbar {
     box-shadow: 0 0 1rem var(--myPurpleShadow);
     display: flex;
     width: 100%;
-    height: 5rem;
+    height: 6rem;
 	 font-size: 1rem;
     align-items: center;
     justify-content: space-between;
@@ -19,112 +19,15 @@ mat-toolbar {
         filter: drop-shadow(1rem 0 0.1rem var(--myLogo));
     }
 
-    & h1 {
-        cursor: pointer;
-        font-style: italic;
-        letter-spacing: 0.5px;
-        text-transform: capitalize;
-        transition: all 0.5s ease-in-out;
-        font-size: 14px;
-        color: var(--myBlack);
-    }
-
-    & h1:hover {
-        letter-spacing: 0.1rem;
-    }
 & .material-icons{
 font-size:x-large;
 }
 
-    & .menu {
-        margin: 0 2rem 0 0;
-        border-radius: 50%;
-        background: var(--myPurpleShadow);
-        color: var(--myLogo);
-        transition: all 0.5s ease-out;
-    }
-
-    & .menu:hover {
-        animation: zoom-in-zoom-out 1s ease infinite;
-        box-shadow:
-            0 0 0.5rem 0.2rem var(--myLogo),
-            0 0 1rem 0.5rem var(--myLogo);
-    }
-}
-
-
-mat-sidenav-container {
-    height: 82.3%;
-    box-shadow: 0 0 1rem var(--myPurpleShadow);
-}
-
-mat-sidenav,
-mat-sidenav-content {
-    padding: 0.5rem;
-    background: var(--myWhite);
-}
-
-
-mat-sidenav {
-    background-color: var(--myPurple);
-    width: 10rem;
-    display: flex;
-    background: var(--myPurple);
-	 position: absoluta;
-
-
-    & .links {
-        display: flex;
-        align-items:flex-start;
-        flex-direction: column;
-        text-transform: capitalize;
-    }
-
-
- //   & .links>li {
-    //    margin: 0.5rem 0;
-      //  padding: 0.6rem 0;
-    //    width: 80%;
-    ///    box-shadow: 0 0.2rem 0.2rem 0 var(--myLogo);
-    //    transition: all 0.5s ease-in-out;
-   // }
-
-    & .links>li>a {
-        width: 100%;
-        padding: 12px 0;
-        transition: all 0.5s ease-in-out;
-        font-size: 14px;
-        color: var(--myBlack);
-    }
-
-    & .links>li:hover {
-        animation: zoom-in-zoom-out 1s ease normal;
-       // box-shadow: 0 0 0.5rem var(--myLogo);
-        color: var(--myLogo);
-    }
-
-
-    & a::after {
-        content: "";
-        background: var(--myLogo);
-        position: absolute;
-        height: 3px;
-        width: 100%;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        transform: scale(0, 0.8);
-        transition: 0.5s ease-in-out;
-    }
-
-    & a:hover::after {
-        transform: scale(0.8, 0.8);
-    }
 }
 
 
 nav {
-	position: fixed;
+	position: relative;
 	z-index: 2;
 	left: 0;
 	right: 0;
@@ -147,10 +50,9 @@ nav .nav-item > a {
 	display: inline-block;
 	padding: 0 1.5em;
 	line-height: 70px;
-	color: var(--myWhite);
+	color: #fff;
 	text-decoration: none;
 }
-
 nav .btn-hamburger {
 	display: none;
 	position: absolute;
@@ -166,11 +68,64 @@ nav .btn-hamburger span {
 	display: block;
 	width: 30px;
 	height: 4px;
-	background-color: var(--myBlack);
+	background-color: #fff;
 	margin: 6px;
 	border-radius: 2px;
 	transition: .3s ease-in-out;
 }
+
+mat-sidenav-container {
+    height: 82.3%;
+    box-shadow: 0 0 1rem var(--myPurpleShadow);
+}
+
+mat-sidenav,
+mat-sidenav-content {
+    padding: 0.5rem;
+    background: var(--myWhite);
+}
+
+
+mat-sidenav {
+    background-color: var(--myPurple);
+    width: 10rem;
+    display: flex;
+    background: var(--myPurple);
+
+    & .links {
+        display: flex;
+        align-items:flex-start;
+        flex-direction: column;
+        text-transform: capitalize;
+    }
+
+    & .links>li>a {
+        width: 100%;
+        padding: 12px 0;
+        transition: all 0.5s ease-in-out;
+        font-size: 14px;
+        color: var(--myBlack);
+    }
+
+
+    & a::after {
+        content: "";
+        background: var(--myLogo);
+        position: absolute;
+        height: 3px;
+        width: 100%;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transform: scale(0, 0.8);
+        transition: 0.5s ease-in-out;
+    }
+
+    & a:hover::after {
+        transform: scale(0.8, 0.8);
+    }
+}
+
 nav .btn-hamburger span:nth-child(4),
 nav .btn-hamburger span:nth-child(5) {
 	position: absolute;
@@ -196,25 +151,12 @@ nav.opened .btn-hamburger span:nth-child(2),
 nav.opened .btn-hamburger span:nth-child(3) {
 	opacity: 0;
 }
-
 .material-icons {
     color: var(--myBlack);
     font-size: x-large;
 }
 
-@keyframes zoom-in-zoom-out {
-    0% {
-        transform: scale(1, 1);
-    }
 
-    50% {
-        transform: scale(1.1, 1.1);
-    }
-
-    100% {
-        transform: scale(1, 1);
-    }
-}
 
 @media screen and (max-width: 950px) {
 	nav .nav-menu {
@@ -226,6 +168,7 @@ nav.opened .btn-hamburger span:nth-child(3) {
 		display: flex;
 		flex-direction: column;
 		justify-content: start;
+		background-color: #363d4e;
 		transition: bottom .5s ease-in-out;
 		overflow: hidden;
 	}
@@ -235,12 +178,8 @@ nav.opened .btn-hamburger span:nth-child(3) {
 	nav .nav-item > a {
 		display: block;
 	}
-	nav .dropdown-menu {
-		position: relative;
-		top: 0;
-		margin: 0 1.5em;
-	}
+
 	nav .btn-hamburger {
-		display: none;
+		display: block;
 	}
 }

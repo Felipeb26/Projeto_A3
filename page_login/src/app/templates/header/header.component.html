@@ -1,83 +1,68 @@
 <app-loading></app-loading>
 <mat-toolbar>
 	<img class="logo" src="{{logo}}" alt="logo" routerLink="" (click)="open=!open">
+	<nav>
+		<button type="button" class="btn-hamburger" data-action="nav-toggle">
+			<span></span>
+			 <span></span>
+			<span></span>
+			<span></span>
+		</button>
 
-
-<nav>
-		<div class="links">
 	<ul class="nav-menu">
-		<li class="nav-item"><a mat-button routerLink="">
+		<li class="nav-item"><a href="#home">
 				<span class="material-icons">
 					home
 				</span>
 				Home
 			</a></li>
 
-		<li class="nav-item"><a mat-button routerLink="cadastro">
-				<span class="material-icons">
-					assignment
-				</span>Cadastro
-			</a></li>
-
-		<li class="nav-item"><a mat-button routerLink="agenda">
+		<li class="nav-item"><a href="#agenda">
 				<span class="material-icons">
 					date_range
 				</span>
 				Calendario
 			</a></li>
 
-		<li class="nav-item"><a mat-button routerLink="about">
+			<li class="nav-item"><a  href="#cadastro">
+		<span class="material-icons">
+			assignment
+		</span>Cadastro
+		</a></li>
+
+		<li class="nav-item"><a  href="#about">
 				<span class="material-icons">
 					help
 				</span>
 				Ajuda
 			</a></li>
 
-		<li class="nav-item"><a mat-button routerLink="user">
+		<li class="nav-item"><a href="user">
 				<span class="material-icons">
 					account_circle
 				</span>
 				Usuário
 			</a></li>
 
-		<li class="nav-item"><a mat-button routerLink="login" (click)=logout()>
+		<li class="nav-item"><a  href="login" (click)=logout()>
 				<span class="material-icons">
 					logout
 				</span>
-				Sair da Conta
 			</a></li>
 
 		<li class="nav-item"><a mat-button (click)="themeMode()">
 				<span class="material-icons mode">
 					{{mode}}
 				</span>
-				Contraste
+
 			</a></li>
 	</ul>
-		</div>
-<button type="button" class="btn-hamburger" data-action='nav-toggle'>
 
-	<!-- <button button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
-		<mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
-		<mat-icon *ngIf="sidenav.opened"> close </mat-icon>
-	 </button> -->
-
-	<span></span>
-	<span></span>
-	<span></span>
-</button>
 </nav>
 
-<script>let nav = document.querySelector('nav');
+<script>
+	let nav = document.querySelector('nav');
 	let navToggle = nav.querySelector("[data-action='nav-toggle']");
-
-	dropdownToggle.addEventListener('click', () => {
-		if (dropdown.classList.contains('show')) {
-			dropdown.classList.remove('show');
-		} else {
-			dropdown.classList.add('show');
-		}
-	})
 
 	navToggle.addEventListener('click', () => {
 		if (nav.classList.contains('opened')) {
