@@ -9,7 +9,7 @@ mat-toolbar {
     justify-content: space-between;
 
     & .logo {
-        height: 6rem;
+        height: 5rem;
         width: auto;
         cursor: pointer;
         transition: all 1s ease-in-out;
@@ -20,11 +20,9 @@ mat-toolbar {
     }
 
 & .material-icons{
-font-size:x-large;
+font-size:medium;
 }
-
 }
-
 
 nav {
 	position: relative;
@@ -36,7 +34,7 @@ nav {
 	padding: 0 1.5em;
 }
 nav .nav-menu {
-	position: absolute;
+	position: relative;
 	right: 1.5em;
 	top: 0;
 	padding: 0;
@@ -50,7 +48,7 @@ nav .nav-item > a {
 	display: inline-block;
 	padding: 0 1.5em;
 	line-height: 70px;
-	color: #fff;
+	color: var(--myBlack);
 	text-decoration: none;
 }
 nav .btn-hamburger {
@@ -68,7 +66,7 @@ nav .btn-hamburger span {
 	display: block;
 	width: 30px;
 	height: 4px;
-	background-color: #fff;
+	background-color: var(--myBlack);
 	margin: 6px;
 	border-radius: 2px;
 	transition: .3s ease-in-out;
@@ -106,7 +104,6 @@ mat-sidenav {
         font-size: 14px;
         color: var(--myBlack);
     }
-
 
     & a::after {
         content: "";
