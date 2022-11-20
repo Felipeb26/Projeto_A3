@@ -15,7 +15,7 @@ Essa aplicação web tem como objetivo expor endpoints para o acesso do usuário
 Seguem os links para instalação dos softwares iniciais. Seguir as configurações relevantes de acordo com o seu sistema operacional que cada fabricante exige. Desconsiderar caso a instalação de algum ou mais deles já tenha sido feita. 
 - Instalar o Git. Link [download e instalação](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - Instalar o NodeJS e npm. Link [download e passos para instalação](https://nodejs.org/en/download/).
-- Instalar o Yarn. Linbk [download e instalação](https://classic.yarnpkg.com/en/docs/install)
+- Instalar o Yarn. Link [download e instalação](https://classic.yarnpkg.com/en/docs/install)
 - Instalar o Swiper para o carrossel [documentação](https://swiperjs.com/angular)
 
 # Build da aplicação
@@ -53,24 +53,24 @@ Segue a documentação de contratos que a interface do usuário possa acessar os
 
 | endpoint gateway| endpoint | method | info|
 |----------|---------|------|------|
-| <http://localhost:3001/crud/login>      |<http://localhost:3000/login> | POST | enviar email e senha para receber Bearer token para ter acesso aos demais endpoints. |
-| <http://localhost:3001/crud/consultas>      |<http://localhost:3000/consultas> | GET | retorna todos as consultas relacionadas ao medico e paciente cadastrados.|
-| <http://localhost:3001/crud/docs>      |<http://localhost:3000/docs> | GET | retorna todos os medicos cadastrados.|
-| <http://localhost:3001/crud/users>      |<http://localhost:3000/users> | GET | retorna todos os usuarios cadastrados.|
-| <http://localhost:3001/crud/users>      |<http://localhost:3000/users> | POST | Salva usuario sendo necessario nome email tellefone senha e role |
-|<http://localhost:3001/crud/users-page> | <http://localhost:3000/users-page> | GET | retorna todos os usuarios paginando.|
-| <http://localhost:3001/crud/user/{id}>  |<http://localhost:3000/user/{id}> | GET | recebe como paraetro o id do usuario para localizar.|
-| <http://localhost:3001/crud/user/{id}>       |<http://localhost:3000/user/{id}> | PUT | recebe o id para localizar o usuario e o corpo de acordo com os parametros para serem alterados.|
-| <http://localhost:3001/crud/user/{id}>       |<http://localhost:3000/user/{id}>  | DELETE | receb o id do usuario afim de excluir ele do banco de dados.|
+| <http://localhost:3001/crud/login>      |<http://localhost:3000/login> | POST | Envia e-mail e senha para receber Bearer token para ter acesso aos demais endpoints. |
+| <http://localhost:3001/crud/consultas>      |<http://localhost:3000/consultas> | GET | retorna todos os dados das consultas relacionadas ao medico e paciente cadastrados.|
+| <http://localhost:3001/crud/docs>      |<http://localhost:3000/docs> | GET | Retorna todos os médicos cadastrados.|
+| <http://localhost:3001/crud/users>      |<http://localhost:3000/users> | GET | Retorna todos os usuários cadastrados.|
+| <http://localhost:3001/crud/users>      |<http://localhost:3000/users> | POST | Salva o usuário sendo necessario nome, e-mail, telefone, senha e role |
+|<http://localhost:3001/crud/users-page> | <http://localhost:3000/users-page> | GET | Retorna todos os usuários paginando.|
+| <http://localhost:3001/crud/user/{id}>  |<http://localhost:3000/user/{id}> | GET | Recebe como parâmetro o id do usuário para localizar.|
+| <http://localhost:3001/crud/user/{id}>       |<http://localhost:3000/user/{id}> | PUT | Recebe o id para localizar o usuário e o corpo de acordo com os parâmetros para serem alterados.|
+| <http://localhost:3001/crud/user/{id}>       |<http://localhost:3000/user/{id}>  | DELETE | Recebe o id do usuário afim de excluí-lo do banco de dados.|
 
 # Segundo microserviço Através do Barramento!
 
 | endpoint gateway| endpoint | method | info|
 |----------|---------|--------|---------|
-| <http://localhost:3001/mail/bem-user> | <http://localhost:3003/bem-user> | POST | envia um email um email para o usuario dando  parabens por se cadastrar no programa.|
-| <http://localhost:3001/mail/bem-doc> | <http://localhost:3003/bem-doc> | POST | envia um email um email para o medico dando  parabens por se cadastrar no programa.|
-| <http://localhost:3001/mail/preview> | <http://localhost:3003/preview> | POST | recebe array de bytes para uso de dowload ou preview do pdf sendo obrigatorio enviar o modelo do arquivo.|
-| <http://localhost:3001/mail/medicamento> | <http://localhost:3003/medicamento> | POST | envia um email com o pdf de todos os medicamentos para serem utilizados pelo paciente .|
-| <http://localhost:3001/mail/atestado> | <http://localhost:3003/atestado> | POST | envia um email com o pdf de todos o atestado referente ao paciente.|
+| <http://localhost:3001/mail/bem-user> | <http://localhost:3003/bem-user> | POST | Envia o e-mail para o usuário dando boas-vindas pelo cadastro na plataforma.|
+| <http://localhost:3001/mail/bem-doc> | <http://localhost:3003/bem-doc> | POST | Envia o e-mail para o médico dando boas-vindas pelo cadastro na plataforma.|
+| <http://localhost:3001/mail/preview> | <http://localhost:3003/preview> | POST | Recebe array de bytes para uso de download ou preview do pdf sendo obrigatório enviar o modelo do arquivo.|
+| <http://localhost:3001/mail/medicamento> | <http://localhost:3003/medicamento> | POST | Envia um e-mail com o pdf de todos os medicamentos para serem utilizados pelo paciente .|
+| <http://localhost:3001/mail/atestado> | <http://localhost:3003/atestado> | POST | Envia um e-mail com o pdf do atestado de saúde referente ao paciente.|
 
 Para rodar o docker-compose.yml usar comando - "docker-compose up --build"
