@@ -9,17 +9,17 @@ import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
-  // { path: "", pathMatch: "full", redirectTo: "home" },
-  { path: "", component: HomeComponent },
-  { path: "login", component: LoginComponent },
-  { path: "about", component: AboutComponent },
-  { path: "user", component: UserComponent },
-  { path: "agenda", component: AgendamentoComponent, canActivate: [AuthGuard] },
-  { path: "cadastro", component: CadastroComponent }
+	// { path: "", pathMatch: "full", redirectTo: "home" },
+	{ path: "", component: HomeComponent },
+	{ path: "login", component: LoginComponent },
+	{ path: "about", component: AboutComponent },
+	{ path: "user", component: UserComponent },
+	{ path: "agenda", component: AgendamentoComponent, canActivate: [AuthGuard] },
+	{ path: "cadastro", component: CadastroComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forRoot(routes)],
+	exports: [RouterModule]
 })
 export class AppRoutingModule { }

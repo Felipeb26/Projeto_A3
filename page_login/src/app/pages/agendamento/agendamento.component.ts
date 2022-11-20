@@ -7,97 +7,122 @@ import { USER } from 'src/app/models/usuario.model';
 import { EndpointsService } from 'src/app/service/endpoints.service';
 
 @Component({
-  selector: 'app-agendamento',
-  templateUrl: './agendamento.component.html',
-  styleUrls: ['./agendamento.component.scss']
+	selector: 'app-agendamento',
+	templateUrl: './agendamento.component.html',
+	styleUrls: ['./agendamento.component.scss']
 })
 export class AgendamentoComponent implements OnInit {
-  local: any = localStorage.getItem("tk")
-  today: any = Date.now().toLocaleString()
-  especialidade: string = ""
-  especialidades: USER[] = []
-  medicos: USER[] = []
+	local: any = localStorage.getItem("tk")
+	today: any = Date.now().toLocaleString()
+	especialidade: string = ""
+	especialidades: USER[] = []
+	medicos: USER[] = []
+	docId: string = ""
+	id: string = ""
+	nome: string = ""
+	medico: string = ""
+	especial: string = ""
+	data: any
 
-  id: string = ""
-  nome: string = ""
-  medico: string = ""
-  especial: string = ""
-  data: any
+	selectDate: any
+	doc: any = ""
+	espe: any = ""
 
-  selectDate: any
-  doc: any = ""
-  espe: any = ""
+	constructor (
+		private endpoints: EndpointsService,
+		private encodes: EncodesService,
+		private alert: AlertsService,
+		private route: Router
+	) { }
 
-  constructor (
-    private endpoints: EndpointsService,
-    private encodes: EncodesService,
-    private alert: AlertsService,
-    private route: Router
-  ) { }
-
-  ngOnInit(): void {
-    this.endpoints.getAllDocs().subscribe(
-      data => {
-        this.decodeToken()
-        data = data.filter(er => er.crm != null)
-        this.especialidades = data
-      },
-      err => {
-        if (err.status == 401 && this.local != null || undefined) {
-          this.alert.infoT("tempo expirado!");
-        } else if (err.status == 401 && this.local == null || undefined) {
-          this.alert.infoT("necessario logar antes!");
-          this.route.navigate(["/login"])
-        }
-      }
-    );
-  }
+	ngOnInit(): void {
+		this.endpoints.getAllDocs().subscribe(
+			data => {
+				this.decodeToken()
+				data = data.filter(er => er.crm != null)
+				this.especialidades = data
+			},
+			err => {
+				if (err.status == 401 && this.local != null || undefined) {
+					this.alert.infoT("tempo expirado!");
+				} else if (err.status == 401 && this.local == null || undefined) {
+					this.alert.infoT("necessario logar antes!");
+					this.route.navigate(["/login"])
+				}
+			}
+		);
+	}
 
 
-  agendar(agenda: NgForm) {
-    const date = agenda.value.data
-    const doc = this.doc
-    const especialidade = this.espe
+	agendar(agenda: NgForm) {
+		const date = agenda.value.data
+		const doc = this.doc
+		const especialidade = this.espe
 
-    const data = {
-      idUser: this.id,
-      agenda: date,
-      medico: doc,
-      especialidade: especialidade
-    }
+		const data = {
+			idUser: this.id,
+			agenda: date,
+			medico: doc,
+			especialidade: especialidade
+		}
+		this.alert.sucessT("consulta agendada com sucesso!")
+	}
 
-    console.table(data)
-  }
+	decodeToken() {
+		const value = this.encodes.decodeString(this.local)
 
-  decodeToken() {
-    const value = this.encodes.decodeString(this.local)
+		if (value) {
+			const data = this.encodes.decodeString(value)
+			if (data) {
+				const index = data.indexOf(":{")
+				const lastIndex = data.lastIndexOf("},")
+				const user = data?.substring(index + 1, lastIndex + 1);
+				const userData = JSON.parse(user);
 
-    if (value) {
-      const data = this.encodes.decodeString(value)
-      if (data) {
-        const index = data.indexOf(":{")
-        const lastIndex = data.lastIndexOf("},")
-        const user = data?.substring(index + 1, lastIndex + 1);
-        const userData = JSON.parse(user);
+				this.id = userData.id;
+				this.nome = userData.nome.toUpperCase();
+			}
+		}
+	}
 
-        this.id = userData.id;
-        this.nome = userData.nome.toUpperCase();
-      }
-    }
-  }
+	selectEspecialidade(value: any) {
+		this.espe = this.especialidades.filter(er => er.id == value).map(ap => ap.especialidade);
+		this.medicos = this.especialidades.filter(er => er.id == value);
+		this.doc = ""
+	}
 
-  selectEspecialidade(value: any) {
-    this.espe = this.especialidades.filter(er => er.id == value).map(ap => ap.especialidade);
-    this.medicos = this.especialidades.filter(er => er.id == value);
-    this.doc = ""
-  }
+	selectMedico(value: any) {
+		this.doc = this.medicos.filter(er => er.id == value).map(ap => ap.nome);
+	}
 
-  selectMedico(value: any) {
-    this.doc = this.medicos.filter(er => er.id == value).map(ap => ap.nome);
-  }
+	showData(value: Date) {
+		this.selectDate = value
+	}
 
-  showData(value: Date) {
-    this.selectDate = value
-  }
+	cancelarConsulta(doc: USER) {
+		let roles = doc.role;
+		if(doc.role == undefined){
+			roles = 0;
+		}
+		const docs = {
+			id: doc.id,
+			nome: doc.nome,
+			email: doc.email,
+			senha: doc.senha,
+			agenda: "",
+			role: roles,
+			crm: doc.crm,
+			especialidade: doc.especialidade
+		}
 
+		this.endpoints.updateDoc(doc.id, docs).subscribe(
+			data => {
+				this.alert.sucessT("Consulta cancelada")
+				console.log(data)
+			},
+			erro => {
+				console.log(erro)
+			}
+		)
+	}
 }

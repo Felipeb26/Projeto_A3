@@ -151,7 +151,7 @@ setInterval(() => {
 			(emailIsGood = false);
 		});
 		console.log(crudIsGood,emailIsGood)
-}, 5000);
+}, 15000);
 
 module.exports = {
 	route,

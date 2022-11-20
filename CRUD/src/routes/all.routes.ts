@@ -12,14 +12,11 @@ const doc = new MedicoController();
 //endpoints referentes ao usuario
 route.get("/users", authUser, cache, user.getAllUsers);
 
-route.get("/docs", authUser, cache, doc.getAllDocs);
-
 route.get("/consultas", authUser, cache, user.getAllConsultas)
 
 route.post("/login", cache, user.getUserForLogin);
 
 route.get("/users-page", authUser, cache, user.getAllPaginate);
-
 
 route.get("/user/:id", authUser, cache, user.getById);
 
@@ -29,6 +26,14 @@ route.put("/user/:id", authUser, cache, user.updateUser);
 
 route.delete("/user/:id", authUser, cache, user.deleteUser);
 // endpoints referente ao medico
+route.get("/docs", authUser, cache, doc.getAllDocs);
+
+route.post("/docs", authUser, cache, user.addUser);
+
+route.put("/docs/:id", authUser, cache, doc.updateUser);
+
+route.delete("/docs/:id", authUser, cache, user.deleteUser);
+
 
 route.get("/", async(req, res) =>{
     return res.status(200).send({message:"Crud is running"})
