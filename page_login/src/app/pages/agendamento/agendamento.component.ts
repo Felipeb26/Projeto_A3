@@ -45,6 +45,7 @@ export class AgendamentoComponent implements OnInit {
 			err => {
 				if (err.status == 401 && this.local != null || undefined) {
 					this.alert.infoT("tempo expirado!");
+					this.route.navigate(["/login"])
 				} else if (err.status == 401 && this.local == null || undefined) {
 					this.alert.infoT("necessario logar antes!");
 					this.route.navigate(["/login"])

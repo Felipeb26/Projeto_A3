@@ -1,10 +1,9 @@
-import { Router } from '@angular/router';
-import { AlertsService } from './../../utils/alerts.service';
-import { EndpointsService } from './../../service/endpoints.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { decode } from 'js-base64';
+import { Router } from '@angular/router';
 import { EncodesService } from 'src/app/utils/encodes.service';
+import { EndpointsService } from './../../service/endpoints.service';
+import { AlertsService } from './../../utils/alerts.service';
 
 
 
@@ -30,9 +29,9 @@ export class UserComponent implements OnInit {
 
 	constructor (
 		private encodes: EncodesService,
-		private endpoint:EndpointsService,
-		private alert:AlertsService,
-		private route:Router) { }
+		private endpoint: EndpointsService,
+		private alert: AlertsService,
+		private route: Router) { }
 
 
 	ngOnInit(): void {
@@ -52,6 +51,9 @@ export class UserComponent implements OnInit {
 				this.senha = userData.senha;
 				this.telefone = userData.telefone;
 			}
+		} else {
+			this.alert.infoT("necessario se logar!");
+			this.route.navigate(["/login"])
 		}
 	}
 
@@ -74,14 +76,14 @@ export class UserComponent implements OnInit {
 	}
 
 
-	delete(){
+	delete() {
 		this.endpoint.deleteUser(this.id).subscribe(
-			data =>{
+			data => {
 				localStorage.clear()
 				this.alert.sucessT(data.message)
 				this.route.navigate([""])
 			},
-			erro =>{
+			erro => {
 				console.log(erro)
 			}
 		)
@@ -113,13 +115,15 @@ export class UserComponent implements OnInit {
 		} else {
 			update = medico
 		}
-		this.endpoint.updateUser(this.id,update).subscribe(
+		this.endpoint.updateUser(this.id, update).subscribe(
 			data => {
 				this.alert.sucessT(`${data.nome} atualizado`)
-				console.log(data)},
+				console.log(data)
+			},
 			erro => {
-					this.alert.errorT(`Erro ao atualizar ${nome}`)
-				console.log(erro)}
+				this.alert.errorT(`Erro ao atualizar ${nome}`)
+				console.log(erro)
+			}
 		)
 
 	}
