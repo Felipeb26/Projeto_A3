@@ -1,27 +1,27 @@
 mat-toolbar {
-    background: var(--myPurple);
-    box-shadow: 0 0 1rem var(--myPurpleShadow);
-    display: flex;
-    width: 100%;
-    height: 6rem;
-	 font-size: 1rem;
-    align-items: center;
-    justify-content: space-between;
+	background: var(--myPurple);
+	box-shadow: 0 0 1rem var(--myPurpleShadow);
+	display: flex;
+	width: 100%;
+	height: 6rem;
+	font-size: 1rem;
+	align-items: center;
+	justify-content: space-between;
 
-    & .logo {
-        height: 5rem;
-        width: auto;
-        cursor: pointer;
-        transition: all 1s ease-in-out;
-    }
+	& .logo {
+		height: 5rem;
+		width: auto;
+		cursor: pointer;
+		transition: all 1s ease-in-out;
+	}
 
-    & .logo:hover {
-        filter: drop-shadow(1rem 0 0.1rem var(--myLogo));
-    }
+	& .logo:hover {
+		filter: drop-shadow(1rem 0 0.1rem var(--myLogo));
+	}
 
-& .material-icons{
-font-size:medium;
-}
+	& .material-icons {
+		font-size: medium;
+	}
 }
 
 nav {
@@ -33,6 +33,7 @@ nav {
 	height: 70px;
 	padding: 0 1.5em;
 }
+
 nav .nav-menu {
 	position: relative;
 	right: 1.5em;
@@ -41,16 +42,19 @@ nav .nav-menu {
 	margin: 0;
 	list-style: none;
 }
+
 nav .nav-item {
 	display: inline-block;
 }
-nav .nav-item > a {
+
+nav .nav-item>a {
 	display: inline-block;
 	padding: 0 1.5em;
 	line-height: 70px;
 	color: var(--myBlack);
 	text-decoration: none;
 }
+
 nav .btn-hamburger {
 	display: none;
 	position: absolute;
@@ -62,6 +66,7 @@ nav .btn-hamburger {
 	outline: none;
 	transform: translateY(-50%);
 }
+
 nav .btn-hamburger span {
 	display: block;
 	width: 30px;
@@ -73,54 +78,54 @@ nav .btn-hamburger span {
 }
 
 mat-sidenav-container {
-    height: 82.3%;
-    box-shadow: 0 0 1rem var(--myPurpleShadow);
+	height: 82.3%;
+	box-shadow: 0 0 1rem var(--myPurpleShadow);
 }
 
 mat-sidenav,
 mat-sidenav-content {
-    padding: 0.5rem;
-    background: var(--myWhite);
+	padding: 0.5rem;
+	background: var(--myWhite);
 }
 
 
 mat-sidenav {
-    background-color: var(--myPurple);
-    width: 10rem;
-    display: flex;
-    background: var(--myPurple);
+	background-color: var(--myPurple);
+	width: 10rem;
+	display: flex;
+	background: var(--myPurple);
 
-    & .links {
-        display: flex;
-        align-items:flex-start;
-        flex-direction: column;
-        text-transform: capitalize;
-    }
+	& .links {
+		display: flex;
+		align-items: flex-start;
+		flex-direction: column;
+		text-transform: capitalize;
+	}
 
-    & .links>li>a {
-        width: 100%;
-        padding: 12px 0;
-        transition: all 0.5s ease-in-out;
-        font-size: 14px;
-        color: var(--myBlack);
-    }
+	& .links>li>a {
+		width: 100%;
+		padding: 12px 0;
+		transition: all 0.5s ease-in-out;
+		font-size: 14px;
+		color: var(--myBlack);
+	}
 
-    & a::after {
-        content: "";
-        background: var(--myLogo);
-        position: absolute;
-        height: 3px;
-        width: 100%;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        transform: scale(0, 0.8);
-        transition: 0.5s ease-in-out;
-    }
+	& a::after {
+		content: "";
+		background: var(--myLogo);
+		position: absolute;
+		height: 3px;
+		width: 100%;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		transform: scale(0, 0.8);
+		transition: 0.5s ease-in-out;
+	}
 
-    & a:hover::after {
-        transform: scale(0.8, 0.8);
-    }
+	& a:hover::after {
+		transform: scale(0.8, 0.8);
+	}
 }
 
 nav .btn-hamburger span:nth-child(4),
@@ -129,28 +134,34 @@ nav .btn-hamburger span:nth-child(5) {
 	top: 10px;
 	opacity: .5;
 }
+
 nav .btn-hamburger span:nth-child(4) {
 	transform: rotate(45deg) scale(0);
 }
+
 nav .btn-hamburger span:nth-child(5) {
 	transform: rotate(-45deg) scale(0);
 }
+
 nav.opened .btn-hamburger span:nth-child(4) {
 	opacity: 1;
 	transform: rotate(45deg) scale(1);
 }
+
 nav.opened .btn-hamburger span:nth-child(5) {
 	opacity: 1;
 	transform: rotate(-45deg) scale(1);
 }
+
 nav.opened .btn-hamburger span:nth-child(1),
 nav.opened .btn-hamburger span:nth-child(2),
 nav.opened .btn-hamburger span:nth-child(3) {
 	opacity: 0;
 }
+
 .material-icons {
-    color: var(--myBlack);
-    font-size: x-large;
+	color: var(--myBlack);
+	font-size: x-large;
 }
 
 
@@ -169,10 +180,12 @@ nav.opened .btn-hamburger span:nth-child(3) {
 		transition: bottom .5s ease-in-out;
 		overflow: hidden;
 	}
+
 	nav.opened .nav-menu {
 		bottom: 0;
 	}
-	nav .nav-item > a {
+
+	nav .nav-item>a {
 		display: block;
 	}
 
