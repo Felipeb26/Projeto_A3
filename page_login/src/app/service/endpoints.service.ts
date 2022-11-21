@@ -62,11 +62,11 @@ export class EndpointsService {
 	}
 
 	boasVindasUser(email: MAil): Observable<any> {
-		return this.http.post<MAil>(`${API_PATH}${MICRO2}/bemUser`, email);
+		return this.http.post<MAil>(`${API_PATH}${MICRO2}/bem-user`, email);
 	}
 
 	boasVindasDoc(email: MAil): Observable<any> {
-		return this.http.post<MAil>(`${API_PATH}${MICRO2}/bemDoc`, email);
+		return this.http.post<MAil>(`${API_PATH}${MICRO2}/bem-doc`, email);
 	}
 
 }

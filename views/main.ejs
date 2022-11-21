@@ -19,10 +19,14 @@
         main>h1{
             width: 100%;
         }
+        .dados{
+            display: flex;flex-direction: column;flex: 2;
+        }
         .img{
-            height: 18rem;
-            width: 28rem;
-            margin: 0.3rem 0;
+            flex: 1;
+            height: 22rem;
+            width: auto;
+            margin: 0.3rem 0.5rem;
             border-radius: 5px;
         }
         .data {
@@ -46,6 +50,7 @@
     </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible">
+    <link rel="icon" type="image/png" href="img.logo">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
@@ -60,7 +65,7 @@
                     <%=i%>
                 </a>
             </h1>
-            <div style="display: flex;flex-direction: column;">
+            <div class="dados">
                 <div class="data">
                     <h3>api name:</h3>
                     <p>
@@ -95,6 +100,14 @@
                             <%=i%>
                         </a>
                     </p>
+                </div>
+                <div class="data">
+                    <% if(i ==="crud"){ %>
+                        <h3><%= crudIsGood %></h3>
+                        <% }else{ %>
+                            <h3><%= emailIsGood %></h3>
+                    <% } %>
+                    <p>o serviço fará outra á cada 15 segundos</p>
                 </div>
             </div>
 

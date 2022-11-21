@@ -73,9 +73,6 @@ export class UserComponent implements OnInit {
 		}
 	}
 
-	togglePass(): void {
-		this.showPassword = !this.showPassword;
-	}
 
 	delete(){
 		this.endpoint.deleteUser(this.id).subscribe(

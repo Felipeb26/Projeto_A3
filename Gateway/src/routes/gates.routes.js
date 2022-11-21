@@ -114,48 +114,45 @@ route.post("/register", async (req, res) => {
 	});
 });
 
-var crudIsGood=false;
-var emailIsGood=false;
+// var crudIsGood ;
+// var emailIsGood;
 
 const urlC = "http://localhost:3000/";
 const urlE = "http://localhost:3003";
 
-setInterval(() => {
-	axios({
+const crudFunc = async () => {
+	await axios({
 		url: urlC,
 		method: "GET",
 	})
 		.then((en) => {
-			if (en.status == 200) {
-				crudIsGood = true;
-			} else {
-				crudIsGood = false;
-			}
+			return en;
 		})
 		.catch((err) => {
-			console.log(err.status)});
-			crudIsGood = false;
+			console.log(err.status);
+			return err;
+		});
+};
+
+const emailFunc = async () => {
 	axios({
 		url: urlE,
 		method: "GET",
 	})
 		.then((en) => {
-			if (en.status == 200) {
-				(emailIsGood = true);
-			} else {
-				(emailIsGood = false);
-			}
+			return en;
 		})
 		.catch((err) => {
 			console.log(err.status);
-			(emailIsGood = false);
+			return err;
 		});
-		console.log(crudIsGood,emailIsGood)
-}, 15000);
+};
+
+// console.log(`Email ${emailIsGood}`, `Crud ${crudIsGood}`);
 
 module.exports = {
 	route,
 	reg,
-	crudIsGood,
-	emailIsGood,
+	crudFunc,
+	emailFunc,
 };

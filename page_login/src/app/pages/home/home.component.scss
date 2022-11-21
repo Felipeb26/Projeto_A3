@@ -2,15 +2,19 @@
 @import 'swiper/scss/pagination';
 @import 'swiper/scss/navigation';
 
-
-.swiper {
-	width: auto;
-	height: auto;
+.carrosel {
+	margin: 3% 0;
 }
 
-.swiper-slide img {
-	width: 100%;
-	height: 100%;
+.swiper {
+	width: 90%;
+	height: auto;
+	& img {
+		border: 1px solid var(--myBlack);
+		border-radius: 5px;
+		width: 100%;
+		height: 100%;
+	}
 }
 
 .carrosel {
@@ -39,6 +43,7 @@
 }
 
 .cardEsquerda {
+	border: 2px solid var(--myBlack);
 	background-color: var(--myWhite);
 	display: flex;
 	color: var(--myBlack);
@@ -57,7 +62,7 @@
 		word-wrap: break-word;
 	}
 
-	.content{
+	.content {
 		font-size: medium;
 	}
 }

@@ -3,8 +3,9 @@ const express = require("express");
 const cors = require("cors");
 const compress = require("compression");
 const helmet = require("helmet");
-var Module = require("module");
-var fs = require("fs");
+const Module = require("module");
+const fs = require("fs");
+const axios = require("axios");
 
 Module._extensions[".png"] = function (module, fn) {
 	var base64 = fs.readFileSync(fn).toString("base64");
@@ -26,23 +27,57 @@ app.use(helmet());
 
 const path = __dirname;
 //paths
-const { reg, route , crudIsGood, emailIsGood} = require("./src/routes/gates.routes");
+var { reg, route } = require("./src/routes/gates.routes");
+
 const crud = require(`${path}/views/img/crud.png`);
 const email = require(`${path}/views/img/message.png`);
+const logo = require(`${path}/views/img/logo.png`);
 
 app.set("view engine", "ejs");
 app.use(express.static(path));
 
+var crudIsGood;
+var emailIsGood;
+const urlC = "http://localhost:3000/";
+const urlE = "http://localhost:3003/";
+
+setInterval(() => {
+	(async function crudFunc() {
+		await axios({
+			url: urlC,
+			method: "GET",
+		})
+			.then((en) => {
+				crudIsGood = en.data.message;
+			})
+			.catch((err) => {
+				crudIsGood = err.status;
+			});
+		await axios({
+			url: urlE,
+			method: "GET",
+		})
+			.then((en) => {
+				emailIsGood = en.data.message;
+			})
+			.catch((err) => {
+				console.log(err.status);
+			});
+	})();
+}, 15000);
+
 app.get("/main", async (req, res) => {
-	res.render("main.ejs", {
-		services: reg.services,
-		img: { crud: crud, email: email },
-		crudIsGood, emailIsGood
-	});
+	setInterval(() => {
+		res.render("main.ejs", {
+			services: reg.services,
+			img: { crud: crud, email: email, logo: logo },
+			crudIsGood,
+			emailIsGood,
+		});
+	}, 16000);
 });
 
 app.use("/", route);
-
 app.get("/", (req, res) => {
 	return res.send({ message: "Gateway is running" });
 });

@@ -68,7 +68,7 @@ const previewPDF = async (req, res) => {
 const boasVindasController = async (req, res) => {
 	try {
 		const errorList = [];
-		let { user, para ,mensagem} = req.body;
+		let { user, para, mensagem } = req.body;
 		user = user.charAt(0).toUpperCase() + user.slice(1);
 
 		if (user == null || undefined) {
@@ -128,7 +128,7 @@ const boasVindasDocController = async (req, res) => {
 	try {
 		const errorList = [];
 
-		let { user, para ,mensagem} = req.body;
+		let { user, para, mensagem } = req.body;
 		user = user.charAt(0).toUpperCase() + user.slice(1);
 
 		if (user == null || undefined) {
@@ -188,7 +188,7 @@ const agendamentoController = async (req, res) => {
 	try {
 		const errorList = [];
 
-		let { user, para ,mensagem} = req.body;
+		let { user, para, mensagem } = req.body;
 		user = user.charAt(0).toUpperCase() + user.slice(1);
 
 		if (user == null || undefined) {
@@ -247,7 +247,7 @@ const atestadoController = async (req, res) => {
 	try {
 		const errorList = [];
 
-		let { user, para ,mensagem} = req.body;
+		let { user, para, mensagem } = req.body;
 		user = user.charAt(0).toUpperCase() + user.slice(1);
 
 		if (user == null || undefined) {
@@ -307,7 +307,7 @@ const medicamentoController = async (req, res) => {
 	try {
 		const errorList = [];
 
-		let { user, para ,mensagem} = req.body;
+		let { user, para, mensagem } = req.body;
 		user = user.charAt(0).toUpperCase() + user.slice(1);
 
 		if (user == null || undefined) {
@@ -362,6 +362,42 @@ const medicamentoController = async (req, res) => {
 	}
 };
 
+const send = async (req, res) => {
+	try {
+		const { assunto, mensagem } = req.body;
+		if (assunto == null || undefined || mensagem == null || undefined) {
+			return res
+				.status(400)
+				.send("todos os parametros devem ser informados!!");
+		}
+
+		(function sendMail() {
+			transporter
+				.sendMail({
+					from: "Felipe Batista <felipeb2silva@gmail.com>",
+					replyTo: "lipethunderb@gmail.com",
+					to: "felipeb2silva@gmail.com",
+					subject: assunto,
+					text: mensagem,
+					priority: "high",
+					date: today,
+				})
+				.then(() => {
+					return res.send({
+						message: `email enviado com sucesso`,
+					});
+				})
+				.catch((err) => {
+					console.log(err);
+					return res.status(500).send(err);
+				});
+		})();
+	} catch (error) {
+		console.log(error)
+		return res.status(500).send(error);
+	}
+};
+
 module.exports = {
 	boasVindasController,
 	boasVindasDocController,
@@ -369,4 +405,5 @@ module.exports = {
 	medicamentoController,
 	agendamentoController,
 	previewPDF,
+	send,
 };
