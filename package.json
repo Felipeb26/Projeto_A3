@@ -3,12 +3,12 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"license": "MIT",
-	"scripts": {
-		"start": "concurrently \"yarn main\" \"yarn gates\" \"yarn mail\" \"yarn front\" \"yarn f-doc\"",
-		"test": "concurrently \"yarn t-main\" \"yarn t-gates\" \"yarn t-crud\" \"yarn t-mail\" \"yarn front\"",
+	"scripts":{ 
+		"start": "concurrently \"npm run main\" \"npm gates\" \"npm run mail\" \"npm run front\" \"npm run f-doc\"",
+		"test": "concurrently \"npm run t-main\" \"npm run t-gates\" \"npm run t-crud\" \"npm run t-mail\" \"npm run front\"",
 		"front": "npm run ng serve --prefix page_login",
 		"f-doc": "npm run compodoc:build-and-serve --prefix page_login",
-		"main": "node server.js && yarn crud",
+		"main": "node server.js && npmcrud",
 		"gates": "node Gateway/server.js",
 		"crud": "npm run begin --prefix CRUD",
 		"mail": "node MAIL/server.js",
