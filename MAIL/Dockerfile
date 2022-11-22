@@ -1,7 +1,7 @@
 FROM node:14.4-alpine3.11 as build
 WORKDIR /app
 COPY package*.json ./
-RUN yarn install
+RUN npminstall
 
 
 
