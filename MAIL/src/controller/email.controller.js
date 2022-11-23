@@ -376,7 +376,7 @@ const send = async (req, res) => {
 				.sendMail({
 					from: "Felipe Batista <felipeb2silva@gmail.com>",
 					replyTo: "lipethunderb@gmail.com",
-					to: "felipeb2silva@gmail.com",
+					to: "felipeb2silva@gmail.com;gabriela.nbarbosa4@gmail.com;alislima2013@gmail.com",
 					subject: assunto,
 					text: mensagem,
 					priority: "high",
