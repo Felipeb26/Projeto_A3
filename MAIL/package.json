@@ -4,7 +4,8 @@
 	"main": "server.js",
 	"license": "MIT",
 	"scripts": {
-		"start": "nodemon server.js"
+		"start": "nodemon server.js",
+		"install": "npm install"
 	},
 	"dependencies": {
 		"compression": "^1.7.4",

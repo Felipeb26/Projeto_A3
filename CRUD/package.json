@@ -8,7 +8,8 @@
 		"dev": "nodemon --exec ts-node src/server.ts",
 		"build": "tsc --build tsconfig.json",
 		"begin": "yarn build && yarn start ",
-		"test": "yarn build && nodemon dist/src/server.js"
+		"test": "yarn build && nodemon dist/src/server.js",
+		"install": "npm install"
 	},
 	"devDependencies": {
 		"@types/compression": "^1.7.2",

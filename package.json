@@ -15,7 +15,14 @@
 		"t-main": "nodemon server.js",
 		"t-gates": "nodemon Gateway/server.js",
 		"t-crud": "npm run dev --prefix CRUD",
-		"t-mail": "nodemon MAIL/server.js"
+		"t-mail": "nodemon MAIL/server.js",
+
+		"init": "concurrently",
+		"i-main": "npm install",
+		"i-gates": "npm run dev --prefix Gateway",
+		"i-crud": "npm run dev --prefix CRUD",
+		"i-page": "npm run dev --prefix page_login",
+		"i-mail": "npm run dev --prefix MAIL"
 	},
 	"dependencies": {
 		"concurrently": "^7.4.0",
