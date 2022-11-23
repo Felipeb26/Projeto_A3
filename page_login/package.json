@@ -11,7 +11,7 @@
 		"compodoc:build": "compodoc -p tsconfig.doc.json",
 		"compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s",
 		"compodoc:serve": "compodoc -s",
-		"install": "npm install"
+		"installA": "yarn install"
 	},
 	"private": true,
 	"homepage": "https://felipeb26.github.io/projeto_a3/",

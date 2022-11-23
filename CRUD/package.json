@@ -9,7 +9,7 @@
 		"build": "tsc --build tsconfig.json",
 		"begin": "yarn build && yarn start ",
 		"test": "yarn build && nodemon dist/src/server.js",
-		"install": "npm install"
+		"installA": "yarn install"
 	},
 	"devDependencies": {
 		"@types/compression": "^1.7.2",

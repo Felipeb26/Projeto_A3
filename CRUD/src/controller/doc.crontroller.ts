@@ -6,7 +6,7 @@ const medicosTable = db.collection("medicos")
 export class MedicoController {
 
     getAllDocs = async (req: any, res: any) => {
-        const data = await medicosTable.get();
+        const data = await medicosTable.orderBy("nome", "asc").get();
         const medicos: any = [];
 
         try {
@@ -49,7 +49,7 @@ export class MedicoController {
                     it.data()!.crm,
                     it.data()!.especialidade
                 );
-                res.send(medico);
+                return res.send(medico);
             }
         } catch (error: any) {
             res.status(400).send({ message: error.message });
@@ -117,7 +117,6 @@ export class MedicoController {
 
             await medicosTable.doc().set(user);
             return res.status(201).send(user);
-
         } catch (error: any) {
             console.log(error.message)
         }

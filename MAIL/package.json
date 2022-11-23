@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"scripts": {
 		"start": "nodemon server.js",
-		"install": "npm install"
+		"installA": "yarn install"
 	},
 	"dependencies": {
 		"compression": "^1.7.4",

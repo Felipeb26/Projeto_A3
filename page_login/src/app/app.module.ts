@@ -31,6 +31,7 @@ import { LoadingComponent } from './utils/loading/loading.component';
 import { UserComponent } from './pages/user/user.component';
 import { AgendamentoComponent } from './pages/agendamento/agendamento.component';
 import { SwiperModule } from 'swiper/angular';
+import { MedicoComponent } from './pages/medico/medico.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { SwiperModule } from 'swiper/angular';
 		CadastroComponent,
 		UserComponent,
 		AgendamentoComponent,
+  MedicoComponent,
 	],
 	imports: [
 		BrowserModule,

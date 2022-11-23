@@ -23,20 +23,22 @@ footer {
 		text-transform: capitalize;
 	}
 
-	& li > a {
+	& li>a {
 		transition: all 0.3s ease-in-out;
 		text-transform: capitalize;
 		color: var(--myBlack);
-		font-size: 0.9rem;
-		font-weight: 200;
+		padding: 0.3rem;
 		display: block;
 		position: relative;
+		letter-spacing: 0.1rem;
+		font-size: 0.9rem;
 		font-style: italic;
-		padding: 0.3rem;
+		font-weight: 200;
+		font-weight: bold;
 	}
 
-	& li > a:hover {
-		color: var(--myWhite);
+	& li>a:hover {
+		color: var(--myLogo);
 		padding-left: 0.8rem;
 		text-decoration: underline;
 	}
@@ -53,12 +55,12 @@ footer {
 
 
 
-	& form > button {
+	& form>button {
 		margin: 0.5rem 0 0 0;
 		background: var(--myPurple);
 		text-transform: capitalize;
 		font-weight: bold;
-		font-size:1rem;
+		font-size: 1rem;
 		letter-spacing: 0.1rem;
 		color: var(--myBlack);
 		box-shadow: 0 0 1rem var(--myPurpleShadow);
@@ -66,8 +68,8 @@ footer {
 
 	}
 
-	& form > button:hover {
-		box-shadow: 0 0.5rem 0.5rem var(--myLogo);
+	& form>button:hover {
+		box-shadow: 0 0.1rem 0.5rem var(--myBlack);
 	}
 }
 
@@ -76,14 +78,13 @@ footer {
 	flex-direction: column;
 
 	& a {
-         border-radius: 1.6rem 1.3rem 1.3rem 1.6rem;
+		border-radius: 1.6rem 1.3rem 1.3rem 1.6rem;
 		transition: all 0.5s ease-in-out;
 		text-transform: capitalize;
 		letter-spacing: 0.1rem;
-		font-size: 1rem;
+		font: 1rem bold;
 		color: var(--myBlack);
 		margin: 0.3rem 0;
-		font-weight: 250;
 		width: 50%;
 		display: flex;
 		align-items: center;
@@ -99,7 +100,6 @@ footer {
 		height: 2.4rem;
 		width: 2.4rem;
 		border-radius: 60%;
-		//border: 1px solid var(--myBlack);
 		background-color: var(--myWhite);
 		transition: all 0.5s ease-in-out;
 	}
@@ -110,7 +110,7 @@ footer {
 			color: var(--iconBlue);
 		}
 
-		  color: var(--myBlack);
+		color: var(--myBlack);
 	}
 
 	.mailIcon {
@@ -119,7 +119,7 @@ footer {
 			color: var(--iconRed);
 		}
 
-		   color: var(--myBlack);
+		color: var(--myBlack);
 	}
 
 	.github {
@@ -128,7 +128,7 @@ footer {
 			color: var(--myBlack);
 		}
 
-		  color: var(--myBlack);
+		color: var(--myBlack);
 	}
 
 	& .linkedin:hover {
@@ -137,7 +137,7 @@ footer {
 		color: var(--myWhite);
 
 		& span {
-			 // border: 5px solid var(--myBlack);
+			// border: 5px solid var(--myBlack);
 			background: var(--iconBlue);
 			color: var(--myWhite);
 		}
@@ -185,7 +185,7 @@ mat-hint {
 
 .ng-pristine.ng-valid {
 	width: 280px;
-	}
+}
 
 @media (max-width: 950px) {
 	.footerCol {
@@ -194,6 +194,6 @@ mat-hint {
 	}
 
 	.ng-pristine.ng-valid {
-	width: 160px;
+		width: 160px;
 	}
 }

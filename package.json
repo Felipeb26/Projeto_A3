@@ -17,12 +17,12 @@
 		"t-crud": "npm run dev --prefix CRUD",
 		"t-mail": "nodemon MAIL/server.js",
 
-		"init": "concurrently",
-		"i-main": "npm install",
-		"i-gates": "npm run dev --prefix Gateway",
-		"i-crud": "npm run dev --prefix CRUD",
-		"i-page": "npm run dev --prefix page_login",
-		"i-mail": "npm run dev --prefix MAIL"
+		"installA": "npm run i-main && npm run i-mail && npm run i-gates && npm run i-crud && npm run i-page && cls",
+		"i-main": "yarn install",
+		"i-gates": "npm run installA --prefix Gateway",
+		"i-crud": "npm run installA --prefix CRUD",
+		"i-page": "npm run installA --prefix page_login",
+		"i-mail": "npm run installA --prefix MAIL"
 	},
 	"dependencies": {
 		"concurrently": "^7.4.0",

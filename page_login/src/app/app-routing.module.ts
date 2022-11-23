@@ -5,6 +5,7 @@ import { AgendamentoComponent } from './pages/agendamento/agendamento.component'
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
+import { MedicoComponent } from './pages/medico/medico.component';
 import { UserComponent } from './pages/user/user.component';
 import { AuthGuard } from './shared/auth.guard';
 
@@ -15,7 +16,8 @@ const routes: Routes = [
 	{ path: "about", component: AboutComponent },
 	{ path: "user", component: UserComponent, canActivate: [AuthGuard] },
 	{ path: "agenda", component: AgendamentoComponent, canActivate: [AuthGuard] },
-	{ path: "cadastro", component: CadastroComponent }
+	{ path: "cadastro", component: CadastroComponent },
+	{ path: "medico", component: MedicoComponent }
 ];
 
 @NgModule({

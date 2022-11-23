@@ -365,8 +365,7 @@ export class UsuariosController {
             }
 
             await usuariosCollections.doc(id).update(userUpdate);
-            const saveUser = await usuariosCollections.doc(id).get();
-            return res.send(saveUser.data());
+            return res.status(202).send(userUpdate);
         } catch (error: any) {
             return res.status(400).send({ message: error.message });
         }
