@@ -1,10 +1,79 @@
 <div class="main">
 	<mat-card class="data">
+		<mat-card-title>
+			meus dados
+		</mat-card-title>
 		<mat-card-content>
-			<label></label>
+			<div class="docdata nome">
+				<h3>nome:</h3>
+				<p>{{nome}}</p>
+			</div>
+			<div class="docdata">
+				<h3>email:</h3>
+				<p>{{email}}</p>
+			</div>
+			<div class="docdata">
+				<h3>senha:</h3>
+				<p>{{senha}}</p>
+			</div>
+			<div class="docdata">
+				<h3>telefone:</h3>
+				<p>{{telefone}}</p>
+			</div>
+			<div class="docdata">
+				<h3>crm:</h3>
+				<p>{{crm}}</p>
+			</div>
+			<div class="docdata">
+				<h3>especialidade:</h3>
+				<p>{{especialidade}}</p>
+			</div>
 		</mat-card-content>
+		<span color="alert">para alterar seus dados necessario ir para seção de usuarios</span>
 	</mat-card>
-	<mat-card class="content">
 
+	<mat-card class="content">
+		<h2>Consultas Agendadas</h2>
+		<mat-form-field>
+			<mat-label>Filter</mat-label>
+			<input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+		</mat-form-field>
+		<table class="mat-elevation-z8" recycleRows mat-table [dataSource]="dataSource" matSort
+			(matSortChange)="sortElements($event)">
+
+			<ng-container matColumnDef="nomeUser">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> Paciente </th>
+				<td mat-cell *matCellDef="let data"> {{data.nomeUser}} </td>
+			</ng-container>
+
+			<ng-container matColumnDef="emailUser">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+				<td mat-cell *matCellDef="let data"> {{data.emailUser}} </td>
+			</ng-container>
+
+			<ng-container matColumnDef="telefoneUser">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> Telefone </th>
+				<td mat-cell *matCellDef="let data"> {{data.telefoneUser}} </td>
+			</ng-container>
+
+			<ng-container matColumnDef="agenda">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> Consulta </th>
+				<td mat-cell *matCellDef="let data"> {{data.agenda}} </td>
+			</ng-container>
+
+			<ng-container matColumnDef="actions">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> actions </th>
+				<td mat-cell *matCellDef="let data"> {{data.agenda}} </td>
+			</ng-container>
+
+			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+			<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+			<tr class="mat-row" *matNoDataRow>
+				<td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+			</tr>
+		</table>
+		<mat-paginator [length]="consultas.length" pageSize="10" [pageSizeOptions]="[1, 5, 10, 20]" showFirstLastButtons
+			aria-p="consultas agendadas"></mat-paginator>
 	</mat-card>
 </div>

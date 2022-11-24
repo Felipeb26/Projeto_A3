@@ -2,7 +2,7 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { faFacebook, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { EndpointsService } from 'src/app/service/endpoints.service';
+import { Endpoints2Service } from 'src/app/service/endpoints2.service';
 import { AlertsService } from './../../utils/alerts.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class FooterComponent implements OnInit {
 	autosize!: CdkTextareaAutosize;
 
 	constructor (
-		private endpoints: EndpointsService,
+		private endpoints: Endpoints2Service,
 		private alert: AlertsService) { }
 
 	ngOnInit(): void {

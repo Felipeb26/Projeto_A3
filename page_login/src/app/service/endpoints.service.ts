@@ -35,11 +35,6 @@ export class EndpointsService {
 			.pipe();
 	}
 
-	getAllConsultas(): Observable<USER[]> {
-		return this.http.get<USER[]>(`${API_PATH}${MICRO1}/consultas`)
-			.pipe();
-	}
-
 	updateUser(id:any,user:USER):Observable<any>{
 		return this.http.put<any>(`${API_PATH}${MICRO1}/user/${id}`,user);
 	}
@@ -53,20 +48,6 @@ export class EndpointsService {
 	}
 	salvarUsuario(user: USER): Observable<any> {
 		return this.http.post<USER>(`${API_PATH}${MICRO1}/users`, user).pipe(first(),)
-	}
-
-	// micro do email
-
-	enviarEmail(mail: MAil): Observable<any> {
-		return this.http.post<any>(`${API_PATH}${MICRO2}/index`, mail);
-	}
-
-	boasVindasUser(email: MAil): Observable<any> {
-		return this.http.post<MAil>(`${API_PATH}${MICRO2}/bem-user`, email);
-	}
-
-	boasVindasDoc(email: MAil): Observable<any> {
-		return this.http.post<MAil>(`${API_PATH}${MICRO2}/bem-doc`, email);
 	}
 
 }

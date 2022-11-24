@@ -11,6 +11,8 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 //import acima angular material
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { BrowserModule } from '@angular/platform-browser';
@@ -32,6 +34,7 @@ import { UserComponent } from './pages/user/user.component';
 import { AgendamentoComponent } from './pages/agendamento/agendamento.component';
 import { SwiperModule } from 'swiper/angular';
 import { MedicoComponent } from './pages/medico/medico.component';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -46,7 +49,7 @@ import { MedicoComponent } from './pages/medico/medico.component';
 		CadastroComponent,
 		UserComponent,
 		AgendamentoComponent,
-  MedicoComponent,
+		MedicoComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -67,7 +70,10 @@ import { MedicoComponent } from './pages/medico/medico.component';
 		MatExpansionModule,
 		MatSelectModule,
 		FontAwesomeModule,
+		MatTableModule,
 		SwiperModule,
+		MatPaginatorModule,
+		MatSortModule
 	],
 
 	providers: [

@@ -1,13 +1,13 @@
 import { StatusCode } from './../enum/code.error';
 import { Consulta } from "../model/consulta.model";
 import { db } from "../config/firebase";
-import { ifNullNewValue } from './../utils/constraints.utils';
+import { anyToDate, ifNullNewValue } from './../utils/constraints.utils';
 
 const collection = db.collection("consultas");
 
 export class ConsultaController {
 
-    getConsultas = async (req: any, res: any) => {
+    getAll = async (req: any, res: any) => {
         try {
             const data = await collection.orderBy("agenda", "asc").get();
             const consultas: Consulta[] = []
@@ -17,10 +17,10 @@ export class ConsultaController {
                     it.id,
                     it.data().nomeUser,
                     it.data().emailUser,
-                    it.data().telefoneUSer,
+                    it.data().telefoneUser,
                     it.data().nomeMedico,
                     it.data().emailMedico,
-                    it.data().agenda,
+                    anyToDate(it.data().agenda),
                 );
                 consultas.push(cons)
             })
@@ -44,16 +44,56 @@ export class ConsultaController {
                     it.id,
                     it.data()!.nomeUser,
                     it.data()!.emailUser,
-                    it.data()!.telefoneUSer,
+                    it.data()!.telefoneUser,
                     it.data()!.nomeMedico,
                     it.data()!.emailMedico,
-                    it.data()!.agenda,
+                    anyToDate(it.data()!.agenda),
                 );
                 return res.status(StatusCode.OK).send(consulta)
             }
         } catch (error: any) {
             console.log(error)
             return res.status(StatusCode.SERVER_ERROR).send({ message: error.message })
+        }
+    }
+
+    getConsultas = async (req: any, res: any) => {
+        try {
+            const param = req.params.param;
+            const data = await collection.orderBy("agenda", "asc").get();
+            const consultas: Consulta[] = []
+
+            data.docs.forEach(it => {
+                const cons = new Consulta(
+                    it.id,
+                    it.data().nomeUser,
+                    it.data().emailUser,
+                    it.data().telefoneUser,
+                    it.data().nomeMedico,
+                    it.data().emailMedico,
+                    anyToDate(it.data().agenda),
+                );
+                consultas.push(cons);
+            });
+
+            let result: Consulta[] = []
+            consultas.map(ap => {
+                if (ap.getEmailMedico() == param) {
+                    result.push(ap)
+                }
+                if (ap.getEmailUser() == param) {
+                    result.push(ap)
+                }
+            });
+
+            if (result.length <= 0) {
+                return res.status(StatusCode.NOT_FOUND).send({ message: "não foi encontrado nenhuma consulta!" })
+            }
+
+            return res.status(StatusCode.ACEPTED).send(result);
+        } catch (error: any) {
+            console.log(error);
+            return res.status(StatusCode.SERVER_ERROR).send({ erro: error.message })
         }
     }
 
@@ -74,7 +114,7 @@ export class ConsultaController {
                 "nomeUser": nomeUser,
                 "emailUser": emailUser,
                 "telefoneUser": telefoneUser,
-                "agenda": agenda
+                "agenda": new Date(agenda)
             }
 
             await collection.doc().set(consulta);
@@ -110,7 +150,7 @@ export class ConsultaController {
             telefoneUser = ifNullNewValue(telefoneUser, consulta.getTelefoneUser());
             nomeMedico = ifNullNewValue(nomeMedico, consulta.getNomeMedico());
             emailMedico = ifNullNewValue(emailMedico, consulta.getEmailMedico());
-            agenda = ifNullNewValue(agenda, consulta.getAgenda());
+            agenda = ifNullNewValue(new Date(agenda), consulta.getAgenda());
 
             const con = {
                 "nomeMedico": nomeMedico,
@@ -145,4 +185,5 @@ export class ConsultaController {
             return res.status(StatusCode.SERVER_ERROR).send({ erro: error.message })
         }
     }
+
 }

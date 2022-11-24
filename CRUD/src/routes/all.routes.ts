@@ -39,9 +39,11 @@ route.put("/docs/:id", authUser, cache, doc.updateUser);
 route.delete("/docs/:id", authUser, cache, user.deleteUser);
 
 //consultas endpoints
-route.get("/consultas", consult.getConsultas);
+route.get("/consultas", consult.getAll);
 
 route.get("/consulta/:id", consult.getById);
+
+route.get("/consultas/:param",consult.getConsultas)
 
 route.post("/consultas", consult.postConsulta);
 

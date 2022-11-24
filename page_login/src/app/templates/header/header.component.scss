@@ -175,7 +175,7 @@ nav.opened .btn-hamburger span:nth-child(3) {
 		bottom: 100%;
 		display: flex;
 		flex-direction: column;
-		justify-content: start;
+		justify-content: flex-start;
 		background-color: #363d4e;
 		transition: bottom .5s ease-in-out;
 		overflow: hidden;

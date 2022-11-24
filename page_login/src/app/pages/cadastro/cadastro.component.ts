@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { EndpointsConsultasService } from 'src/app/service/endpoints.consultas.service';
 import { EndpointsService } from 'src/app/service/endpoints.service';
+import { Endpoints2Service } from 'src/app/service/endpoints2.service';
 import { AlertsService } from 'src/app/utils/alerts.service';
 import { USER } from './../../models/usuario.model';
 
@@ -35,6 +37,7 @@ export class CadastroComponent implements OnInit {
 	constructor (
 		private formBuilder: FormBuilder,
 		private endpoints: EndpointsService,
+		private endpoint2: Endpoints2Service,
 		private route: Router,
 		private alert: AlertsService) { }
 
@@ -99,9 +102,9 @@ export class CadastroComponent implements OnInit {
 					para: result.email
 				}
 				if (result.crm != null || undefined) {
-					this.endpoints.boasVindasUser(mail);
+					this.endpoint2.boasVindasUser(mail);
 				}
-				this.endpoints.boasVindasDoc(mail).subscribe(
+				this.endpoint2.boasVindasDoc(mail).subscribe(
 					data => console.log(data),
 					erro => console.log(erro)
 				);
