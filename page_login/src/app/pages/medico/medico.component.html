@@ -86,8 +86,10 @@
 				</tr>
 			</table>
 		</div>
-		<mat-paginator [length]="consultas.length" pageSize="10" [pageSizeOptions]="[1, 5, 10, 20]" showFirstLastButtons
-			aria-p="consultas agendadas"></mat-paginator>
+		<div *ngIf="consultas">
+			<mat-paginator  [length]="consultas.length" pageSize="10" [pageSizeOptions]="[1, 5, 10, 20]" showFirstLastButtons
+				aria-p="consultas agendadas"></mat-paginator>
+		</div>
 	</mat-card>
-	<app-calendar></app-calendar>
+	<app-calendar [data]="consultas"></app-calendar>
 </div>

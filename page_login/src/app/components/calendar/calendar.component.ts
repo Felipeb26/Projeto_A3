@@ -1,15 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Agenda } from './../../models/agenda';
+import { AfterContentInit, Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-calendar',
-  templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss']
+	selector: 'app-calendar',
+	templateUrl: './calendar.component.html',
+	styleUrls: ['./calendar.component.scss']
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, AfterContentInit {
 
-  constructor() { }
+	@Input() data!: Agenda[]
 
-  ngOnInit(): void {
-  }
+	constructor () { }
+	ngAfterContentInit(): void {
+		console.table(this.data)
+	}
+
+	ngOnInit(): void {
+		console.log(this.data)
+	}
 
 }

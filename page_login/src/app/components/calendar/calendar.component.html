@@ -1,1 +1,6 @@
-<p>calendar works!</p>
+<div *ngIf="data">
+	<div *ngFor="let it of data">
+		<p>{{it.nomeUser}}</p>
+		<p>{{it.emailUser}}</p>
+	</div>
+</div>

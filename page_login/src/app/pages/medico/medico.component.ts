@@ -17,7 +17,7 @@ import { faStethoscope } from "@fortawesome/free-solid-svg-icons"
 export class MedicoComponent implements OnInit {
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
 	@ViewChild(MatSort) sort!: MatSort;
-	consultas: Agenda[] = [];
+	consultas!: Agenda[];
 	dataSource!: MatTableDataSource<any>;
 	data!: Agenda;
 	displayedColumns: string[] = ["nomeUser", "emailUser", "telefoneUser", "agenda", "actions"]
