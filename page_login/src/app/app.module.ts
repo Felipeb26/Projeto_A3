@@ -38,7 +38,18 @@ import { LoadingComponent } from './utils/loading/loading.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SwiperModule } from 'swiper/angular';
 //calendar
+import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
+import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
+import timeGridPlugin from "@fullcalendar/timegrid";
+import listPlugin from "@fullcalendar/list";
 
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+	dayGridPlugin,
+	interactionPlugin,
+	timeGridPlugin,
+	listPlugin
+])
 
 @NgModule({
 	declarations: [
@@ -78,6 +89,7 @@ import { SwiperModule } from 'swiper/angular';
 		SwiperModule,
 		MatPaginatorModule,
 		MatSortModule,
+		FullCalendarModule
 	],
 
 	providers: [

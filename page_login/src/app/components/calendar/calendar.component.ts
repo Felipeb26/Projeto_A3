@@ -1,3 +1,4 @@
+import { CalendarOptions } from '@fullcalendar/angular';
 import { Agenda } from './../../models/agenda';
 import { AfterContentInit, Component, Input, OnInit } from '@angular/core';
 
@@ -9,6 +10,14 @@ import { AfterContentInit, Component, Input, OnInit } from '@angular/core';
 export class CalendarComponent implements OnInit, AfterContentInit {
 
 	@Input() data!: Agenda[]
+
+	options:CalendarOptions ={
+		events:this.data,
+		headerToolbar: {
+			left: "prev,next today"
+		}
+	}
+
 
 	constructor () { }
 	ngAfterContentInit(): void {
