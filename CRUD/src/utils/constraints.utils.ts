@@ -20,12 +20,26 @@ export const ifNullNewValue = (valor: any, ifNull: any) => {
 
 export const anyToDate = (value: any) => {
     try {
-        value = Number(value)
-        const date = new Date(value);
-        return `${date.toLocaleDateString("pt-br")} ${date.toLocaleTimeString("pt-br")}`
+        if (value._seconds == null || undefined) {
+            value = Number(value)
+            const date = new Date(value);
+            return `${date.toLocaleDateString("pt-br")} ${date.toLocaleTimeString("pt-br")}`
+        } else {
+            const date = new Date(value._seconds * 1000)
+            return `${date.toLocaleDateString("pt-br")} ${date.toLocaleTimeString("pt-br")}`
+        }
     } catch (error) {
         console.log(error)
         return value;
     }
 }
 
+export const toDates = async (value: any) => {
+    try {
+        var date: Date = new Date(value._seconds * 1000)
+        const data = `${date.toLocaleDateString("pt-br")} ${date.toLocaleTimeString("pt-br")}`
+        return data;
+    } catch (error: any) {
+        console.log(error.message)
+    }
+}

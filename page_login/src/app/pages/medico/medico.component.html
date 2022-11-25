@@ -31,13 +31,12 @@
 		</mat-card-content>
 		<span>para alterar seus dados necessario ir para seção de usuarios</span>
 		<mat-card-actions>
-			<button class="btnComponent" mat-button changeCompo="ver agenda"
-				(click)="changeComponent()">
+			<button class="btnComponent" mat-button changeCompo="ver agenda" (click)="changeComponent()">
 				<span class="material-icons">
 					date_range
 				</span>
 			</button>
-			<button  class="btnComponent" mat-button changeCompo="ver consultas">
+			<button class="btnComponent" mat-button changeCompo="ver consultas">
 				<fa-icon [icon]="esteto" size="2x"></fa-icon>
 			</button>
 		</mat-card-actions>
@@ -49,7 +48,7 @@
 			<mat-label>Filtro</mat-label>
 			<input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
 		</mat-form-field>
-		<div class="content mat-elevation-z2" tabindex="0">
+		<div class="content mat-elevation-z2">
 			<table class="mat-elevation-z8" recycleRows mat-table [dataSource]="dataSource" matSort
 				(matSortChange)="sortElements($event)">
 
@@ -86,10 +85,8 @@
 				</tr>
 			</table>
 		</div>
-		<div *ngIf="consultas">
-			<mat-paginator  [length]="consultas.length" pageSize="10" [pageSizeOptions]="[1, 5, 10, 20]" showFirstLastButtons
-				aria-p="consultas agendadas"></mat-paginator>
-		</div>
+		<mat-paginator pageSize="10" [pageSizeOptions]="[1, 5, 10, 20]"
+			showFirstLastButtons aria-label="consultas agendadas"></mat-paginator>
 	</mat-card>
 	<app-calendar [data]="consultas"></app-calendar>
 </div>

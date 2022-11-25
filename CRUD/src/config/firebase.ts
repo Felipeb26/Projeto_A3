@@ -1,6 +1,6 @@
 import * as admin from "firebase-admin";
 
-import service from "./projeto-a3-felipes-firebase-adminsdk-imy6r-9d0f61fabf.json"
+import service from "./projeto-a3-felipes-firebase-adminsdk-imy6r-9d0f61fabf.json";
 
 
 admin.initializeApp({

@@ -5,6 +5,6 @@ export interface Agenda {
 	nomeUser?: string,
 	emailUser?: string,
 	telefoneUser?: string,
-	agenda?: any,
+	agenda?: string,
 	prioridade?:number
 }
