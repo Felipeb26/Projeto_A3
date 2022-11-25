@@ -21,8 +21,10 @@ export class MedicoComponent implements OnInit {
 	dataSource!: MatTableDataSource<any>;
 	data!: Agenda;
 	displayedColumns: string[] = ["nomeUser", "emailUser", "telefoneUser", "agenda", "actions"]
-	steto = faStethoscope
 
+	consultaCard = document.getElementsByClassName("card-content") as HTMLCollectionOf<HTMLElement>;
+	consultaCalendar = document.getElementsByTagName("app-calendar") as HTMLCollectionOf<HTMLElement>;
+	esteto = faStethoscope
 	id: string = ""
 	nome: string = ""
 	email: string = ""
@@ -41,7 +43,6 @@ export class MedicoComponent implements OnInit {
 
 	ngOnInit(): void {
 		const value = this.encodes.decodeString(localStorage.getItem("tk"))
-
 		if (value) {
 			const data = this.encodes.decodeString(value)
 			if (data) {
@@ -62,13 +63,16 @@ export class MedicoComponent implements OnInit {
 			this.alert.infoT("necessario se logar!");
 			this.route.navigate(["/login"])
 		}
+		for (let i = 0; i < this.consultaCalendar.length; i++) {
+			this.consultaCard[i].style.display = "none";
+			this.consultaCalendar[i].style.display = "flex"
+		}
 		this.endpoint.getAllConsultas().subscribe(
 			data => {
 				this.dataSource = new MatTableDataSource(data);
 				this.dataSource.paginator = this.paginator;
 				this.dataSource.sort = this.sort
 				this.consultas = data;
-				console.log(data)
 			},
 			erro => {
 				console.log(erro)
@@ -89,6 +93,18 @@ export class MedicoComponent implements OnInit {
 		this.dataSource.filter = filterValue.trim().toLowerCase();
 		if (this.dataSource.paginator) {
 			this.dataSource.paginator.firstPage();
+		}
+	}
+
+	changeComponent() {
+		for (let i = 0; i < this.consultaCard.length; i++) {
+			if (this.consultaCard[i].style.display == "none") {
+				this.consultaCard[i].style.display = "flex";
+				this.consultaCalendar[i].style.display = "none"
+			} else {
+				this.consultaCalendar[i].style.display = "flex"
+				this.consultaCard[i].style.display = "none";
+			}
 		}
 	}
 }

@@ -1,3 +1,4 @@
+import { faStethoscope } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Token } from 'src/app/models/token.model';
@@ -12,12 +13,12 @@ import { EncodesService } from './../../utils/encodes.service';
 	styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+	esteto=faStethoscope
 	logo: string = "assets/img/logo.png"
 	open: boolean = false
 	mode: string = "light_mode"
 	email: string = ""
 	senha: string = ""
-
 
 	constructor (
 		private alert: AlertsService,

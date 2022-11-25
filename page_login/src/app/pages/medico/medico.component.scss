@@ -1,6 +1,8 @@
 .main {
 	display: flex;
 	margin: 3% 1%;
+	position: relative;
+	flex-wrap: wrap;
 }
 
 .data {
@@ -8,39 +10,119 @@
 	flex: 1;
 	display: flex;
 	flex-direction: column;
-	& mat-card-title{
-		text-transform: capitalize;
-		margin: 0 0 1rem 0;
+
+	& span {
+		text-decoration: underline;
+		color: var(--midRed);
 	}
-	& .docdata{
+
+	& mat-card-title {
+		text-transform: capitalize;
+		margin: 0 0 2rem 0;
+	}
+
+	& .docdata {
 		justify-content: flex-start;
 		align-items: center;
 		display: flex;
 		margin-bottom: 0;
-		& h3{
+
+		& h3 {
 			text-transform: capitalize;
 			font-weight: bold;
 			padding: 0 1rem 0 0;
 		}
 	}
-	& .nome>p{
+
+	& .nome>p {
 		text-transform: capitalize;
 	}
 }
 
-.content {
+.card-content {
 	background: var(--myWhite);
 	border: 1px solid var(--myBlack);
+	flex-direction: column;
+	display: flex;
+	position: relative;
+	max-height: 50rem;
 	margin: 0 0 0 0;
 	flex: 4;
+	& mat-form-field {
+		width: 80%;
+	}
+
+	& .content {
+		max-height: 33.5rem;
+		position: relative;
+		overflow: auto;
+	}
 
 	& h2 {
-		text-decoration-color: var(--myBlack) ;
+		text-decoration-color: var(--myBlack);
 		text-decoration: underline;
 		color: var(--myBlack);
 	}
 
 	& table {
 		width: 100%;
+		position: relative;
+		max-height: 10rem;
+		overflow: auto;
+	}
+}
+
+mat-card-actions{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	& button{
+		box-shadow: 0 0 0.5rem var(--myLogo);
+		border: 1px solid var(--myBlack);
+		background: var(--myPurple);
+		border-radius: 5px;
+		padding: 0.2rem;
+		margin: 0 10%;
+		flex: 1;
+	}
+	& fa-icon,.material-icons{
+		color: var(--myBlack);
+		margin: auto;
+	}
+}
+
+.btnComponent {
+	position: relative;
+	transition: all 0.5 ease-in-out;
+}
+
+.btnComponent::after {
+	visibility: hidden;
+	content: attr(changeCompo);
+	transition: all 0.5s ease-in-out;
+	border-radius: 5px;
+	position: absolute;
+	width: 100px;
+	top: 110%;
+	left: 0;
+	background: var(--myGray);
+	color: var(--myBlack);
+	opacity: 0;
+	z-index: 2;
+}
+
+.btnComponent:hover::after {
+	opacity: 1;
+	visibility: visible;
+}
+
+
+app-calendar{
+	flex: 4;
+}
+
+@media (max-width: 900px) {
+	.data {
+		margin: 0 5rem 5rem 0;
 	}
 }

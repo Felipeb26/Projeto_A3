@@ -42,13 +42,11 @@
 					</span>
 					Usuário
 				</a></li>
-			<li class="nav-item"><a href="medico">
-					<span class="material-icons">
-						medication_liquid
-					</span>
+			<li class="nav-item"><a routerLink="medico">
+					<fa-icon [icon]="esteto" size="1x"></fa-icon>
 					controle
-				</a></li>
-
+				</a>
+			</li>
 			<li class="nav-item"><a routerLink="login" (click)=logout()>
 					<span class="material-icons">
 						logout
@@ -102,7 +100,12 @@
 					</span>
 					Usuário
 				</a></li>
-
+			<li>
+				<a mat-button routerLink="medico">
+					<fa-icon [icon]="esteto" size="1x"></fa-icon>
+					controle
+				</a>
+			</li>
 			<li><a mat-button routerLink="login" (click)=logout()>
 					<span class="material-icons">
 						logout
