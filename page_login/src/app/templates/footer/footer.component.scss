@@ -53,19 +53,16 @@ footer {
 		align-items: flex-start;
 	}
 
-
-
 	& form>button {
-		margin: 0.5rem 0 0 0;
-		background: var(--myPurple);
+		box-shadow: 0 0 1rem var(--myPurpleShadow);
+		border: 1px solid var(--myBlack);
+		background: var(--myPurpleS);
+		color: var(--myBlack);
 		text-transform: capitalize;
 		font-weight: bold;
 		font-size: 1rem;
 		letter-spacing: 0.1rem;
-		color: var(--myBlack);
-		box-shadow: 0 0 1rem var(--myPurpleShadow);
-		border: 1px solid var(--myBlack);
-
+		margin: 0.5rem 0 0 0;
 	}
 
 	& form>button:hover {

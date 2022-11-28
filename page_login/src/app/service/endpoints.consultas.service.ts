@@ -22,4 +22,17 @@ export class EndpointsConsultasService {
 		return this.http.get<Agenda[]>(`${API_PATH}${MICRO1}/consultas`)
 	}
 
+	getConsultaById(id:any):Observable<Agenda>{
+		return this.http.get<Agenda>(`${API_PATH}${MICRO1}/consulta/${id}`)
+	}
+
+	updateConsulta(id:any,body:Agenda):Observable<Agenda>{
+		return this.http.put<Agenda>(`${API_PATH}${MICRO1}/consulta/${id}`,body);
+	}
+
+	deleteConsulta(id: any): Observable<any> {
+		return this.http.delete<any>(`${API_PATH}${MICRO1}/consulta/${id}`);
+	}
 }
+
+

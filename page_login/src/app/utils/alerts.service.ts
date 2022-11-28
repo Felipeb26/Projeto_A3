@@ -30,8 +30,30 @@ export class AlertsService {
 		},
 		background: this.back,
 		color: this.color,
+	});
+
+	ToastReload = Swal.mixin({
+		toast: true,
+		position: "top-start",
+		timer: 3500,
+		timerProgressBar: true,
+		showCloseButton: true,
+		showConfirmButton: false,
+		customClass: 'swal-wide',
+		didOpen: (toast) => {
+			toast.addEventListener('mouseenter', Swal.stopTimer)
+			toast.addEventListener('mouseleave', Swal.resumeTimer)
+		},
+		background: this.back,
+		color: this.color,
 	})
 
+	infoReload(text: any) {
+		this.ToastReload.fire({
+			text: text,
+			icon: 'info'
+		})
+	}
 	//using only the text
 	sucessT(text: any) {
 		this.Toast.fire({

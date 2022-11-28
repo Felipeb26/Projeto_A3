@@ -3,6 +3,7 @@
 	margin: 3% 1%;
 	position: relative;
 	flex-wrap: wrap;
+	max-height: 50rem;
 }
 
 .data {
@@ -40,39 +41,6 @@
 	}
 }
 
-.card-content {
-	background: var(--myWhite);
-	border: 1px solid var(--myBlack);
-	flex-direction: column;
-	display: flex;
-	position: relative;
-	max-height: 50rem;
-	margin: 0 0 0 0;
-	flex: 4;
-	& mat-form-field {
-		width: 80%;
-	}
-
-	& .content {
-		max-height: 33.5rem;
-		position: relative;
-		overflow: auto;
-	}
-
-	& h2 {
-		text-decoration-color: var(--myBlack);
-		text-decoration: underline;
-		color: var(--myBlack);
-	}
-
-	& table {
-		width: 100%;
-		position: relative;
-		max-height: 10rem;
-		overflow: auto;
-	}
-}
-
 mat-card-actions{
 	display: flex;
 	flex-direction: row;
@@ -104,10 +72,11 @@ mat-card-actions{
 	border-radius: 5px;
 	position: absolute;
 	width: 100px;
+	border: 1px solid var(--myBlack);
 	top: 110%;
 	left: 0;
 	background: var(--myGray);
-	color: var(--myBlack);
+	color: black;
 	opacity: 0;
 	z-index: 2;
 }
@@ -117,6 +86,9 @@ mat-card-actions{
 	visibility: visible;
 }
 
+app-consulta{
+	flex: 4;
+}
 
 app-calendar{
 	flex: 4;

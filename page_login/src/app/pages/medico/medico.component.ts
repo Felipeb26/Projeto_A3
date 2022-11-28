@@ -1,29 +1,23 @@
-import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort, Sort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { faStethoscope } from "@fortawesome/free-solid-svg-icons";
 import { EndpointsConsultasService } from 'src/app/service/endpoints.consultas.service';
 import { Agenda } from './../../models/agenda';
 import { AlertsService } from './../../utils/alerts.service';
 import { EncodesService } from './../../utils/encodes.service';
-import { faStethoscope } from "@fortawesome/free-solid-svg-icons"
 @Component({
 	selector: 'app-medico',
 	templateUrl: './medico.component.html',
 	styleUrls: ['./medico.component.scss']
 })
 export class MedicoComponent implements OnInit {
-	@ViewChild(MatPaginator) paginator!: MatPaginator;
-	@ViewChild(MatSort) sort!: MatSort;
-	consultas!: Agenda[];
-	dataSource!: MatTableDataSource<any>;
+	consultas: Agenda[] = [];
+
 	data!: Agenda;
 	displayedColumns: string[] = ["nomeUser", "emailUser", "telefoneUser", "agenda", "actions"]
 
-	consultaCard = document.getElementsByClassName("card-content") as HTMLCollectionOf<HTMLElement>;
-	consultaCalendar = document.getElementsByTagName("app-calendar") as HTMLCollectionOf<HTMLElement>;
+	appConsulta = document.getElementsByTagName("app-consulta") as HTMLCollectionOf<HTMLElement>;
+	appCalendar = document.getElementsByTagName("app-calendar") as HTMLCollectionOf<HTMLElement>;
 	esteto = faStethoscope
 	id: string = ""
 	nome: string = ""
@@ -38,7 +32,6 @@ export class MedicoComponent implements OnInit {
 		private alert: AlertsService,
 		private endpoint: EndpointsConsultasService,
 		private encodes: EncodesService,
-		private _liveAnnouncer: LiveAnnouncer
 	) { }
 
 	ngOnInit(): void {
@@ -63,15 +56,12 @@ export class MedicoComponent implements OnInit {
 			this.alert.infoT("necessario se logar!");
 			this.route.navigate(["/login"])
 		}
-		for (let i = 0; i < this.consultaCalendar.length; i++) {
-			this.consultaCard[i].style.display = "none";
-			this.consultaCalendar[i].style.display = "flex"
+		for (let i = 0; i < this.appCalendar.length; i++) {
+			this.appConsulta[i].style.display = "none";
+			this.appCalendar[i].style.display = "flex"
 		}
 		this.endpoint.getAllConsultas().subscribe(
 			data => {
-				this.dataSource = new MatTableDataSource(data);
-				this.dataSource.paginator = this.paginator;
-				this.dataSource.sort = this.sort
 				this.consultas = data;
 			},
 			erro => {
@@ -80,31 +70,24 @@ export class MedicoComponent implements OnInit {
 		)
 	}
 
-	sortElements(sortState: Sort) {
-		if (sortState.direction) {
-			this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-		} else {
-			this._liveAnnouncer.announce('Sorting cleared');
-		}
-	}
-
-	applyFilter(event: Event) {
-		const filterValue = (event.target as HTMLInputElement).value;
-		this.dataSource.filter = filterValue.trim().toLowerCase();
-		if (this.dataSource.paginator) {
-			this.dataSource.paginator.firstPage();
-		}
-	}
-
-	changeComponent() {
-		for (let i = 0; i < this.consultaCard.length; i++) {
-			if (this.consultaCard[i].style.display == "none") {
-				this.consultaCard[i].style.display = "flex";
-				this.consultaCalendar[i].style.display = "none"
-			} else {
-				this.consultaCalendar[i].style.display = "flex"
-				this.consultaCard[i].style.display = "none";
+	showConsulta() {
+		for (let i = 0; i < this.appConsulta.length; i++) {
+			if (this.appConsulta[i].style.display == "none") {
+				this.appConsulta[i].style.display = "flex";
+				this.appCalendar[i].style.display = "none"
 			}
 		}
 	}
+
+	showAgenda() {
+		setTimeout(()=>{
+			for (let i = 0; i < this.appConsulta.length; i++) {
+				if (this.appCalendar[i].style.display == "none") {
+					this.appConsulta[i].style.display = "none";
+					this.appCalendar[i].style.display = "flex"
+				}
+			}
+		},2500)
+	}
+
 }

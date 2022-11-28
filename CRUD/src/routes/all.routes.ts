@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { MedicoController } from "../controller/doc.crontroller";
 import { UsuariosController } from "../controller/user.controller";
-import { cache } from "../utils/cache.utils";
 import { authUser } from "../utils/token.utils";
 import { ConsultaController } from './../controller/consulta.controller';
 
@@ -12,44 +11,42 @@ const user = new UsuariosController()
 const doc = new MedicoController();
 
 //endpoints referentes ao usuario
-route.get("/users", authUser, cache, user.getAllUsers);
+route.get("/users", authUser, user.getAllUsers);
 
-// route.get("/consultas", authUser, cache, user.getAllConsultas)
+route.post("/login", user.getUserForLogin);
 
-route.post("/login", cache, user.getUserForLogin);
+route.get("/users-page", authUser, user.getAllPaginate);
 
-route.get("/users-page", authUser, cache, user.getAllPaginate);
+route.get("/user/:id", authUser, user.getById);
 
-route.get("/user/:id", authUser, cache, user.getById);
+route.post("/users", user.addUser);
 
-route.post("/users", cache, user.addUser);
+route.put("/user/:id", authUser, user.updateUser);
 
-route.put("/user/:id", authUser, cache, user.updateUser);
-
-route.delete("/user/:id", authUser, cache, user.deleteUser);
+route.delete("/user/:id", authUser, user.deleteUser);
 
 
 // endpoints referente ao medico
-route.get("/docs", authUser, cache, doc.getAllDocs);
+route.get("/docs", authUser, doc.getAllDocs);
 
-route.post("/docs", cache, user.addUser);
+route.post("/docs", user.addUser);
 
-route.put("/docs/:id", authUser, cache, doc.updateUser);
+route.put("/docs/:id", authUser, doc.updateUser);
 
-route.delete("/docs/:id", authUser, cache, user.deleteUser);
+route.delete("/docs/:id", authUser, user.deleteUser);
 
 //consultas endpoints
-route.get("/consultas", consult.getAll);
+route.get("/consultas", authUser, consult.getAll);
 
-route.get("/consulta/:id", consult.getById);
+route.get("/consulta/:id", authUser, consult.getById);
 
-route.get("/consultas/:param",consult.getConsultas)
+route.get("/consultas/:param", authUser, consult.getConsultas)
 
-route.post("/consultas", consult.postConsulta);
+route.post("/consultas", authUser, consult.postConsulta);
 
-route.put("/consulta/:id", consult.updateConsulta);
+route.put("/consulta/:id", authUser, consult.updateConsulta);
 
-route.delete("/consulta/:id", consult.deleteConsulta);
+route.delete("/consulta/:id", authUser, consult.deleteConsulta);
 
 
 route.get("/", async (req, res) => {

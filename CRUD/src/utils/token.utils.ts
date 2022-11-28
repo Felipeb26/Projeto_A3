@@ -7,7 +7,7 @@ export const generateToken = (pass: any) => {
     if(secret == null || undefined){
         secret = "o_algoz_ninja_age_feito_o_vento"
     }
-    const acessToken = jwt.sign({ id: pass }, secret!, { expiresIn: 900 });
+    const acessToken = jwt.sign({ id: pass }, secret!, { expiresIn: 9000 });
     return acessToken;
 };
 

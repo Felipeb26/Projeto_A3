@@ -30,24 +30,31 @@ export class EndpointsService {
 			.pipe();
 	}
 
-	getAllDocs(): Observable<Medico[]> {
-		return this.http.get<Medico[]>(`${API_PATH}${MICRO1}/docs`)
-			.pipe();
+	getById(id:any):Observable<USER>{
+		return this.http.get<any>(`${API_PATH}${MICRO1}/user/${id}`);
 	}
 
-	updateUser(id:any,user:USER):Observable<any>{
-		return this.http.put<any>(`${API_PATH}${MICRO1}/user/${id}`,user);
-	}
-
-	updateDoc(id: any, user: USER): Observable<any> {
-		return this.http.put<any>(`${API_PATH}${MICRO1}/docs/${id}`, user);
+	updateUser(id: any, user: USER): Observable<any> {
+		return this.http.put<any>(`${API_PATH}${MICRO1}/user/${id}`, user);
 	}
 
 	deleteUser(id: any): Observable<any> {
 		return this.http.delete<any>(`${API_PATH}${MICRO1}/user/${id}`);
 	}
+
 	salvarUsuario(user: USER): Observable<any> {
 		return this.http.post<USER>(`${API_PATH}${MICRO1}/users`, user).pipe(first(),)
 	}
+
+
+
+	getAllDocs(): Observable<Medico[]> {
+		return this.http.get<Medico[]>(`${API_PATH}${MICRO1}/docs`)
+			.pipe();
+	}
+	updateDoc(id: any, user: USER): Observable<any> {
+		return this.http.put<any>(`${API_PATH}${MICRO1}/docs/${id}`, user);
+	}
+
 
 }

@@ -1,6 +1,7 @@
-import { faStethoscope } from '@fortawesome/free-solid-svg-icons';
+import { RoleVerifyService } from './../../service/role.verify.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { faStethoscope } from '@fortawesome/free-solid-svg-icons';
 import { Token } from 'src/app/models/token.model';
 import { EndpointsService } from 'src/app/service/endpoints.service';
 import { AlertsService } from 'src/app/utils/alerts.service';
@@ -13,7 +14,9 @@ import { EncodesService } from './../../utils/encodes.service';
 	styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-	esteto=faStethoscope
+	medicoIcon = document.getElementsByClassName("medico") as HTMLCollectionOf<HTMLElement>;
+
+	esteto = faStethoscope
 	logo: string = "assets/img/logo.png"
 	open: boolean = false
 	mode: string = "light_mode"
@@ -24,6 +27,7 @@ export class HeaderComponent implements OnInit {
 		private alert: AlertsService,
 		private encodes: EncodesService,
 		private endpoint: EndpointsService,
+		private roles:RoleVerifyService,
 		private route: Router
 	) { }
 
@@ -36,12 +40,21 @@ export class HeaderComponent implements OnInit {
 			}
 		}
 		this.showDialog()
+		this.roles.showIcon()
+			.then(en => {
+				if(en == "false"){
+					this.roles.ShowAndHide(this.medicoIcon,"none");
+				}else{
+					this.roles.ShowAndHide(this.medicoIcon, "");
+				}
+			})
 	}
 
 	logout() {
 		const local = localStorage.getItem("tk");
 		if (local != null || local != undefined) {
-			localStorage.removeItem("tk")
+			localStorage.removeItem("tk");
+			localStorage.removeItem("is");
 			this.alert.sucessT("usuario deslogado com sucesso!")
 		} else {
 			this.alert.infoT("sem usuario logado!")
@@ -60,27 +73,31 @@ export class HeaderComponent implements OnInit {
 	}
 
 	showDialog() {
-		setInterval(() => {
-			Swal.fire({
-				text: "CONTINUAR LOGADO?",
-				allowEscapeKey: false,
-				allowOutsideClick: false,
-				confirmButtonColor: "cyan",
-				confirmButtonText: "continuar",
-				showConfirmButton: true,
-				denyButtonColor: "não",
-				showDenyButton: true,
-				timerProgressBar: true,
-				timer: 5000,
-			}).then(data => {
-				if (data.isConfirmed) {
-					this.manterLogin();
-				} else {
-					this.alert.infoT("usuario deslogado")
-					this.route.navigate(["/login"])
-				}
-			}).catch(() => this.alert.errorT("necessario logar"))
-		}, 10 * 900 * 100)
+		const local = localStorage.getItem("tk");
+		if(local != undefined || null){
+			setInterval(() => {
+				Swal.fire({
+					text: "CONTINUAR LOGADO?",
+					allowEscapeKey: false,
+					allowOutsideClick: false,
+					confirmButtonColor: "cyan",
+					confirmButtonText: "continuar",
+					showConfirmButton: true,
+					denyButtonColor: "não",
+					showDenyButton: true,
+					timerProgressBar: true,
+					timer: 15000,
+				}).then(data => {
+					if (data.isConfirmed) {
+						this.manterLogin();
+					} else {
+						localStorage.clear();
+						this.alert.infoT("usuario deslogado")
+						this.route.navigate(["/login"])
+					}
+				}).catch(() => this.alert.errorT("necessario logar"))
+			}, 100 * 9000)
+		}
 	}
 
 	manterLogin() {

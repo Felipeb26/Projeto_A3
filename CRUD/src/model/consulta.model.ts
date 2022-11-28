@@ -7,6 +7,7 @@ export class Consulta {
     private nomeMedico: string = "";
     private emailMedico: string = "";
     private agenda: any = "";
+    private prioridade: string = ""
 
     constructor (
         id: string,
@@ -15,14 +16,16 @@ export class Consulta {
         telefoneUser: string,
         nomeMedico: string,
         emailMedico: string,
-        agenda: any) {
+        agenda: any,
+        prioridade: string) {
         this.id = id;
         this.nomeUser = nomeUser;
         this.emailUser = emailUser
         this.telefoneUser = telefoneUser
         this.nomeMedico = nomeMedico
         this.emailMedico = emailMedico
-        this.agenda = agenda
+        this.agenda = agenda,
+            this.prioridade = prioridade
     }
 
     getId() {
@@ -46,6 +49,9 @@ export class Consulta {
     getAgenda() {
         return this.agenda;
     }
+    getPrioridade() {
+        return this.prioridade
+    }
 
     setId(id: string) {
         this.id = id;
@@ -68,5 +74,7 @@ export class Consulta {
     setAgenda(agenda: any) {
         this.agenda = agenda;
     }
-
+    setPrioridade(prioridade: string) {
+        this.prioridade = prioridade;
+    }
 }

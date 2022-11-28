@@ -153,9 +153,6 @@ mat-form-field {
 a{
 	filter: drop-shadow(0 0.2rem 0.2rem black);
 	color: var(--myLogo);
+	background: #ff0000;
 }
 
-input::-webkit-calendar-picker-indicator {
-	height: 1.5rem;
-	width: 1.5rem;
-}

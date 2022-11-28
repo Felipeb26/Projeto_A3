@@ -12,7 +12,6 @@ import { EndpointsService } from 'src/app/service/endpoints.service';
 	styleUrls: ['./agendamento.component.scss']
 })
 export class AgendamentoComponent implements OnInit {
-	local: any = localStorage.getItem("tk")
 	today: any = Date.now().toLocaleString()
 	especialidade: string = ""
 	especialidades: USER[] = []
@@ -36,6 +35,7 @@ export class AgendamentoComponent implements OnInit {
 	) { }
 
 	ngOnInit(): void {
+		const local = localStorage.getItem("tk")
 		this.endpoints.getAllDocs().subscribe(
 			data => {
 				this.decodeToken()
@@ -43,10 +43,10 @@ export class AgendamentoComponent implements OnInit {
 				this.especialidades = data
 			},
 			err => {
-				if (err.status == 401 && this.local != null || undefined) {
+				if (err.status == 401 && local != null || undefined) {
 					this.alert.infoT("tempo expirado!");
 					this.route.navigate(["/login"])
-				} else if (err.status == 401 && this.local == null || undefined) {
+				} else if (err.status == 401 && local == null || undefined) {
 					this.alert.infoT("necessario logar antes!");
 					this.route.navigate(["/login"])
 				}
@@ -70,13 +70,14 @@ export class AgendamentoComponent implements OnInit {
 	}
 
 	decodeToken() {
-		const value = this.encodes.decodeString(this.local)
+		const local = localStorage.getItem("tk");
+		const value = this.encodes.decodeString(local);
 
 		if (value) {
-			const data = this.encodes.decodeString(value)
+			const data = this.encodes.decodeString(value);
 			if (data) {
-				const index = data.indexOf(":{")
-				const lastIndex = data.lastIndexOf("},")
+				const index = data.indexOf(":{");
+				const lastIndex = data.lastIndexOf("},");
 				const user = data?.substring(index + 1, lastIndex + 1);
 				const userData = JSON.parse(user);
 

@@ -1,6 +1,6 @@
-import { StatusCode } from './../enum/code.error';
-import { Consulta } from "../model/consulta.model";
 import { db } from "../config/firebase";
+import { Consulta } from "../model/consulta.model";
+import { StatusCode } from './../enum/code.error';
 import { anyToDate, ifNullNewValue } from './../utils/constraints.utils';
 
 const collection = db.collection("consultas");
@@ -21,6 +21,7 @@ export class ConsultaController {
                     it.data().nomeMedico,
                     it.data().emailMedico,
                     anyToDate(it.data().agenda),
+                    it.data().prioridade
                 );
                 consultas.push(cons)
             })
@@ -48,6 +49,7 @@ export class ConsultaController {
                     it.data()!.nomeMedico,
                     it.data()!.emailMedico,
                     anyToDate(it.data()!.agenda),
+                    it.data()!.prioridade
                 );
                 return res.status(StatusCode.OK).send(consulta)
             }
@@ -72,6 +74,7 @@ export class ConsultaController {
                     it.data().nomeMedico,
                     it.data().emailMedico,
                     anyToDate(it.data().agenda),
+                    it.data().prioridade
                 );
                 consultas.push(cons);
             });
@@ -99,7 +102,7 @@ export class ConsultaController {
 
     postConsulta = async (req: any, res: any) => {
         try {
-            let { nomeUser, emailUser, telefoneUser, nomeMedico, emailMedico, agenda } = req.body;
+            let { nomeUser, emailUser, telefoneUser, nomeMedico, emailMedico, agenda, prioridade } = req.body;
 
             if (
                 (nomeMedico == null || undefined) || (emailMedico == null || undefined) ||
@@ -108,13 +111,18 @@ export class ConsultaController {
                 return res.status(StatusCode.BAD_REQUEST).send({ messgae: "todos os campos devem ser informados!" })
             }
 
+            if(prioridade == null || undefined){
+                prioridade = "#0000ff"
+            }
+
             const consulta = {
                 "nomeMedico": nomeMedico,
                 "emailMedico": emailMedico,
                 "nomeUser": nomeUser,
                 "emailUser": emailUser,
                 "telefoneUser": telefoneUser,
-                "agenda": new Date(agenda)
+                "agenda": new Date(agenda),
+                "prioridade": prioridade
             }
 
             await collection.doc().set(consulta);
@@ -127,7 +135,7 @@ export class ConsultaController {
     updateConsulta = async (req: any, res: any) => {
         try {
             const id = req.params.id;
-            let { nomeUser, emailUser, telefoneUser, nomeMedico, emailMedico, agenda } = req.body;
+            let { nomeUser, emailUser, telefoneUser, nomeMedico, emailMedico, agenda, prioridade } = req.body;
             const it = await collection.doc(id).get();
 
             let consulta: Consulta;
@@ -142,6 +150,7 @@ export class ConsultaController {
                     it.data()!.nomeMedico,
                     it.data()!.emailMedico,
                     it.data()!.agenda,
+                    it.data()!.prioridade,
                 );
             }
 
@@ -151,6 +160,7 @@ export class ConsultaController {
             nomeMedico = ifNullNewValue(nomeMedico, consulta.getNomeMedico());
             emailMedico = ifNullNewValue(emailMedico, consulta.getEmailMedico());
             agenda = ifNullNewValue(new Date(agenda), consulta.getAgenda());
+            prioridade = ifNullNewValue(prioridade, consulta.getPrioridade());
 
             const con = {
                 "nomeMedico": nomeMedico,
@@ -158,10 +168,9 @@ export class ConsultaController {
                 "nomeUser": nomeUser,
                 "emailUser": emailUser,
                 "telefoneUser": telefoneUser,
-                "agenda": agenda
+                "agenda": agenda,
+                "prioridade": prioridade
             }
-
-            console.table(con)
 
             await collection.doc(id).update(con);
             return res.status(StatusCode.ACEPTED).send(con);

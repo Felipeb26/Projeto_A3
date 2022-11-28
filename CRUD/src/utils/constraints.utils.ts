@@ -12,7 +12,11 @@ export const verifyRoles = (value: any) => {
 
 export const ifNullNewValue = (valor: any, ifNull: any) => {
     if (valor == null || undefined) {
-        return valor = ifNull;
+        if (ifNull._seconds != undefined || null) {
+            return valor = new Date(ifNull * 1000)
+        } else {
+            return valor = ifNull;
+        }
     } else {
         return valor;
     }
