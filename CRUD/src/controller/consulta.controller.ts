@@ -21,7 +21,8 @@ export class ConsultaController {
                     it.data().nomeMedico,
                     it.data().emailMedico,
                     anyToDate(it.data().agenda),
-                    it.data().prioridade
+                    it.data().prioridade,
+                    it.data().especialidadeMedico,
                 );
                 consultas.push(cons)
             })
@@ -39,7 +40,7 @@ export class ConsultaController {
             const it = await collection.doc(id).get();
 
             if (!it.exists) {
-                return res.status(StatusCode.NOT_FOUND).send({ message: "" })
+                return res.status(StatusCode.NOT_FOUND).send({ message: "não foi encontrado usuario" })
             } else {
                 const consulta = new Consulta(
                     it.id,
@@ -49,7 +50,8 @@ export class ConsultaController {
                     it.data()!.nomeMedico,
                     it.data()!.emailMedico,
                     anyToDate(it.data()!.agenda),
-                    it.data()!.prioridade
+                    it.data()!.prioridade,
+                    it.data()!.especialidadeMedico
                 );
                 return res.status(StatusCode.OK).send(consulta)
             }
@@ -61,9 +63,13 @@ export class ConsultaController {
 
     getConsultas = async (req: any, res: any) => {
         try {
-            const param = req.params.param;
+            let param = req.params.param;
             const data = await collection.orderBy("agenda", "asc").get();
             const consultas: Consulta[] = []
+
+            if (param.indexOf("%") != -1) {
+                param = decodeURI(param);
+            }
 
             data.docs.forEach(it => {
                 const cons = new Consulta(
@@ -74,7 +80,8 @@ export class ConsultaController {
                     it.data().nomeMedico,
                     it.data().emailMedico,
                     anyToDate(it.data().agenda),
-                    it.data().prioridade
+                    it.data().prioridade,
+                    it.data().especialidadeMedico,
                 );
                 consultas.push(cons);
             });
@@ -82,7 +89,7 @@ export class ConsultaController {
             let result: Consulta[] = []
             consultas.map(ap => {
                 if (ap.getEmailMedico() == param) {
-                    result.push(ap)
+                    console.log(ap)
                 }
                 if (ap.getEmailUser() == param) {
                     result.push(ap)
@@ -102,16 +109,17 @@ export class ConsultaController {
 
     postConsulta = async (req: any, res: any) => {
         try {
-            let { nomeUser, emailUser, telefoneUser, nomeMedico, emailMedico, agenda, prioridade } = req.body;
+            let { nomeUser, emailUser, telefoneUser, nomeMedico, emailMedico, agenda, prioridade, especialidadeMedico } = req.body;
 
             if (
                 (nomeMedico == null || undefined) || (emailMedico == null || undefined) ||
                 (nomeUser == null || undefined) || (emailUser == null || undefined) ||
-                (telefoneUser == null || undefined) || (agenda == null || undefined)) {
+                (telefoneUser == null || undefined) || (agenda == null || undefined) ||
+                (especialidadeMedico == null || undefined)) {
                 return res.status(StatusCode.BAD_REQUEST).send({ messgae: "todos os campos devem ser informados!" })
             }
 
-            if(prioridade == null || undefined){
+            if (prioridade == null || undefined) {
                 prioridade = "#0000ff"
             }
 
@@ -122,7 +130,8 @@ export class ConsultaController {
                 "emailUser": emailUser,
                 "telefoneUser": telefoneUser,
                 "agenda": new Date(agenda),
-                "prioridade": prioridade
+                "prioridade": prioridade,
+                "especialidadeMedico": especialidadeMedico
             }
 
             await collection.doc().set(consulta);
@@ -135,7 +144,7 @@ export class ConsultaController {
     updateConsulta = async (req: any, res: any) => {
         try {
             const id = req.params.id;
-            let { nomeUser, emailUser, telefoneUser, nomeMedico, emailMedico, agenda, prioridade } = req.body;
+            let { nomeUser, emailUser, telefoneUser, nomeMedico, emailMedico, agenda, prioridade, especialidadeMedico } = req.body;
             const it = await collection.doc(id).get();
 
             let consulta: Consulta;
@@ -151,6 +160,7 @@ export class ConsultaController {
                     it.data()!.emailMedico,
                     it.data()!.agenda,
                     it.data()!.prioridade,
+                    it.data()!.especialidadeMedico,
                 );
             }
 
@@ -161,6 +171,7 @@ export class ConsultaController {
             emailMedico = ifNullNewValue(emailMedico, consulta.getEmailMedico());
             agenda = ifNullNewValue(new Date(agenda), consulta.getAgenda());
             prioridade = ifNullNewValue(prioridade, consulta.getPrioridade());
+            especialidadeMedico = ifNullNewValue(especialidadeMedico, consulta.getEspecialidadeMedico());
 
             const con = {
                 "nomeMedico": nomeMedico,
@@ -169,7 +180,8 @@ export class ConsultaController {
                 "emailUser": emailUser,
                 "telefoneUser": telefoneUser,
                 "agenda": agenda,
-                "prioridade": prioridade
+                "prioridade": prioridade,
+                "especialidadeMedico": especialidadeMedico
             }
 
             await collection.doc(id).update(con);

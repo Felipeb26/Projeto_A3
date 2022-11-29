@@ -44,17 +44,19 @@
 		}
 
 		button:hover {
-			box-shadow: 0 0.5rem 0.5rem var(--myLogo);
+			box-shadow: 0 0rem 0.5rem var(--myLogo);
 		}
 	}
 
 	& .agendadas {
-		margin: 5%;
+		min-width: 15rem;
+		max-height: 28rem;
+		margin: 0 5%;
 		flex: 3;
 		display: flex;
 		flex-direction: column;
+		overflow-y: scroll;
 	}
-
 }
 
 .card:hover {
@@ -80,7 +82,7 @@ mat-form-field {
 	margin: 5% 0;
 
 	& mat-label {
-		text-transform: uppercase;
+		// text-transform: uppercase;
 		letter-spacing: 0.1rem;
 		font-weight: bold;
 	}
@@ -91,6 +93,16 @@ mat-form-field {
 		font-weight: 500;
 		letter-spacing: 0.1rem;
 	}
+}
+mat-panel-title{
+	text-transform: uppercase;
+	letter-spacing: 0.1rem;
+	font-weight: bold;
+}
+
+mat-panel-description{
+	text-decoration: underline;
+	color: var(--midRed);
 }
 
 .option {
@@ -135,7 +147,7 @@ mat-form-field {
 	& p {
 		margin: 0.4rem 0 0 0;
 		text-decoration: underline;
-		text-transform: uppercase;
+		// text-transform: uppercase;
 		text-overflow: ellipsis;
 		font-weight: 550;
 		flex: 1;
@@ -150,9 +162,16 @@ mat-form-field {
 	}
 }
 
-a{
+a {
 	filter: drop-shadow(0 0.2rem 0.2rem black);
 	color: var(--myLogo);
 	background: #ff0000;
 }
 
+@media (max-width:950px) {
+	.card {
+		& button {
+			margin: 5% 0;
+		}
+	}
+}

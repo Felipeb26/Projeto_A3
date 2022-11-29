@@ -60,7 +60,8 @@ export class MedicoComponent implements OnInit {
 			this.appConsulta[i].style.display = "none";
 			this.appCalendar[i].style.display = "flex"
 		}
-		this.endpoint.getAllConsultas().subscribe(
+		const param = encodeURIComponent(this.email);
+		this.endpoint.getAllConsultasByParam(param).subscribe(
 			data => {
 				this.consultas = data;
 			},

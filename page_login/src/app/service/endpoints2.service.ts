@@ -26,4 +26,12 @@ export class Endpoints2Service {
 	boasVindasDoc(email: MAil): Observable<any> {
 		return this.http.post<MAil>(`${API_PATH}${MICRO2}/bem-doc`, email);
 	}
+
+	consultaDeletada(email: MAil): Observable<any> {
+		return this.http.post<MAil>(`${API_PATH}${MICRO2}/consult-del`, email);
+	}
+
+	consultaReagendada(email: MAil): Observable<any> {
+		return this.http.post<MAil>(`${API_PATH}${MICRO2}/consult-rea`, email);
+	}
 }

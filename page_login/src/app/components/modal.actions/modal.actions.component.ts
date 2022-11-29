@@ -1,12 +1,11 @@
-import { AlertsService } from './../../utils/alerts.service';
-import { Consulta } from './../../../../../CRUD/src/model/consulta.model';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatTable } from '@angular/material/table';
+import { EndpointsConsultasService } from 'src/app/service/endpoints.consultas.service';
+import { RoleVerifyService } from 'src/app/service/role.verify.service';
 import { Agenda } from './../../models/agenda';
 import { Endpoints2Service } from './../../service/endpoints2.service';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { EndpointsService } from 'src/app/service/endpoints.service';
-import { EndpointsConsultasService } from 'src/app/service/endpoints.consultas.service';
-import { MatTable } from '@angular/material/table';
+import { AlertsService } from './../../utils/alerts.service';
 
 @Component({
 	selector: 'app-modal.actions',
@@ -20,6 +19,7 @@ export class ModalActionsComponent implements OnInit {
 	id: string = ""
 	requestType: string = ""
 
+	action: string = ""
 	today: any = Date.now();
 	nome: any = "";
 	email: any = "";
@@ -31,7 +31,7 @@ export class ModalActionsComponent implements OnInit {
 	priorid: string = ""
 	color: string = ""
 	selecteDate: any = "";
-	disabled:string="disabled"
+	disabled: string = "disabled"
 
 	prioridades: any[] = [
 		{ value: "Emergência", color: "#ff0000" },
@@ -42,16 +42,27 @@ export class ModalActionsComponent implements OnInit {
 
 	constructor (
 		@Inject(MAT_DIALOG_DATA) data: any,
+		private serviceCheck: RoleVerifyService,
 		private consultas: EndpointsConsultasService,
 		private endpoints2: Endpoints2Service,
-		private alert:AlertsService
+		private alert: AlertsService
 	) {
 		this.id = data.id;
 		this.requestType = data.type
-		this.table= data.table
+		this.table = data.table
 	}
 
 	ngOnInit(): void {
+		if (this.requestType.startsWith("edit")) {
+			this.disabled = "false";
+		}
+		this.action = this.requestType;
+		if (this.action.startsWith("delete")) {
+			this.action = this.action.replace("delete", "deletar");
+		} else {
+			this.action = this.action.replace("edit", "editar");
+		}
+
 		this.consultas.getConsultaById(this.id).subscribe(
 			data => {
 				this.data = data
@@ -68,7 +79,7 @@ export class ModalActionsComponent implements OnInit {
 		this.email = this.data.emailUser;
 		this.telefone = this.data.telefoneUser;
 		this.agenda = this.data.agenda;
-		this.prioridade = this.prioridade;
+		this.prioridade = this.serviceCheck.prioridade(this.data.prioridade!);
 	}
 
 	selectPriorid(value: any) {
@@ -84,12 +95,11 @@ export class ModalActionsComponent implements OnInit {
 		this.selecteDate = value;
 	}
 
-
-	method(){
-		if(this.requestType.startsWith("edit")){
+	method() {
+		if (this.requestType.startsWith("edit")) {
 			this.editarConsulta();
-		}else{
-			this.deletarConsulta(	)
+		} else {
+			this.deletarConsulta();
 		}
 	}
 
@@ -97,6 +107,10 @@ export class ModalActionsComponent implements OnInit {
 		let agenda = this.selecteDate;
 		if (this.selecteDate == null || undefined) {
 			agenda = this.data.agenda;
+		}
+
+		if (agenda < Date.now()) {
+			return this.alert.errorT("necessario inserir uma data maior do que a atual!")
 		}
 
 		console.log(agenda)
@@ -112,10 +126,18 @@ export class ModalActionsComponent implements OnInit {
 		console.table(consulta)
 		this.consultas.updateConsulta(this.id, consulta).subscribe(
 			data => {
-				console.log(data);
+				this.alert.sucessT(`Consulta de ${data.nomeUser} reagendada com sucesso!`);
+
+				const mail = { para: data.nomeUser }
+				this.endpoints2.consultaReagendada(mail).subscribe(data => console.log(data), erro => console.log(erro))
 			},
 			erro => {
-				console.log(erro)
+				const error = erro.erro;
+				if (error == null || undefined) {
+					this.alert.errorT(erro.message)
+				} else {
+					this.alert.errorT(error)
+				}
 			}
 		)
 	}
@@ -125,6 +147,8 @@ export class ModalActionsComponent implements OnInit {
 		this.consultas.deleteConsulta(id).subscribe(
 			data => {
 				console.log(data);
+				const mail = { para: data.nomeUser }
+				this.endpoints2.consultaDeletada(mail).subscribe(data => console.log(data), erro => console.log(erro))
 				this.alert.sucessT(data.message)
 				this.table.renderRows();
 			},

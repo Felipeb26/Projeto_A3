@@ -8,6 +8,7 @@ export class Consulta {
     private emailMedico: string = "";
     private agenda: any = "";
     private prioridade: string = ""
+    private especialidadeMedico: string = ""
 
     constructor (
         id: string,
@@ -17,15 +18,17 @@ export class Consulta {
         nomeMedico: string,
         emailMedico: string,
         agenda: any,
-        prioridade: string) {
+        prioridade: string,
+        especialidadeMedico: string) {
         this.id = id;
         this.nomeUser = nomeUser;
-        this.emailUser = emailUser
-        this.telefoneUser = telefoneUser
-        this.nomeMedico = nomeMedico
-        this.emailMedico = emailMedico
-        this.agenda = agenda,
-            this.prioridade = prioridade
+        this.emailUser = emailUser;
+        this.telefoneUser = telefoneUser;
+        this.nomeMedico = nomeMedico;
+        this.emailMedico = emailMedico;
+        this.agenda = agenda;
+        this.prioridade = prioridade;
+        this.especialidadeMedico = especialidadeMedico
     }
 
     getId() {
@@ -52,6 +55,9 @@ export class Consulta {
     getPrioridade() {
         return this.prioridade
     }
+    getEspecialidadeMedico() {
+        return this.especialidadeMedico;
+    }
 
     setId(id: string) {
         this.id = id;
@@ -76,5 +82,8 @@ export class Consulta {
     }
     setPrioridade(prioridade: string) {
         this.prioridade = prioridade;
+    }
+    setEspecialidadeMedico(especialidadeMedico: string) {
+        this.especialidadeMedico = especialidadeMedico;
     }
 }

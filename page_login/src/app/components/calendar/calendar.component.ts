@@ -1,3 +1,4 @@
+import { RoleVerifyService } from 'src/app/service/role.verify.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CalendarOptions } from '@fullcalendar/angular';
@@ -29,15 +30,16 @@ export class CalendarComponent implements OnInit {
 			center: "title",
 			left: "listWeek,timeGridWeek,dayGridMonth"
 		},
+		navLinks: true,
 		editable: false,
 		selectable: true,
 		weekends: true,
 		eventClick: this.handleClick.bind(this),
 	}
 
-
 	constructor (
-		public dialog: MatDialog
+		public dialog: MatDialog,
+		private service:RoleVerifyService
 	) { }
 
 	ngOnInit(): void {
@@ -55,10 +57,10 @@ export class CalendarComponent implements OnInit {
 			const events = {
 				title: it.nomeUser,
 				date: it.agenda,
-				description: it,
-				color: it.prioridade
+				description: it.id,
+				color: this.service.prioridadeColor(it.prioridade),
+				backgroundColor: it.prioridade
 			}
-
 			eventos.push(events)
 		});
 		this.options.eventSources = [eventos, this.event];
@@ -80,6 +82,7 @@ export class CalendarComponent implements OnInit {
 				emailUser: it.emailUser,
 				telefoneUser: it.telefoneUser,
 				agenda: it.agenda,
+				prioridade: it.prioridade
 			}
 			this.event.push(agenda);
 		});

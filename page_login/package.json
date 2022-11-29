@@ -4,7 +4,7 @@
 	"scripts": {
 		"ng": "ng",
 		"start": "ng serve",
-		"build": "ng build --base-href https://felipeb26.github.io/projeto_a3/",
+		"build": "ng build --base-href https://felipeb26.github.io/front_a3/",
 		"watch": "ng build --watch --configuration development",
 		"test": "ng test",
 		"pages": "ngh --dir dist/projeto-login",
@@ -14,7 +14,7 @@
 		"installA": "yarn install"
 	},
 	"private": true,
-	"homepage": "https://felipeb26.github.io/projeto_a3/",
+	"homepage": "https://felipeb26.github.io/front_a3/",
 	"dependencies": {
 		"@angular/animations": "^14.2.0",
 		"@angular/cdk": "14.2.5",

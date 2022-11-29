@@ -22,8 +22,16 @@ export class EndpointsConsultasService {
 		return this.http.get<Agenda[]>(`${API_PATH}${MICRO1}/consultas`)
 	}
 
+	getAllConsultasByParam(param:string): Observable<Agenda[]> {
+		return this.http.get<Agenda[]>(`${API_PATH}${MICRO1}/consultas/${param}`)
+	}
+
 	getConsultaById(id:any):Observable<Agenda>{
 		return this.http.get<Agenda>(`${API_PATH}${MICRO1}/consulta/${id}`)
+	}
+
+	saveConsulta(body:Agenda){
+		return this.http.post<Agenda>(`${API_PATH}${MICRO1}/consultas`,body)
 	}
 
 	updateConsulta(id:any,body:Agenda):Observable<Agenda>{
